@@ -36,8 +36,7 @@
 					<reportOutputDirectory>${project.basedir}/apidocs</reportOutputDirectory>
 					<doclint>all</doclint>
 					<detectLinks>true</detectLinks>
-					<author>Patrique Legault</author>
-					<bottom><![CDATA[Copyright, <a href="https://engineering.uottawa.ca/outreach-programs"> Outreach.<a> All Rights Reserved]]></bottom>
+					<author>SwaggerGen Team</author>
 				</configuration>
 				<executions>
 					<execution>
