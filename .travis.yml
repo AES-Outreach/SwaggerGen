@@ -20,6 +20,5 @@ jobs:
         - mvn javadoc:javadoc -s ../assets/settings.xml
 stages: 
   - name: compile
-    if: env(OUTREACH_TYPE) IS NOT present
 notifications:
   slack: swaggen:Ykqb64SVX8bgvp5ZDi9KcJ3A 
