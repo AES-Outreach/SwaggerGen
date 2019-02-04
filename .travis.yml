@@ -1,0 +1,25 @@
+#safelist
+branches:
+  only:
+      - master
+      - develop
+sudo : false
+language: java
+jdk:
+  - openjdk11
+cache:
+    directories:
+        - $HOME/.m2
+jobs: 
+  include: 
+    - stage: compile
+      before_script:
+        - cd swaggen
+      script:
+        - mvn -U -s ../assets/settings.xml clean install
+        - mvn javadoc:javadoc -s ../assets/settings.xml
+stages: 
+  - name: compile
+    if: env(OUTREACH_TYPE) IS NOT present
+notifications:
+  slack: swaggen:Ykqb64SVX8bgvp5ZDi9KcJ3A 
