@@ -1,4 +1,6 @@
-package resource;
+package resource.annotation;
+
+import resource.jsonschema.RequestBody;
 
 /**
  * A response with a code, description, and body

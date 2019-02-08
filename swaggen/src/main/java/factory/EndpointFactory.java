@@ -1,7 +1,7 @@
 package factory;
 
 import annotation.SwaggerGen;
-import resource.Endpoint;
+import resource.annotation.Endpoint;
 
 /**
  * Creates a Swagger Endpoint from the annotation.

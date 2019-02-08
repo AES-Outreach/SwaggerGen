@@ -2,7 +2,7 @@ package factory;
 
 import enums.ParamFormat;
 import enums.ParamType;
-import resource.ParamSchema;
+import resource.annotation.ParamSchema;
 
 /**
  * Creates a ParamSchema from the schema identifier.
@@ -11,7 +11,7 @@ import resource.ParamSchema;
  */
 public class ParamSchemaFactory {
 
-	public static resource.ParamSchema ParamSchema() {
+	public static resource.annotation.ParamSchema ParamSchema() {
 		return ParamSchema(null);
 	}
 	

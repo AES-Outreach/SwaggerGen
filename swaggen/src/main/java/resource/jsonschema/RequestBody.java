@@ -1,4 +1,4 @@
-package resource;
+package resource.jsonschema;
 
 import enums.ContentType;
 
@@ -17,26 +17,27 @@ public class RequestBody {
 	/**
 	 * The body
 	 */
-	private ContentSchema schema;
-	
+	private String filename;
+
 	public ContentType getType() {
 		return type;
 	}
-	
+
 	public void setType(ContentType type) {
 		this.type = type;
 	}
-	
-	public ContentSchema getSchema() {
-		return schema;
+
+	public String getFilename() {
+		return filename;
 	}
-	
-	public void setSchema(ContentSchema schema) {
-		this.schema = schema;
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "RequestBody [type=" + type + ", schema=" + schema + "]";
+		return "RequestBody [type=" + type + ", filename=" + filename + "]";
 	}
+	
 }

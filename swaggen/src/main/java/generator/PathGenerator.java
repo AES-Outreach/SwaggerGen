@@ -9,8 +9,8 @@ import java.util.Map;
 import annotation.SwaggerGen;
 import enums.RequestMethod;
 import factory.EndpointFactory;
-import resource.Endpoint;
-import resource.Path;
+import resource.annotation.Endpoint;
+import resource.annotation.Path;
 
 /**
  * Generates a list of paths from a list of classes. Main entry point for managing the input.

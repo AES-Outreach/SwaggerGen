@@ -1,6 +1,8 @@
-package resource;
+package resource.annotation;
 
 import java.util.List;
+
+import resource.jsonschema.RequestBody;
 
 /**
  * Represents a REST Endpoint. It is referenced from the Path by its method.

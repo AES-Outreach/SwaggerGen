@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import enums.RequestMethod;
 import generator.PathGenerator;
-import resource.Endpoint;
-import resource.Path;
+import resource.annotation.Endpoint;
+import resource.annotation.Path;
 
 public class PathGeneratorSingleEndpointTests extends BasePathGeneratorTest {
 	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import annotation.SwaggerGen;
-import resource.Response;
+import resource.annotation.Response;
 
 /**
  * Creates a response from the annotation

@@ -2,7 +2,8 @@ package tests.pathgen;
 
 import java.util.List;
 
-import resource.Path;
+import resource.annotation.Path;
+
 
 public class BasePathGeneratorTest {
 
