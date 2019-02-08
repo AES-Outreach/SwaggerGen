@@ -8,19 +8,35 @@
 	<version>0.0.1</version>
 	<packaging>maven-plugin</packaging>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.11</version>
+		</dependency>
 		<!-- dependencies for maven -->
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
 			<version>3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-artifact -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-artifact</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-project -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 
 		<!-- dependencies to annotations -->
@@ -87,29 +103,14 @@
 			</plugin>
 
 			<!-- JAVADOC PLUGIN -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.1</version>
-				<configuration>
-					<detectJavaApiLink>false</detectJavaApiLink>
-					<excludePackageNames>com.outreach.test.*</excludePackageNames>
-					<failOnError>true</failOnError>
-					<reportOutputDirectory>${project.basedir}/apidocs</reportOutputDirectory>
-					<doclint>all</doclint>
-					<detectLinks>true</detectLinks>
-					<author>SwaggerGen Team</author>
-				</configuration>
-				<executions>
-					<execution>
-						<id>aggregate</id>
-						<goals>
-							<goal>aggregate</goal>
-						</goals>
-						<phase>install</phase>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
+				<version>3.0.1</version> <configuration> <detectJavaApiLink>false</detectJavaApiLink> 
+				<excludePackageNames>com.outreach.test.*</excludePackageNames> <failOnError>true</failOnError> 
+				<reportOutputDirectory>${project.basedir}/apidocs</reportOutputDirectory> 
+				<doclint>all</doclint> <detectLinks>true</detectLinks> <author>SwaggerGen 
+				Team</author> </configuration> <executions> <execution> <id>aggregate</id> 
+				<goals> <goal>aggregate</goal> </goals> <phase>install</phase> </execution> 
+				</executions> </plugin> -->
 		</plugins>
 	</build>
 
