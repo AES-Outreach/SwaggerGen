@@ -65,10 +65,11 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 			getLog().info(ref.getAllTypes().toString());
 			getLog().info("trying to get annotations");
-			ref.getTypesAnnotatedWith(SwaggerGen.class);
+			ref.getMethodsAnnotatedWith(SwaggerGen.class);
 		
 		} catch (Exception e) {
-			new MojoExecutionException("Dependency resolution failed", e);
+			getLog().error(e.toString());
+			throw new MojoExecutionException("Dependency resolution failed", e);
 		}
 
 		getLog().info("-- DONE --");

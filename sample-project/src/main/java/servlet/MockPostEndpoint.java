@@ -23,7 +23,7 @@ public class MockPostEndpoint {
 		responseBody= "response.scheme",
 		scheme="HTTP"
 	)
-	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	public static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
 		// Implementation not important.
 	}
 }
