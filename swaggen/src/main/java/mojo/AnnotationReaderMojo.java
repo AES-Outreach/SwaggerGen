@@ -1,8 +1,13 @@
 package mojo;
 
-import java.awt.List;
+import java.io.File;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -14,6 +19,7 @@ import org.apache.maven.project.MavenProject;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
@@ -28,44 +34,39 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 	@Component
 	private MavenProject project;
+	
 	/**
 	 * The greeting to display.
 	 */
 	@Parameter(property = "process-annotations.baseUrl", defaultValue = "localhost")
 	private String baseUrl;
 
+	@SuppressWarnings("unchecked")
 	public void execute() throws MojoExecutionException {
 
-		ArrayList<String> classpathElements = null;
-
 		try {
+			
+			
+			// The outputDirectory is the ${project.build.directory} the Maven plugin is executing in
+			File classesDirectory = new File(project.getBuild().getDirectory());  
 
-			classpathElements = this.project.getCompileClasspathElements();
-			List<URL> projectClasspathList = new ArrayList<URL>();
-			for (String element : classpathElements) {
-				try {
-					projectClasspathList.add(new File(element).toURI().toURL());
-				} catch (MalformedURLException e) {
-					throw new MojoExecutionException(element + " is an invalid classpath element", e);
-				}
-			}
+			getLog().info(project.getBuild().getDirectory()+ "\\classes\\servlet");
+			URL classesUrl = classesDirectory.toURI().toURL();
+			URL[] classesUrls = new URL[]{classesUrl}; 
 
+			// Make sure to use the URLClassLoader, using the simple ClassLoader WILL NOT WORK for reading the annotations       
+			URLClassLoader classLoader = URLClassLoader.newInstance(classesUrls, getClass().getClassLoader());
+
+			
+			
 			Reflections ref = new Reflections(new ConfigurationBuilder()
-					.addUrls(ClasspathHelper.forClassLoader(ClassLoader.getPlatformClassLoader()))
+					.addUrls(classLoader.getURLs())
 					.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
 
-			Set<Method> annotated = ref.getMethodsAnnotatedWith(SwaggerGen.class);
 			getLog().info(ref.getAllTypes().toString());
-
-			getLog().info(annotated.toString());
-			for (Method controller : annotated) {
-				SwaggerGen request = controller.getAnnotation(SwaggerGen.class);
-				String mapping = request.url();
-				getLog().info("-- " + mapping + " --");
-			}
-
-		} catch (ClassNotFoundException e) {
-			throw new MojoExecutionException(e.getMessage());
+			getLog().info("trying to get annotations");
+			ref.getTypesAnnotatedWith(SwaggerGen.class);
+		
 		} catch (Exception e) {
 			new MojoExecutionException("Dependency resolution failed", e);
 		}
