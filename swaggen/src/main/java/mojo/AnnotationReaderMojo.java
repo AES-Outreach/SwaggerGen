@@ -2,12 +2,8 @@ package mojo;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -19,8 +15,6 @@ import org.apache.maven.project.MavenProject;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
-import org.reflections.scanners.TypeAnnotationsScanner;
-import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import annotation.SwaggerGen;
@@ -48,7 +42,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 			
 			
 			// The outputDirectory is the ${project.build.directory} the Maven plugin is executing in
-			File classesDirectory = new File(project.getBuild().getDirectory());  
+			File classesDirectory = new File(project.getBuild().getDirectory() + "\\classes\\servlet");  
 
 			getLog().info(project.getBuild().getDirectory()+ "\\classes\\servlet");
 			URL classesUrl = classesDirectory.toURI().toURL();
@@ -65,7 +59,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 			getLog().info(ref.getAllTypes().toString());
 			getLog().info("trying to get annotations");
-			ref.getMethodsAnnotatedWith(SwaggerGen.class);
+			Set<Method> m = ref.getMethodsAnnotatedWith(SwaggerGen.class);
 		
 		} catch (Exception e) {
 			getLog().error(e.toString());
