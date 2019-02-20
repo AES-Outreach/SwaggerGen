@@ -1,6 +1,5 @@
 package resource.jsonschema;
 
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,33 +7,48 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import enums.PropertyType;
 
+/**
+ * The Jackson map for a JSON Schema Property
+ * 
+ * @author William Gardiner (7267012)
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Property {
 
+	/**
+	 * The Property ID
+	 */
 	@JsonProperty("$id")
 	private String id;
 
+	/**
+	 * The Property title
+	 */
 	@JsonProperty("title")
 	private String title;
 
+	/**
+	 * A Regex Pattern
+	 */
 	@JsonProperty("pattern")
 	private String pattern;
 
-	@JsonProperty("examples")
-	private List<String> examples;
-
-	@JsonProperty("default")
-	private String def;
-
-	@JsonProperty("required")
-	private List<String> required;
-
+	/**
+	 * The Property Type
+	 */
 	@JsonProperty("type")
 	private PropertyType type;
 
+	/**
+	 * The properties if type is OBJECT
+	 */
 	@JsonProperty("properties")
 	private Map<String, Property> properties;
 
+	/**
+	 * The items if type is ARRAY
+	 */
 	@JsonProperty("items")
 	private Property items;
 	
@@ -62,30 +76,6 @@ public class Property {
 		this.pattern = pattern;
 	}
 	
-	public List<String> getExamples() {
-		return examples;
-	}
-	
-	public void setExamples(List<String> examples) {
-		this.examples = examples;
-	}
-	
-	public String getDef() {
-		return def;
-	}
-	
-	public void setDef(String def) {
-		this.def = def;
-	}
-	
-	public List<String> getRequired() {
-		return required;
-	}
-	
-	public void setRequired(List<String> required) {
-		this.required = required;
-	}
-	
 	public PropertyType getType() {
 		return type;
 	}
@@ -109,11 +99,10 @@ public class Property {
 	public void setItems(Property items) {
 		this.items = items;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Property [id=" + id + ", title=" + title + ", pattern=" + pattern + ", examples=" + examples + ", def="
-				+ def + ", required=" + required + ", type=" + type + ", properties=" + properties + ", items=" + items
-				+ "]";
+		return "Property [id=" + id + ", title=" + title + ", pattern=" + pattern + ", type=" + type + ", properties="
+				+ properties + ", items=" + items + "]";
 	}
 }

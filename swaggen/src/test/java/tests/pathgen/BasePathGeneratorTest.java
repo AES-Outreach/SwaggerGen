@@ -2,7 +2,7 @@ package tests.pathgen;
 
 import java.util.List;
 
-import resource.annotation.Path;
+import domain.path.Path;
 
 
 public class BasePathGeneratorTest {

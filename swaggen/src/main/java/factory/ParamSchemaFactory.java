@@ -1,8 +1,8 @@
 package factory;
 
+import domain.path.ParamSchema;
 import enums.ParamFormat;
 import enums.ParamType;
-import resource.annotation.ParamSchema;
 
 /**
  * Creates a ParamSchema from the schema identifier.
@@ -11,7 +11,7 @@ import resource.annotation.ParamSchema;
  */
 public class ParamSchemaFactory {
 
-	public static resource.annotation.ParamSchema ParamSchema() {
+	public static domain.path.ParamSchema ParamSchema() {
 		return ParamSchema(null);
 	}
 	

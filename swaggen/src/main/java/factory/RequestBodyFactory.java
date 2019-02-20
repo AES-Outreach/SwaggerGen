@@ -1,7 +1,7 @@
 package factory;
 
 import annotation.SwaggerGen;
-import resource.jsonschema.RequestBody;
+import domain.path.RequestBody;
 
 /**
  * Generates a RequestBody from the requestBody in the annotation.

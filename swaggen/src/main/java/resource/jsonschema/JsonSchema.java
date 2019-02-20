@@ -1,6 +1,5 @@
 package resource.jsonschema;
 
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,27 +7,48 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import enums.PropertyType;
 
+/**
+ * Jackson map for a JSON Schema.
+ * 
+ * @author William Gardiner (7267012)
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonSchema {
 
+	/**
+	 * The Schema used
+	 */
 	@JsonProperty("$schema")
 	private String schema;
 
+	/**
+	 * The Schema ID
+	 */
 	@JsonProperty("$id")
 	private String id;
 	
+	/**
+	 * The base type
+	 */
 	@JsonProperty("type")
 	private PropertyType type;
 	
+	/**
+	 * The Schema title
+	 */
 	@JsonProperty("title")
 	private String title;
-	
-	@JsonProperty("required")
-	private List<String> required;
 
+	/**
+	 * The properties if type is OBJECT
+	 */
 	@JsonProperty("properties")
 	private Map<String, Property> properties;
 
+	/**
+	 * The items if type is ARRAY
+	 */
 	@JsonProperty("items")
 	private Property items;
 	
@@ -64,14 +84,6 @@ public class JsonSchema {
 		this.title = title;
 	}
 	
-	public List<String> getRequired() {
-		return required;
-	}
-	
-	public void setRequired(List<String> required) {
-		this.required = required;
-	}
-	
 	public Map<String, Property> getProperties() {
 		return properties;
 	}
@@ -87,10 +99,10 @@ public class JsonSchema {
 	public void setItems(Property items) {
 		this.items = items;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "JsonSchema [schema=" + schema + ", id=" + id + ", type=" + type + ", title=" + title + ", required="
-				+ required + ", properties=" + properties + ", items=" + items + "]";
+		return "JsonSchema [schema=" + schema + ", id=" + id + ", type=" + type + ", title=" + title + ", properties="
+				+ properties + ", items=" + items + "]";
 	}
 }
