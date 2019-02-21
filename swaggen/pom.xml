@@ -77,13 +77,13 @@
 			<version>3.3.3</version>
 			<scope></scope>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>maven</groupId>
 			<artifactId>maven-model</artifactId>
 			<version>3.0.2.javadoc</version>
 			<type>javadoc.jar</type>
 			<scope>test</scope>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-aether-provider</artifactId>
@@ -128,14 +128,30 @@
 			</plugin>
 
 			<!-- JAVADOC PLUGIN -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
-				<version>3.0.1</version> <configuration> <detectJavaApiLink>false</detectJavaApiLink> 
-				<excludePackageNames>com.outreach.test.*</excludePackageNames> <failOnError>true</failOnError> 
-				<reportOutputDirectory>${project.basedir}/apidocs</reportOutputDirectory> 
-				<doclint>all</doclint> <detectLinks>true</detectLinks> <author>SwaggerGen 
-				Team</author> </configuration> <executions> <execution> <id>aggregate</id> 
-				<goals> <goal>aggregate</goal> </goals> <phase>install</phase> </execution> 
-				</executions> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<detectJavaApiLink>false</detectJavaApiLink>
+					<excludePackageNames>com.outreach.test.*</excludePackageNames>
+					<failOnError>true</failOnError>
+					<reportOutputDirectory>${project.basedir}/apidocs</reportOutputDirectory>
+					<doclint>all</doclint>
+					<detectLinks>true</detectLinks>
+					<author>SwaggerGen
+						Team</author>
+				</configuration>
+				<executions>
+					<execution>
+						<id>aggregate</id>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+						<phase>install</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
