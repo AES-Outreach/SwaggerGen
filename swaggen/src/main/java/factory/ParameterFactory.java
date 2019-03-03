@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import annotation.SwaggerGen;
+import domain.path.Parameter;
 import enums.ParamLocation;
 import enums.ParamType;
-import resource.Parameter;
 
 /**
  * Creates a list of Parameters from an annotation.

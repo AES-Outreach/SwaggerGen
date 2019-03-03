@@ -1,0 +1,142 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "num",
+    "int",
+    "str",
+    "obj",
+    "arr"
+  ],
+  "properties": {
+    "num": {
+      "$id": "#/properties/num",
+      "type": "number",
+      "title": "The Num Schema",
+      "default": 0.0,
+      "examples": [
+        3.5
+      ],
+      "pattern": "^(.*)$"
+    },
+    "int": {
+      "$id": "#/properties/int",
+      "type": "integer",
+      "title": "The Int Schema",
+      "default": 0,
+      "examples": [
+        3
+      ],
+      "pattern": "^(.*)$"
+    },
+    "str": {
+      "$id": "#/properties/str",
+      "type": "string",
+      "title": "The Str Schema",
+      "default": "",
+      "examples": [
+        "Hello"
+      ],
+      "pattern": "^(.*)$"
+   },
+   "obj": {
+     "$id": "#/properties/obj",
+     "type": "object",
+     "title": "The Obj Schema",
+     "required": [
+       "key1",
+       "key2",
+       "key3"
+     ],
+     "properties": {
+       "key1": {
+         "$id": "#/properties/obj/properties/key1",
+         "type": "string",
+         "title": "The Key1 Schema",
+         "default": "",
+         "examples": [
+           "val1"
+         ],
+         "pattern": "^(.*)$"
+       },
+       "key2": {
+         "$id": "#/properties/obj/properties/key2",
+         "type": "string",
+         "title": "The Key2 Schema",
+         "default": "",
+         "examples": [
+           "val2"
+         ],
+         "pattern": "^(.*)$"
+        },
+        "key3": {
+          "$id": "#/properties/obj/properties/key3",
+          "type": "array",
+          "title": "The Key3 Schema",
+          "items": {
+            "$id": "#/properties/obj/properties/key3/items",
+            "type": "string",
+            "title": "The Items Schema",
+            "default": "",
+            "examples": [
+              "val3-1",
+              "val3-2",
+              "val3-3"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    },
+    "arr": {
+      "$id": "#/properties/arr",
+      "type": "array",
+      "title": "The Arr Schema",
+      "items": {
+        "$id": "#/properties/arr/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "k1",
+          "k2",
+          "k3"
+        ],
+        "properties": {
+          "k1": {
+            "$id": "#/properties/arr/items/properties/k1",
+            "type": "string",
+            "title": "The K1 Schema",
+            "default": "",
+            "examples": [
+              "a"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "k2": {
+            "$id": "#/properties/arr/items/properties/k2",
+            "type": "string",
+            "title": "The K2 Schema",
+            "default": "",
+            "examples": [
+              "b"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "k3": {
+            "$id": "#/properties/arr/items/properties/k3",
+            "type": "string",
+            "title": "The K3 Schema",
+            "default": "",
+            "examples": [
+              "c"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    }
+  }
+}
