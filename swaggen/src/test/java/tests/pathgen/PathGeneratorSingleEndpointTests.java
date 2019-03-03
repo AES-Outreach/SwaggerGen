@@ -8,10 +8,10 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.path.Endpoint;
+import domain.path.Path;
 import enums.RequestMethod;
 import generator.PathGenerator;
-import resource.Endpoint;
-import resource.Path;
 
 public class PathGeneratorSingleEndpointTests extends BasePathGeneratorTest {
 	
