@@ -18,7 +18,7 @@ import factory.EndpointFactory;
  * @author William Gardiner (7267012)
  */
 public class PathGenerator {
-	
+
 	public static List<Path> generatePathsFromClassList(Class<?>[] klasses) {
 		List<Path> pathList = new ArrayList<>();
 		for(Class<?> klass : klasses) {

@@ -25,6 +25,12 @@ import org.reflections.util.ConfigurationBuilder;
 
 import annotation.SwaggerGen;
 
+/**
+ * Maven MOJO in charge of running during the install lifecycle phase of
+ * projects importing the SwaggerGen annotation project.
+ * 
+ * @author Alexandre Seguin
+ */
 @Mojo(name = "process-annotations", requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
 public class AnnotationReaderMojo extends AbstractMojo {
 

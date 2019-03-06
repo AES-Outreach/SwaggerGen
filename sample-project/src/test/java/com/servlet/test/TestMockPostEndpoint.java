@@ -17,8 +17,16 @@ import org.reflections.util.ConfigurationBuilder;
 
 import annotation.SwaggerGen;
 
+/**
+ * Sanity unit tests for sample-project code.
+ * @author ASEGU103
+ */
 public class TestMockPostEndpoint {
 
+	/**
+	 * Test to ensure MOJO reflection methods works within this project.
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetmockPostEndpoint() throws Exception {
 		File classesDirectory = new File(System.getProperty("user.dir"));
@@ -33,14 +41,7 @@ public class TestMockPostEndpoint {
 				.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
 
 		Set<Method> m = ref.getMethodsAnnotatedWith(SwaggerGen.class);
-		System.out.println(m);
 		assertNotNull(m);
 		assertTrue(m.size() > 0);
-
-		for (Method mm : m) {
-
-			System.out.println(mm.getAnnotation(SwaggerGen.class));
-
-		}
 	}
 }
