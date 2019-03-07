@@ -18,7 +18,14 @@ jobs:
       script:
         - mvn -U -s ../assets/settings.xml clean install
         - mvn javadoc:javadoc -s ../assets/settings.xml
+	- cd ../
+    - stage: sample
+      before_script:
+        - cd sample-project
+      script:
+        - mvn clean install
 stages: 
   - name: compile
+  - name: sample
 notifications:
   slack: swaggen:Ykqb64SVX8bgvp5ZDi9KcJ3A 
