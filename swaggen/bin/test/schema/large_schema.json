@@ -1,0 +1,289 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "array",
+  "title": "The Root Schema",
+  "items": {
+    "$id": "#/items",
+    "type": "object",
+    "title": "The Items Schema",
+    "required": [
+      "_id",
+      "index",
+      "guid",
+      "isActive",
+      "balance",
+      "picture",
+      "age",
+      "eyeColor",
+      "name",
+      "gender",
+      "company",
+      "email",
+      "phone",
+      "address",
+      "about",
+      "registered",
+      "latitude",
+      "longitude",
+      "tags",
+      "friends",
+      "greeting",
+      "favoriteFruit"
+    ],
+    "properties": {
+      "_id": {
+        "$id": "#/items/properties/_id",
+        "type": "string",
+        "title": "The _id Schema",
+        "default": "",
+        "examples": [
+          "5c5de2352040af236bd8ccd6"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "index": {
+        "$id": "#/items/properties/index",
+        "type": "integer",
+        "title": "The Index Schema",
+        "default": 0,
+        "examples": [
+          0
+        ]
+      },
+      "guid": {
+        "$id": "#/items/properties/guid",
+        "type": "string",
+        "title": "The Guid Schema",
+        "default": "",
+        "examples": [
+          "0652462c-f83e-49b0-9eec-8b6c37c55889"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "isActive": {
+        "$id": "#/items/properties/isActive",
+        "type": "boolean",
+        "title": "The Isactive Schema",
+        "default": false,
+        "examples": [
+          true
+        ]
+      },
+      "balance": {
+        "$id": "#/items/properties/balance",
+        "type": "string",
+        "title": "The Balance Schema",
+        "default": "",
+        "examples": [
+          "$1,579.62"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "picture": {
+        "$id": "#/items/properties/picture",
+        "type": "string",
+        "title": "The Picture Schema",
+        "default": "",
+        "examples": [
+          "http://placehold.it/32x32"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "age": {
+        "$id": "#/items/properties/age",
+        "type": "integer",
+        "title": "The Age Schema",
+        "default": 0,
+        "examples": [
+          40
+        ]
+      },
+      "eyeColor": {
+        "$id": "#/items/properties/eyeColor",
+        "type": "string",
+        "title": "The Eyecolor Schema",
+        "default": "",
+        "examples": [
+          "blue"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "name": {
+        "$id": "#/items/properties/name",
+        "type": "string",
+        "title": "The Name Schema",
+        "default": "",
+        "examples": [
+          "Benita Mullins"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "gender": {
+        "$id": "#/items/properties/gender",
+        "type": "string",
+        "title": "The Gender Schema",
+        "default": "",
+        "examples": [
+          "female"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "company": {
+        "$id": "#/items/properties/company",
+        "type": "string",
+        "title": "The Company Schema",
+        "default": "",
+        "examples": [
+          "ZEROLOGY"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "email": {
+        "$id": "#/items/properties/email",
+        "type": "string",
+        "title": "The Email Schema",
+        "default": "",
+        "examples": [
+          "benitamullins@zerology.com"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "phone": {
+        "$id": "#/items/properties/phone",
+        "type": "string",
+        "title": "The Phone Schema",
+        "default": "",
+        "examples": [
+          "+1 (820) 522-2234"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "address": {
+        "$id": "#/items/properties/address",
+        "type": "string",
+        "title": "The Address Schema",
+        "default": "",
+        "examples": [
+          "922 Montrose Avenue, Noxen, Idaho, 1346"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "about": {
+        "$id": "#/items/properties/about",
+        "type": "string",
+        "title": "The About Schema",
+        "default": "",
+        "examples": [
+          "Commodo dolore elit voluptate labore sit velit id occaecat enim pariatur reprehenderit. Enim cupidatat reprehenderit elit deserunt eu est reprehenderit cillum do do id dolor cupidatat esse. Ea et esse sit incididunt anim amet quis tempor Lorem id labore.\r\n"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "registered": {
+        "$id": "#/items/properties/registered",
+        "type": "string",
+        "title": "The Registered Schema",
+        "default": "",
+        "examples": [
+          "2015-08-28T11:52:09 +04:00"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "latitude": {
+        "$id": "#/items/properties/latitude",
+        "type": "number",
+        "title": "The Latitude Schema",
+        "default": 0.0,
+        "examples": [
+          39.826973
+        ]
+      },
+      "longitude": {
+        "$id": "#/items/properties/longitude",
+        "type": "number",
+        "title": "The Longitude Schema",
+        "default": 0.0,
+        "examples": [
+          109.747459
+        ]
+      },
+      "tags": {
+        "$id": "#/items/properties/tags",
+        "type": "array",
+        "title": "The Tags Schema",
+        "items": {
+          "$id": "#/items/properties/tags/items",
+          "type": "string",
+          "title": "The Items Schema",
+          "default": "",
+          "examples": [
+            "exercitation",
+            "eu",
+            "laborum",
+            "nulla",
+            "veniam",
+            "consequat",
+            "ut"
+          ],
+          "pattern": "^(.*)$"
+        }
+      },
+      "friends": {
+        "$id": "#/items/properties/friends",
+        "type": "array",
+        "title": "The Friends Schema",
+        "items": {
+          "$id": "#/items/properties/friends/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "id",
+            "name"
+          ],
+          "properties": {
+            "id": {
+              "$id": "#/items/properties/friends/items/properties/id",
+              "type": "integer",
+              "title": "The Id Schema",
+              "default": 0,
+              "examples": [
+                0
+              ]
+            },
+            "name": {
+              "$id": "#/items/properties/friends/items/properties/name",
+              "type": "string",
+              "title": "The Name Schema",
+              "default": "",
+              "examples": [
+                "Alice Cobb"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      },
+      "greeting": {
+        "$id": "#/items/properties/greeting",
+        "type": "string",
+        "title": "The Greeting Schema",
+        "default": "",
+        "examples": [
+          "Hello, Benita Mullins! You have 6 unread messages."
+        ],
+        "pattern": "^(.*)$"
+      },
+      "favoriteFruit": {
+        "$id": "#/items/properties/favoriteFruit",
+        "type": "string",
+        "title": "The Favoritefruit Schema",
+        "default": "",
+        "examples": [
+          "apple"
+        ],
+        "pattern": "^(.*)$"
+      }
+    }
+  }
+}
