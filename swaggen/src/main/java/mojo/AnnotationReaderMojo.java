@@ -53,7 +53,9 @@ public class AnnotationReaderMojo extends AbstractMojo {
 			Class<?>[] klasses = getClassArray();
 
 			getLog().info("-- PROCESSING ANNOTATIONS --");
-			/* TRIGGER ANNOTATION PROCESSING HERE */
+			
+			utils.Main.log = getLog();
+			utils.Main.exec(klasses);
 
 		} catch (Exception e) {
 			// Can add other catches here for more complete error handling
@@ -74,20 +76,18 @@ public class AnnotationReaderMojo extends AbstractMojo {
 	 */
 	private Class<?>[] getClassArray() throws MalformedURLException, DependencyResolutionRequiredException {
 
-		Reflections ref = new Reflections(
+		Reflections loadedKlasses = new Reflections(
 				new ConfigurationBuilder().addUrls(ClasspathHelper.forClassLoader(getClassLoader()))
 						.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
 
-		Set<Method> methods = ref.getMethodsAnnotatedWith(SwaggerGen.class);
-		List<Class<?>> k = new ArrayList<Class<?>>();
-		for (Method m : methods) {
-			if (!k.contains(m.getDeclaringClass().getClass())) {
-				k.add(m.getDeclaringClass());
-				getLog().info("Annotated class: " + m.getDeclaringClass().toString());
-			}
+		Set<Method> swaggenMethods = loadedKlasses.getMethodsAnnotatedWith(SwaggerGen.class);
+		Set<Class<?>> klasses = new HashSet<Class<?>>();
+		for (Method methud : swaggenMethods) {
+				klasses.add(methud.getDeclaringClass());
+				getLog().info("Annotated class: " + methud.getDeclaringClass().toString());
 		}
 
-		return k.toArray(new Class<?>[k.size()]);
+		return klasses.toArray(new Class<?>[klasses.size()]);
 	}
 
 	/**
