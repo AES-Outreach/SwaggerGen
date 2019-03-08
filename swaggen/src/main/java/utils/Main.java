@@ -27,7 +27,7 @@ public class Main {
 		 * @throws JsonMappingException
 		 * @throws IOException
 		 **/
-		
+
 		List<Path> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 		for(Class<?> k: klasses) {
 			utils.JsonObjectMapper.fileToClass(k.getName(), k);
