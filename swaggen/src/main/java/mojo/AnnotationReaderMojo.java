@@ -53,6 +53,8 @@ public class AnnotationReaderMojo extends AbstractMojo {
 			Class<?>[] klasses = getClassArray();
 
 			getLog().info("-- PROCESSING ANNOTATIONS --");
+			
+			utils.Main.log = getLog();
 			utils.Main.exec(klasses);
 
 		} catch (Exception e) {
@@ -78,9 +80,9 @@ public class AnnotationReaderMojo extends AbstractMojo {
 				new ConfigurationBuilder().addUrls(ClasspathHelper.forClassLoader(getClassLoader()))
 						.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
 
-		Set<Method> methods = loadedKlasses.getMethodsAnnotatedWith(SwaggerGen.class);
+		Set<Method> swaggenMethods = loadedKlasses.getMethodsAnnotatedWith(SwaggerGen.class);
 		List<Class<?>> klasses = new ArrayList<Class<?>>();
-		for (Method methud : methods) {
+		for (Method methud : swaggenMethods) {
 			if (!klasses.contains(methud.getDeclaringClass().getClass())) {
 				klasses.add(methud.getDeclaringClass());
 				getLog().info("Annotated class: " + methud.getDeclaringClass().toString());

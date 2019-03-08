@@ -3,10 +3,15 @@ package utils;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.maven.plugin.logging.Log;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import domain.path.Endpoint;
 import domain.path.Path;
+import domain.path.RequestBody;
+import enums.RequestMethod;
 
 /**
  * Connects the plugin with the SwaggerGen logic
@@ -15,6 +20,8 @@ import domain.path.Path;
  */
 
 public class Main {
+	
+	public static Log log;
 
 	public static void exec(Class<?>[] klasses) throws JsonParseException, JsonMappingException, IOException {
 		
@@ -28,9 +35,18 @@ public class Main {
 		 * @throws IOException
 		 **/
 
+		log.info("- generating paths -");
 		List<Path> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
-		for(Class<?> k: klasses) {
-			utils.JsonObjectMapper.fileToClass(k.getName(), k);
+
+		for(Path path : paths) {
+			for(RequestMethod endpointMethodType : path.getEndpoints().keySet()) {
+				Endpoint endpoint = path.getEndpoints().get(endpointMethodType);
+				log.info(endpoint.toString());
+				if(endpointMethodType.equals(RequestMethod.POST)  || endpointMethodType.equals(RequestMethod.PUT)) {
+					// fetch schema parameter
+				}
+			}
 		}
 	}
+	
 }
