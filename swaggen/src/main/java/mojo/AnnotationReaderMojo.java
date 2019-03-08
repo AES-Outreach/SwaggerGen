@@ -53,7 +53,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 			Class<?>[] klasses = getClassArray();
 
 			getLog().info("-- PROCESSING ANNOTATIONS --");
-			/* TRIGGER ANNOTATION PROCESSING HERE */
+			utils.Main.exec(klasses);
 
 		} catch (Exception e) {
 			// Can add other catches here for more complete error handling
