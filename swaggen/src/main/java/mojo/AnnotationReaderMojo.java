@@ -81,12 +81,10 @@ public class AnnotationReaderMojo extends AbstractMojo {
 						.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
 
 		Set<Method> swaggenMethods = loadedKlasses.getMethodsAnnotatedWith(SwaggerGen.class);
-		List<Class<?>> klasses = new ArrayList<Class<?>>();
+		Set<Class<?>> klasses = new HashSet<Class<?>>();
 		for (Method methud : swaggenMethods) {
-			if (!klasses.contains(methud.getDeclaringClass().getClass())) {
 				klasses.add(methud.getDeclaringClass());
 				getLog().info("Annotated class: " + methud.getDeclaringClass().toString());
-			}
 		}
 
 		return klasses.toArray(new Class<?>[klasses.size()]);
