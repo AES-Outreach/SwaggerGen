@@ -8,7 +8,6 @@ import java.util.Map;
 import annotation.SwaggerGen;
 import domain.path.Parameter;
 import enums.ParamLocation;
-import enums.ParamType;
 
 /**
  * Creates a list of Parameters from an annotation.

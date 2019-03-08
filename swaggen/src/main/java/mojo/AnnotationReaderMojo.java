@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +54,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 			getLog().info("-- PROCESSING ANNOTATIONS --");
 			
 			generator.SwaggerGenerator.log = getLog();
-			generator.SwaggerGenerator.generateSwaggerFile(klasses, "TestYaml.yaml");
+			generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/TestYaml.yaml");
 
 		} catch (Exception e) {
 			// Can add other catches here for more complete error handling

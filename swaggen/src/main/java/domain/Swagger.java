@@ -8,6 +8,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import domain.path.Endpoint;
 import enums.RequestMethod;
 
+/**
+ * Domain object representing an entire Swagger file.
+ * 
+ * @author William Gardiner (7267012)
+ */
 @JsonInclude(Include.NON_NULL)
 public class Swagger {
 
