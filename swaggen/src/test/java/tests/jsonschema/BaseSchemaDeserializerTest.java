@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import enums.PropertyType;
 import resource.jsonschema.JsonSchema;
 import resource.jsonschema.Property;
-import utils.JsonObjectMapper;
+import utils.FileMapper;
 
 public abstract class BaseSchemaDeserializerTest {
 
@@ -23,7 +23,7 @@ public abstract class BaseSchemaDeserializerTest {
 	protected static JsonSchema schema;
 
 	protected void setFile(String filename) throws JsonParseException, JsonMappingException, IOException {
-		schema = JsonObjectMapper.fileToClass(filename, JsonSchema.class);
+		schema = FileMapper.jsonToClass(filename, JsonSchema.class);
 	}
 
 	protected Property assertProperty(Map<String, Property> properties, String key, String id, PropertyType type,
