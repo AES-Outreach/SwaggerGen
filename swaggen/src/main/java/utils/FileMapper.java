@@ -17,12 +17,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 public class FileMapper {
 
 	/**
-	 * Given a class of type T and a filename, maps the JSON file to the POJO
-	 * described by the class.
+	 * Maps a JSON file to a Java object representation of the json file.
 	 * 
-	 * @param fileName the filename
-	 * @param klass    the class
-	 * @return the object of type T
+	 * @param fileName the name of the JSON file
+	 * @param klass    the class the represents the JSON structure
+	 * @return the object that the JSON mapped to
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
 	 * @throws IOException
@@ -35,10 +34,10 @@ public class FileMapper {
 	}
 
 	/**
-	 * Given an object, writes it to a yaml file.
+	 * Maps a Java object to a YAML file.
 	 * 
-	 * @param fileName the file name
-	 * @param object the object
+	 * @param fileName the name of the YAML file
+	 * @param object the Java object
 	 * @throws JsonGenerationException
 	 * @throws JsonMappingException
 	 * @throws IOException
