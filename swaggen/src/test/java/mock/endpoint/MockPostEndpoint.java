@@ -1,7 +1,7 @@
-package endpoint;
+package mock.endpoint;
 import annotation.SwaggerGen;
-import service.MockSlingServerletRequest;
-import service.MockSlingServerletResponse;
+import mock.service.MockSlingServerletRequest;
+import mock.service.MockSlingServerletResponse;
 
 /**
  * A Fake endpoint for testing.

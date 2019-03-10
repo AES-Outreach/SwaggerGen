@@ -1,4 +1,4 @@
-package service;
+package mock.service;
 
 public class MockSlingServerletResponse {
 
