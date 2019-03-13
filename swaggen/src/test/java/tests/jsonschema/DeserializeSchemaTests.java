@@ -30,7 +30,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void TestSimpleJsonSchema() throws JsonParseException, JsonMappingException, IOException {
+	public void testSimpleJsonSchema() throws JsonParseException, JsonMappingException, IOException {
 		setFile("swaggen/test/schema/simple_object_schema.json");
 		
 		// Top Level Schema
@@ -131,7 +131,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 * @throws IOException
 	 */
 	@Test 
-	public void TestManySchemas() throws JsonParseException, JsonMappingException, IOException {
+	public void testManySchemas() throws JsonParseException, JsonMappingException, IOException {
 		for(int i = 0; i < 100; i++) {
 			setFile("swaggen/test/schema/simple_object_schema.json");
 			assertNotNull(schema.getTitle());
@@ -147,7 +147,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 * @throws IOException
 	 */
 	@Test 
-	public void TestLargeSchema() throws JsonParseException, JsonMappingException, IOException {
+	public void testLargeSchema() throws JsonParseException, JsonMappingException, IOException {
 		setFile("swaggen/test/schema/large_schema.json");
 		
 		assertEquals(schema.getSchema(), SCHEMA);
@@ -178,7 +178,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 * @throws IOException
 	 */
 	@Test 
-	public void TestEmptyBody() throws JsonParseException, JsonMappingException, IOException {
+	public void testEmptyBody() throws JsonParseException, JsonMappingException, IOException {
 		setFile("swaggen/test/schema/empty_body.json");
 		
 		assertEquals(schema.getSchema(), SCHEMA);
@@ -198,7 +198,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 * @throws IOException
 	 */
 	@Test(expected = IOException.class) 
-	public void TestEmptyFile() throws JsonParseException, JsonMappingException, IOException {
+	public void testEmptyFile() throws JsonParseException, JsonMappingException, IOException {
 		setFile("swaggen/test/schema/empty_file.json");
 	}
 	

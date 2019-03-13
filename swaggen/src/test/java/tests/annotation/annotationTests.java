@@ -1,0 +1,33 @@
+package tests.annotation;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Map;
+
+import org.junit.Test;
+
+import domain.path.Endpoint;
+import enums.ParamType;
+import enums.RequestMethod;
+import generator.PathGenerator;
+import mock.endpoint.MockPostEndpoint;
+
+public class annotationTests {
+
+	@Test
+	public void testAnnotation() {
+		
+		Class<?>[] klasses = {MockPostEndpoint.class};
+		Map<String, Map<RequestMethod, Endpoint>> path = PathGenerator.generatePathsFromClassList(klasses);
+		
+		Endpoint endpoint = path.get("/base/endpoint").get(RequestMethod.POST);
+		
+		assertEquals(endpoint.getDescription(), "Serverlet Description");
+		assertEquals(endpoint.getSummary(), "Serverlet Description");
+		assertEquals(endpoint.getResponses().size(), 3);
+		assertEquals(endpoint.getParameters().size(), 5);
+		assertEquals(endpoint.getParameters().get(0).getSchema().getType(), ParamType.STRING);
+
+	}
+	
+}
