@@ -16,6 +16,9 @@ import enums.RequestMethod;
 @JsonInclude(Include.NON_NULL)
 public class Swagger {
 
+	/**
+	 * Top level map, mapping all endpoints by their request method and URL
+	 */
 	private Map<String, Map<RequestMethod, Endpoint>> paths;
 
 	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {

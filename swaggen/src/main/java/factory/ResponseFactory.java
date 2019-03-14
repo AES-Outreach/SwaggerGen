@@ -13,6 +13,12 @@ import domain.path.Response;
  */
 public class ResponseFactory {
 
+	/**
+	 * Generates a Map of response codes to Responses from the annotation
+	 * 
+	 * @param annotation the annotation
+	 * @return the map
+	 */
 	public static Map<String, Response> Responses(SwaggerGen annotation) {
 		Map<String, Response> responses = new HashMap<>();
 		for(int code : annotation.responses()) {

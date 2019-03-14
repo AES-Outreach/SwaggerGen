@@ -23,6 +23,13 @@ import utils.FileMapper;
  */
 public class YamlFileWriterTest {
 	
+	/**
+	 * Test that the YAML Writer generates the expected YAML
+	 * 
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	@Test
 	public void testYamlWriter() throws JsonGenerationException, JsonMappingException, IOException {
 		String filename = "test/generated/testYamlWriter.yaml";
@@ -40,14 +47,20 @@ public class YamlFileWriterTest {
 		file.delete();
 	}
 	
+	/**
+	 * Tests that null values are included in the YAML
+	 */
 	@Test
 	public void testYamlWithNullValues() {
-		
+		// TODO: Implement
 	}
 	
+	/**
+	 * Tests that null values are not included in the YAML
+	 */
 	@Test
 	public void testYamlWithoutNullValues() {
-		
+		// TODO: Implement
 	}
 	
 }

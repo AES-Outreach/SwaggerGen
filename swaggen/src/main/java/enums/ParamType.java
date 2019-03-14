@@ -12,19 +12,52 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author William Gardiner (7267012)
  */
 public enum ParamType {
-	STRING("string"), INTEGER("integer"), NUMBER("number"), BOOLEAN("boolean");
 	
+	/**
+	 * String
+	 */
+	STRING("string"), 
+	
+	/**
+	 * Integer
+	 */
+	INTEGER("integer"), 
+	
+	/**
+	 * Floating point number
+	 */
+	NUMBER("number"), 
+	
+	/**
+	 * Boolean
+	 */
+	BOOLEAN("boolean");
+	
+	/**
+	 * The String representation
+	 */
 	private String value;
 
 	private ParamType(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * Converts the ENUM to the String representation
+	 * 
+	 * @return
+	 */
 	@JsonValue
 	public String value() {
 		return value;
 	}
 
+	/**
+	 * Converts the String representation to the ENUM
+	 * 
+	 * @param value
+	 * @return
+	 */
 	@JsonCreator
 	public PropertyType type(String value) {
 		for (PropertyType type : new ArrayList<PropertyType>(Arrays.asList(PropertyType.values()))) {

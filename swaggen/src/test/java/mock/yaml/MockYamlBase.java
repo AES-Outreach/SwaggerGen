@@ -3,6 +3,11 @@ package mock.yaml;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class for testing the YAML writer.
+ * 
+ * @author William Gardiner (7267012)
+ */
 public class MockYamlBase {
 
 	private List<MockYamlListItem> items;

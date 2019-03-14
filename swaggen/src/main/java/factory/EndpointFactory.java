@@ -9,6 +9,13 @@ import domain.path.Endpoint;
  * @author William Gardiner (7267012)
  */
 public class EndpointFactory {
+	
+	/**
+	 * Creates an Endpoint from an annotation.s
+	 * 
+	 * @param annotation the annotation
+	 * @return the endpoint
+	 */
 	public static Endpoint Endpoint(SwaggerGen annotation) {
 		Endpoint endpoint = new Endpoint();
 		endpoint.setSummary(annotation.description());

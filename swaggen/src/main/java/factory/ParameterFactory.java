@@ -16,11 +16,32 @@ import enums.ParamLocation;
  */
 public class ParameterFactory {
 
+	/**
+	 * Delimiter between param name and description
+	 */
 	private static final String DELIMITER = "=";
+	
+	/**
+	 * delimiter between param type and param definition
+	 */
 	private static final String TYPE_DELIMITER = " ";
+	
+	/**
+	 * Starting symbol for path parameters
+	 */
 	private static final String OPEN = "{";
+	
+	/**
+	 * Closing symbol for path parameters
+	 */
 	private static final String CLOSE = "}";
 	
+	/**
+	 * Generates a list of parameters from an annotation.
+	 * 
+	 * @param annotation the annotation
+	 * @return the list of parameters
+	 */
 	public static List<Parameter> Parameters(SwaggerGen annotation) {
 		List<Parameter> parameters = new ArrayList<>();
 		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));
@@ -29,6 +50,13 @@ public class ParameterFactory {
 		return parameters;
 	}
 	
+	/**
+	 * Generates a list of parameters from a ParamLocation and an array of param descriptions.
+	 * 
+	 * @param loc location
+	 * @param params the list of parameters
+	 * @return the list of parameters
+	 */
 	private static List<Parameter> getParamList(ParamLocation loc, String[] params) {
 		List<Parameter> paramList = new ArrayList<>();
 		Map<String, String> paramMap = splitParams(params);
@@ -51,6 +79,12 @@ public class ParameterFactory {
 		return paramList;
 	}
 	
+	/**
+	 * Maps parameter names to their descriptions.
+	 * 
+	 * @param params the list of parameter descriptions
+	 * @return the map
+	 */
 	private static Map<String, String> splitParams(String[] params) {
 		Map<String, String> paramMap = new HashMap<>();
 		for(String param : params) {
@@ -63,6 +97,12 @@ public class ParameterFactory {
 		return paramMap;
 	}
 	
+	/**
+	 * Gets a list of parameters from a URL
+	 * 
+	 * @param url the url
+	 * @return the list of parameters
+	 */
 	private static List<Parameter> getPathVariableList(String url) {
 		List<Parameter> paramList = new ArrayList<>();
 		int index = 0;

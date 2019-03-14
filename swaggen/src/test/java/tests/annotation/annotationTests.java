@@ -12,8 +12,16 @@ import enums.RequestMethod;
 import generator.PathGenerator;
 import mock.endpoint.MockPostEndpoint;
 
+/**
+ * Tests the annotation
+ * 
+ * @author William Gardiner (7267012)
+ */
 public class annotationTests {
 
+	/**
+	 * Test the annotation and factories by generating a path.
+	 */
 	@Test
 	public void testAnnotation() {
 		
@@ -29,5 +37,7 @@ public class annotationTests {
 		assertEquals(endpoint.getParameters().get(0).getSchema().getType(), ParamType.STRING);
 
 	}
+	
+	// TODO: Add tests here as the expected behaviour is defined.
 	
 }

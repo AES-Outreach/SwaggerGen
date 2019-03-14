@@ -11,10 +11,18 @@ import enums.ParamType;
  */
 public class ParamSchemaFactory {
 
-	public static domain.path.ParamSchema ParamSchema() {
+	public static ParamSchema ParamSchema() {
 		return ParamSchema(null);
 	}
+
+	// TODO: Update the method below to use a static map istead of a switch statement.
 	
+	/**
+	 * Creates a ParamSchema based on the schema identifier
+	 * 
+	 * @param schemaIdentifier the schema identifier
+	 * @return the schema
+	 */
 	public static ParamSchema ParamSchema(String schemaIdentifier) {
 		ParamSchema schema = new ParamSchema();
 		if(schemaIdentifier == null || "".contentEquals(schemaIdentifier)) {

@@ -16,6 +16,12 @@ import factory.EndpointFactory;
  */
 public class PathGenerator {
 
+	/**
+	 * Generates a Map of URLs and RequestMethods to Endpoints.
+	 * 
+	 * @param klasses s list of annotated classes
+	 * @return the map
+	 */
 	public static Map<String, Map<RequestMethod, Endpoint>> generatePathsFromClassList(Class<?>[] klasses) {
 		Map<String, Map<RequestMethod, Endpoint>> pathMap = new HashMap<>();
 		for(Class<?> klass : klasses) {
@@ -24,19 +30,31 @@ public class PathGenerator {
 		return pathMap;
 	}
 
+	/**
+	 * Generates a Map of URLs and RequestMethods to Endpoints.
+	 * 
+	 * @param klass the annotated class
+	 * @return the map
+	 */
 	private static Map<String, Map<RequestMethod, Endpoint>> generatePathsFromClass(Class<?> klass) {
 		Map<String, Map<RequestMethod, Endpoint>> pathMap = new HashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			if(annotation != null) {
-				pathMap.put(annotation.url(), generatePathFromMethod(method, annotation));
+				pathMap.put(annotation.url(), generatePathFromAnnotation(annotation));
 			}
 		}
 		return pathMap;
 	}
 	
-	private static Map<RequestMethod, Endpoint> generatePathFromMethod(Method method, SwaggerGen annotation) {
+	/**
+	 * Generates a path from an annotation
+	 * 
+	 * @param annotation the annotation
+	 * @return the path
+	 */
+	private static Map<RequestMethod, Endpoint> generatePathFromAnnotation(SwaggerGen annotation) {
 		Map<RequestMethod, Endpoint> endpointMap = new HashMap<>();
 		endpointMap.put(RequestMethod.valueOf(annotation.method()), EndpointFactory.Endpoint(annotation));
 		return endpointMap;
