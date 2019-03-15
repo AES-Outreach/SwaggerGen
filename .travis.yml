@@ -7,6 +7,8 @@ sudo : false
 language: java
 jdk:
   - openjdk11
+node_js: "10"
+install: "npm install -g swagger-cli"
 cache:
     directories:
         - $HOME/.m2
@@ -23,8 +25,14 @@ jobs:
         - cd sample-project
       script:
         - mvn clean install
+    - stage: test
+      before_script:
+        - cd sample-project/generated/swagger
+      script:
+        - swagger-cli validate TestYaml.yaml
 stages: 
   - name: compile
   - name: sample
+  - name: test
 notifications:
   slack: swaggen:Ykqb64SVX8bgvp5ZDi9KcJ3A 
