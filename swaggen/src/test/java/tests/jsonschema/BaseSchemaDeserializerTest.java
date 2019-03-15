@@ -14,18 +14,39 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import enums.PropertyType;
 import resource.jsonschema.JsonSchema;
 import resource.jsonschema.Property;
-import utils.JsonObjectMapper;
+import utils.FileMapper;
 
+/**
+ * Tests the JsonSchema Deserializer
+ * 
+ * @author William Gardiner (7267012)
+ */
 public abstract class BaseSchemaDeserializerTest {
 
+	/**
+	 * The schema version
+	 */
 	protected static String SCHEMA = "http://json-schema.org/draft-07/schema#";
 
+	/**
+	 * The schema object
+	 */
 	protected static JsonSchema schema;
 
 	protected void setFile(String filename) throws JsonParseException, JsonMappingException, IOException {
-		schema = JsonObjectMapper.fileToClass(filename, JsonSchema.class);
+		schema = FileMapper.jsonToClass(filename, JsonSchema.class);
 	}
 
+	/**
+	 * Asserts that a property matches the expected format
+	 * 
+	 * @param properties the map of properties
+	 * @param key the property key
+	 * @param id the property id
+	 * @param type the property type
+	 * @param title the property title
+	 * @return the property
+	 */
 	protected Property assertProperty(Map<String, Property> properties, String key, String id, PropertyType type,
 			String title) {
 		if (properties == null || !properties.containsKey(key)) {
@@ -51,7 +72,16 @@ public abstract class BaseSchemaDeserializerTest {
 		}
 		return property;
 	}
-
+	
+	/**
+	 * Asserts that the list item property matches the expected format
+	 * 
+	 * @param property the property
+	 * @param id the property id
+	 * @param type the property type
+	 * @param title the property title
+	 * @return the property
+	 */
 	protected Property assertItem(Property property, String id, PropertyType type, String title) {
 		if (property == null || property.getItems() == null) {
 			assertFalse(true);

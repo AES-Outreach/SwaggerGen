@@ -1,12 +1,17 @@
 package domain.path;
 
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * Represents a REST Endpoint. It is referenced from the Path by its method.
  * 
  * @author William Gardiner (7267012)
  */
+@JsonInclude(Include.NON_NULL)
 public class Endpoint {
 	
 	/**
@@ -32,7 +37,7 @@ public class Endpoint {
 	/**
 	 * The possible responses
 	 */
-	private List<Response> responses;
+	private Map<String, Response> responses;
 	
 	public String getSummary() {
 		return summary;
@@ -66,11 +71,11 @@ public class Endpoint {
 		this.requestBody = requestBody;
 	}
 	
-	public List<Response> getResponses() {
+	public Map<String, Response> getResponses() {
 		return responses;
 	}
 	
-	public void setResponses(List<Response> responses) {
+	public void setResponses(Map<String, Response> responses) {
 		this.responses = responses;
 	}
 

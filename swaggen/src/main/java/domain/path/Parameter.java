@@ -1,5 +1,9 @@
 package domain.path;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import enums.ParamLocation;
 
 /**
@@ -8,6 +12,7 @@ import enums.ParamLocation;
  * 
  * @author William Gardiner (7267012)
  */
+@JsonInclude(Include.NON_NULL)
 public class Parameter {
 	
 	/**
@@ -23,6 +28,7 @@ public class Parameter {
 	/**
 	 * The location (e.g. Header)
 	 */
+	@JsonProperty("in")
 	private ParamLocation loc;
 	
 	/**

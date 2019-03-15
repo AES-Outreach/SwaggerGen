@@ -14,14 +14,68 @@ import java.lang.annotation.ElementType;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SwaggerGen {
 
+	/**
+	 * The URL of the endpoint
+	 * 
+	 * @return
+	 */
 	String url();
+	
+	/**
+	 * The HTTP Request Method
+	 * 
+	 * @return
+	 */
 	String method();
+	
+	/**
+	 * The description of the endpoint
+	 * 
+	 * @return
+	 */
 	String description() default "";
+	
+	/**
+	 * List of headers of the form "{name}={description}"
+	 * 
+	 * @return
+	 */
 	String[] headers() default {};
+	
+	/**
+	 * List of query parameters of the form "{name}={description}"
+	 * 
+	 * @return
+	 */
 	String[] queryParams() default {};
+	
+	/**
+	 * The name of the JSON schema file that describes the body of the request
+	 * 
+	 * @return
+	 */
 	String body() default "";
+	
+	/**
+	 * A list of response codes
+	 * 
+	 * @return
+	 */
 	int[] responses();
+	
+	/**
+	 * The name of the JSON schema file that describes the body of the response
+	 * corresponding to the first response code provided.
+	 * 
+	 * @return
+	 */
 	String responseBody() default "";
+	
+	/**
+	 * The scheme: HTTP or HTTPS
+	 * 
+	 * @return
+	 */
 	String scheme() default "HTTP";
 
 }

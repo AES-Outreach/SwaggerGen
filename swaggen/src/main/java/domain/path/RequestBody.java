@@ -1,5 +1,8 @@
 package domain.path;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import enums.ContentType;
 
 /**
@@ -7,6 +10,7 @@ import enums.ContentType;
  * 
  * @author William Gardiner (7267012)
  */
+@JsonInclude(Include.NON_NULL)
 public class RequestBody {
 
 	/**

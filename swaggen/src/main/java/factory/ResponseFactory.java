@@ -1,7 +1,7 @@
 package factory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import annotation.SwaggerGen;
 import domain.path.Response;
@@ -13,16 +13,20 @@ import domain.path.Response;
  */
 public class ResponseFactory {
 
-	public static List<Response> Responses(SwaggerGen annotation) {
-		List<Response> responses = new ArrayList<>();
+	/**
+	 * Generates a Map of response codes to Responses from the annotation
+	 * 
+	 * @param annotation the annotation
+	 * @return the map
+	 */
+	public static Map<String, Response> Responses(SwaggerGen annotation) {
+		Map<String, Response> responses = new HashMap<>();
 		for(int code : annotation.responses()) {
-			Response response = new Response();
-			response.setCode(Integer.toString(code));
-			responses.add(response);
+			responses.put(Integer.toString(code), new Response());
 		}
-		if(responses.size() > 0) {
-			Response response = responses.get(0);
-			response.setBody(ResponseBodyFactory.RequestBody(annotation));
+		if(annotation.responses().length > 0) {
+			String expectedResponseCode = Integer.toString(annotation.responses()[0]);
+			responses.get(expectedResponseCode).setBody(ResponseBodyFactory.RequestBody(annotation));
 		}
 		return responses;
 	}

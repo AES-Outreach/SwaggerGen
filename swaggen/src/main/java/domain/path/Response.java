@@ -1,16 +1,15 @@
 package domain.path;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * A response with a code, description, and body
  * 
  * @author William Gardiner (7267012)
  */
+@JsonInclude(Include.NON_NULL)
 public class Response {
-
-	/**
-	 * The response code
-	 */
-	private String code;
 	
 	/**
 	 * The optional description
@@ -21,14 +20,6 @@ public class Response {
 	 * The optional body
 	 */
 	private RequestBody body;
-	
-	public String getCode() {
-		return code;
-	}
-	
-	public void setCode(String code) {
-		this.code = code;
-	}
 	
 	public String getDescription() {
 		return description;
@@ -46,8 +37,4 @@ public class Response {
 		this.body = body;
 	}
 	
-	@Override
-	public String toString() {
-		return "Response [code=" + code + ", description=" + description + ", body=" + body + "]";
-	}
 }

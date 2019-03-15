@@ -1,14 +1,11 @@
 package generator;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import annotation.SwaggerGen;
 import domain.path.Endpoint;
-import domain.path.Path;
 import enums.RequestMethod;
 import factory.EndpointFactory;
 
@@ -19,57 +16,47 @@ import factory.EndpointFactory;
  */
 public class PathGenerator {
 
-	public static List<Path> generatePathsFromClassList(Class<?>[] klasses) {
-		List<Path> pathList = new ArrayList<>();
+	/**
+	 * Generates a Map of URLs and RequestMethods to Endpoints.
+	 * 
+	 * @param klasses s list of annotated classes
+	 * @return the map
+	 */
+	public static Map<String, Map<RequestMethod, Endpoint>> generatePathsFromClassList(Class<?>[] klasses) {
+		Map<String, Map<RequestMethod, Endpoint>> pathMap = new HashMap<>();
 		for(Class<?> klass : klasses) {
-			List<Path> generatedPathes = generatePathsFromClass(klass);
-			pathList = mergePathLists(pathList, generatedPathes);
+			pathMap.putAll(generatePathsFromClass(klass));
 		}
-		return pathList;
+		return pathMap;
 	}
 
-	private static List<Path> generatePathsFromClass(Class<?> klass) {
-		List<Path> pathList = new ArrayList<>();
+	/**
+	 * Generates a Map of URLs and RequestMethods to Endpoints.
+	 * 
+	 * @param klass the annotated class
+	 * @return the map
+	 */
+	private static Map<String, Map<RequestMethod, Endpoint>> generatePathsFromClass(Class<?> klass) {
+		Map<String, Map<RequestMethod, Endpoint>> pathMap = new HashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			if(annotation != null) {
-				Path path = generatePathFromMethod(method, annotation);
-				mergePathLists(pathList, path);
+				pathMap.put(annotation.url(), generatePathFromAnnotation(annotation));
 			}
 		}
-		return pathList;
+		return pathMap;
 	}
 	
-	private static Path generatePathFromMethod(Method method, SwaggerGen annotation) {
-		Path path = new Path();
-		path.setPath(annotation.url());
-		
+	/**
+	 * Generates a path from an annotation
+	 * 
+	 * @param annotation the annotation
+	 * @return the path
+	 */
+	private static Map<RequestMethod, Endpoint> generatePathFromAnnotation(SwaggerGen annotation) {
 		Map<RequestMethod, Endpoint> endpointMap = new HashMap<>();
 		endpointMap.put(RequestMethod.valueOf(annotation.method()), EndpointFactory.Endpoint(annotation));
-		path.setEndpoints(endpointMap);
-		return path;
-	}
-	
-	private static List<Path> mergePathLists(List<Path> baseList, List<Path> additionalList) {
-		for(Path path : additionalList) {
-			baseList = mergePathLists(baseList, path);
-		}
-		return baseList;
-	}
-	
-	private static List<Path> mergePathLists(List<Path> baseList, Path newPath) {
-		for(Path basePath : baseList) {
-			if(basePath.equals(newPath)) {
-				Map<RequestMethod, Endpoint> baseEndpoints = basePath.getEndpoints();
-				Map<RequestMethod, Endpoint> newEndpoints = newPath.getEndpoints();
-				for(RequestMethod key : newEndpoints.keySet()) {
-					baseEndpoints.put(key, newEndpoints.get(key));
-				}
-				return baseList;
-			}
-		}
-		baseList.add(newPath);
-		return baseList;
+		return endpointMap;
 	}
 }
