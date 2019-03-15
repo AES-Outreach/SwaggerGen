@@ -1,4 +1,4 @@
 /target/
 /bin/
 /.settings/
-generated/swagger/*.yaml
+generated/
