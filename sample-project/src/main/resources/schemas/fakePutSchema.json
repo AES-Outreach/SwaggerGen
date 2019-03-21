@@ -1,0 +1,68 @@
+{
+	"definitions": {
+	},
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://example.com/root.json",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"boolean",
+		"null",
+		"number",
+		"string",
+		"array"
+	],
+	"properties": {
+		"boolean": {
+			"$id": "#/properties/boolean",
+			"type": "boolean"
+		},
+		"null": {
+			"$id": "#/properties/null",
+			"type": "null"
+		},
+		"number": {
+			"$id": "#/properties/number",
+			"type": "integer"
+		},
+		"string": {
+			"$id": "#/properties/string",
+			"type": "string",
+			"pattern": "^(.*)$"
+		},
+		"array": {
+			"$id": "#/properties/array",
+			"type": "array",
+			"items": {
+				"$id": "#/properties/array/items",
+				"type": "object",
+				"additionalProperties": false,
+				"required": [
+					"json",
+					"number"
+				],
+				"properties": {
+					"json": {
+						"$id": "#/properties/array/items/properties/json",
+						"type": "object",
+						"additionalProperties": false,
+						"required": [
+							"nestedString"
+						],
+						"properties": {
+							"nestedString": {
+								"$id": "#/properties/array/items/properties/json/properties/nestedString",
+								"type": "string",
+								"pattern": "^(.*)$"
+							}
+						}
+					},
+					"number": {
+						"$id": "#/properties/array/items/properties/number",
+						"type": "integer"
+					}
+				}
+			}
+		}
+	}
+}
