@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import domain.Swagger;
+import domain.SwaggerInfo;
 import domain.path.Endpoint;
 import enums.RequestMethod;
 import utils.FileMapper;
@@ -56,6 +57,15 @@ public class SwaggerGenerator {
 //		}
 		
 		Swagger swagger = new Swagger();
+		swagger.setVersion("3.0.0");
+		
+		SwaggerInfo info = new SwaggerInfo();
+		// These will be read from a config file.
+		info.setTitle("Title");
+		info.setDescription("Description");
+		info.setVersion("0.0");
+		
+		swagger.setInfo(info);
 		swagger.setPaths(paths);
 		
 		FileMapper.classToYaml(filename, swagger);
