@@ -17,6 +17,16 @@ import enums.RequestMethod;
 public class Swagger {
 
 	/**
+	 * The OpenAPI Version
+	 */
+	private String version;
+	
+	/**
+	 * The API Suite Info
+	 */
+	private SwaggerInfo info;
+
+	/**
 	 * Top level map, mapping all endpoints by their request method and URL
 	 */
 	private Map<String, Map<RequestMethod, Endpoint>> paths;
@@ -28,5 +38,20 @@ public class Swagger {
 	public void setPaths(Map<String, Map<RequestMethod, Endpoint>> paths) {
 		this.paths = paths;
 	}
-	
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public SwaggerInfo getInfo() {
+		return info;
+	}
+
+	public void setInfo(SwaggerInfo info) {
+		this.info = info;
+	}
 }
