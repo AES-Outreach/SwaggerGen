@@ -19,33 +19,33 @@ public class FileMapper {
 	/**
 	 * Maps a JSON file to a Java object representation of the json file.
 	 * 
-	 * @param fileName the name of the JSON file
+	 * @param filename the name of the JSON file
 	 * @param klass    the class the represents the JSON structure
 	 * @return the object that the JSON mapped to
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static <T> T jsonToClass(String fileName, Class<T> klass)
+	public static <T> T jsonToClass(String filename, Class<T> klass)
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
-		File file = new File(fileName);
+		File file = new File(filename);
 		return objectMapper.readValue(file, klass);
 	}
 
 	/**
 	 * Maps a Java object to a YAML file.
 	 * 
-	 * @param fileName the name of the YAML file
+	 * @param filename the name of the YAML file
 	 * @param object the Java object
 	 * @throws JsonGenerationException
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static <T> void classToYaml(String fileName, T object)
+	public static <T> void classToYaml(String filename, T object)
 			throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-		objectMapper.writeValue(new File(fileName), object);
+		objectMapper.writeValue(new File(filename), object);
 	}
 
 }

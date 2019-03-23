@@ -1,5 +1,6 @@
 package generator;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -67,6 +68,9 @@ public class SwaggerGenerator {
 		
 		swagger.setInfo(info);
 		swagger.setPaths(paths);
+		
+		File file = new File(filename);
+		file.getParentFile().mkdirs();
 		
 		FileMapper.classToYaml(filename, swagger);
 		
