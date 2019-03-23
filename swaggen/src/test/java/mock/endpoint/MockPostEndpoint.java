@@ -22,7 +22,7 @@ public class MockPostEndpoint {
 				"param4 = Another String Param"
 				},
 		body="body.scheme",
-		responses={200, 400, 404},
+		responses={"200=OK", "400=Bad Request", "404"},
 		responseBody= "response.scheme",
 		scheme="HTTP"
 	)

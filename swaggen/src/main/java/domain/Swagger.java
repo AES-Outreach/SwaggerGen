@@ -19,7 +19,12 @@ public class Swagger {
 	/**
 	 * The OpenAPI Version
 	 */
-	private String version;
+	private String openapi;
+	
+	/**
+	 * The Swagger Version
+	 */
+	private String swagger;
 	
 	/**
 	 * The API Suite Info
@@ -39,12 +44,22 @@ public class Swagger {
 		this.paths = paths;
 	}
 
-	public String getVersion() {
-		return version;
+	public String getOpenapi() {
+		return openapi;
+	}
+	
+	public String getSwagger() {
+		return swagger;
 	}
 
 	public void setVersion(String version) {
-		this.version = version;
+		if("2.0".equals(version)) {
+			openapi = null;
+			swagger = version;
+		} else {
+			swagger = null;
+			openapi = version;
+		}
 	}
 
 	public SwaggerInfo getInfo() {

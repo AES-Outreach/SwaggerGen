@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Response {
 	
 	/**
-	 * The optional description
+	 * The description
 	 */
 	private String description;
 	
