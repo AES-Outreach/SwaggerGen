@@ -1,4 +1,4 @@
-package servlet;
+package tests.generation;
 import annotation.SwaggerGen;
 /**
  * A Fake endpoint for testing.
@@ -17,10 +17,10 @@ public class MockPutEndpointWithSchema {
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/fakePutSchema.json",
-		responses={200, 400, 404},
+		responses={"200=OK", "400", "404"},
 		scheme="HTTP"
 	)
-	public void doPut(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	public void doPut(Object request, Object resp) {
 		// Implementation not important.
 	}
 }

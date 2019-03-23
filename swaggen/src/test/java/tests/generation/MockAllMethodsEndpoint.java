@@ -1,4 +1,4 @@
-package servlet;
+package tests.generation;
 import annotation.SwaggerGen;
 /**
  * A Fake endpoint for testing.
@@ -18,10 +18,10 @@ public class MockAllMethodsEndpoint {
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/all/orderPut.json",
-		responses={200, 400, 404, 401, 403},
+		responses={"200=OK", "400", "404", "401", "403"},
 		scheme="HTTP"
 	)
-	public void doPut(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	public void doPut(Object request, Object resp) {
 		// Implementation not important.
 	}
 
@@ -36,10 +36,10 @@ public class MockAllMethodsEndpoint {
 		description="Post Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/all/orderPost.json",
-		responses={200, 400, 404, 401, 403},
+		responses={"200=OK", "400", "404", "401", "403"},
 		scheme="HTTP"
 	)
-	public void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	public void doPost(Object request, Object resp) {
 		// Implementation not important.
 	}
 	
@@ -56,10 +56,10 @@ public class MockAllMethodsEndpoint {
 		queryParams={
 				"i order_id = id of the order being requested"
 				},
-		responses={200, 400, 404, 401, 403},
+		responses={"200=OK", "400", "404", "401", "403"},
 		scheme="HTTP"
 	)
-	public void doGet(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	public void doGet(Object request, Object resp) {
 		// Implementation not important.
 	}
 	
@@ -71,15 +71,15 @@ public class MockAllMethodsEndpoint {
 	@SwaggerGen(
 		url="/base/all/delete-endpoint",
 		method="DELETE",
-		description="Get Servlet Description",
+		description="Delete Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		queryParams={
 				"i order_id = id of the order being requested"
 				},
-		responses={200, 400, 404, 401, 403},
+		responses={"200=OK", "400", "404", "401", "403"},
 		scheme="HTTP"
 	)
-	public void doDelete(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	public void doDelete(Object request, Object resp) {
 		// Implementation not important.
 	}
 }
