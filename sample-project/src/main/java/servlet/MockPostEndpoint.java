@@ -6,7 +6,11 @@ import annotation.SwaggerGen;
  * @author William Gardiner (7267012)
  */
 public class MockPostEndpoint {
-
+	/**
+	 * Fake endpoint for testing purposes
+	 * @param request fake request object
+	 * @param resp fake response object
+	 */
 	@SwaggerGen(
 		url="/base/endpoint",
 		method="POST",
