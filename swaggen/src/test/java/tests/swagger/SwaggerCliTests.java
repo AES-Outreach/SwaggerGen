@@ -1,14 +1,13 @@
-package tests.swagger.generation;
+package tests.swagger;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import tests.endpoints.MinimalGetEndpointTest;
-import tests.endpoints.MockAllMethodsEndpoint;
-import tests.endpoints.MockPostEndpoint;
-import tests.endpoints.MockPutEndpointWithSchema;
-import tests.swagger.utils.SwagValidator;
+import mock.endpoint.MinimalGetEndpointTest;
+import mock.endpoint.MockAllMethodsEndpoint;
+import mock.endpoint.MockPostEndpoint;
+import mock.endpoint.MockPutEndpointWithSchema;
 
 public class SwaggerCliTests {
 

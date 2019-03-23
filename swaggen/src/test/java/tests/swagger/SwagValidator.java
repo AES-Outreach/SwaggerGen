@@ -1,4 +1,4 @@
-package tests.swagger.utils;
+package tests.swagger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
