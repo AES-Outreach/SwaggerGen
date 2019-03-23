@@ -1,4 +1,4 @@
-package tests.generation;
+package tests.endpoints;
 import annotation.SwaggerGen;
 /**
  * A Fake endpoint for testing.
