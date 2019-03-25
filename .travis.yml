@@ -17,10 +17,10 @@ jobs:
         - cd swaggen
       script:
         - npm install -g swagger-cli
-        - mvn -U -s ../assets/settings.xml clean install
+        - mvn -U -s ../assets/settings.xml clean install #plugin
         - mvn javadoc:javadoc -s ../assets/settings.xml
-        - cd ../sample-project
-        - mvn clean install
+        - cd ../sample-project 
+        - mvn clean install #sample-project
 
 stages:
   - name: compile
