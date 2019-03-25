@@ -57,11 +57,11 @@ public @interface SwaggerGen {
 	String body() default "";
 	
 	/**
-	 * A list of response codes
+	 * A list of response codes of the form "{name}={description}"
 	 * 
 	 * @return
 	 */
-	int[] responses();
+	String[] responses() default {"200=OK"};
 	
 	/**
 	 * The name of the JSON schema file that describes the body of the response

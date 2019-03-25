@@ -53,7 +53,6 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 			getLog().info("-- PROCESSING ANNOTATIONS --");
 			
-			generator.SwaggerGenerator.log = getLog();
 			generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/TestYaml.yaml");
 
 		} catch (Exception e) {

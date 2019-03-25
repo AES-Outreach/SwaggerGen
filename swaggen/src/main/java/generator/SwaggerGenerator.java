@@ -23,8 +23,6 @@ import utils.FileMapper;
 
 public class SwaggerGenerator {
 	
-	public static Log log;
-
 	/**
 	 * Given an array of classes that contain methods annotated with SwaggerGen,
 	 * generate a list of associated paths and POJO
@@ -35,8 +33,6 @@ public class SwaggerGenerator {
 	 * @throws IOException
 	 **/
 	public static void generateSwaggerFile(Class<?>[] klasses, String filename) throws JsonParseException, JsonMappingException, IOException {
-
-		log.info("- generating paths -");
 		Map<String, Map<RequestMethod, Endpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 //		Set<String> schemaFilenames = new HashSet<>();
 

@@ -38,6 +38,4 @@ public class annotationTests {
 
 	}
 	
-	// TODO: Add tests here as the expected behaviour is defined.
-	
 }

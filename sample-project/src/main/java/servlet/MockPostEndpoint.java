@@ -6,7 +6,11 @@ import annotation.SwaggerGen;
  * @author William Gardiner (7267012)
  */
 public class MockPostEndpoint {
-
+	/**
+	 * Fake endpoint for testing purposes
+	 * @param request fake request object
+	 * @param resp fake response object
+	 */
 	@SwaggerGen(
 		url="/base/endpoint",
 		method="POST",
@@ -19,7 +23,7 @@ public class MockPostEndpoint {
 				"param4 = Another String Param"
 				},
 		body="body.scheme",
-		responses={200, 400, 404},
+		responses={"200=OK", "400", "404"},
 		responseBody= "response.scheme",
 		scheme="HTTP"
 	)
