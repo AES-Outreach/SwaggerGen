@@ -23,7 +23,7 @@ jobs:
         - cd ../sample-project 
         - mvn clean install #sample-project
         - cd ..
-        - sh generate_docs.sh
+        - sudo sh generate_docs.sh
 stages:
   - name: compile
 notifications:
