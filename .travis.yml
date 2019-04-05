@@ -17,11 +17,13 @@ jobs:
         - cd swaggen
       script:
         - npm install -g swagger-cli
+        - npm install -g redoc-cli
         - mvn -U -s ../assets/settings.xml clean install #plugin
         - mvn javadoc:javadoc -s ../assets/settings.xml
         - cd ../sample-project 
         - mvn clean install #sample-project
-
+	- cd ..
+	- ./generate_docs.sh
 stages:
   - name: compile
 notifications:
