@@ -23,7 +23,9 @@ jobs:
         - cd ../sample-project 
         - mvn clean install #sample-project
         - cd ..
-        - sudo ./generate_docs
+        - mkdir swaggen/generated/html
+        - mkdir sample-project/generated/html
+        - sh generate_docs.sh
 stages:
   - name: compile
 notifications:
