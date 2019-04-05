@@ -22,8 +22,8 @@ jobs:
         - mvn javadoc:javadoc -s ../assets/settings.xml
         - cd ../sample-project 
         - mvn clean install #sample-project
-	- cd ..
-	- ./generate_docs.sh
+        - cd ..
+        - sh generate_docs.sh
 stages:
   - name: compile
 notifications:
