@@ -31,7 +31,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 */
 	@Test
 	public void testSimpleJsonSchema() throws JsonParseException, JsonMappingException, IOException {
-		setFile("swaggen/test/schema/simple_object_schema.json");
+		setFile("test/schema/simple_object_schema.json");
 		
 		// Top Level Schema
 		assertEquals(schema.getSchema(), SCHEMA);
@@ -133,7 +133,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	@Test 
 	public void testManySchemas() throws JsonParseException, JsonMappingException, IOException {
 		for(int i = 0; i < 100; i++) {
-			setFile("swaggen/test/schema/simple_object_schema.json");
+			setFile("test/schema/simple_object_schema.json");
 			assertNotNull(schema.getTitle());
 			schema = null;
 		}
@@ -148,7 +148,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 */
 	@Test 
 	public void testLargeSchema() throws JsonParseException, JsonMappingException, IOException {
-		setFile("swaggen/test/schema/large_schema.json");
+		setFile("test/schema/large_schema.json");
 		
 		assertEquals(schema.getSchema(), SCHEMA);
 		assertEquals(schema.getId(), "http://example.com/root.json");
@@ -167,7 +167,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 */
 	@Test(expected = JsonMappingException.class)
 	public void TestBadJson() throws JsonParseException, JsonMappingException, IOException {
-		setFile("swaggen/test/schema/bad_json.json");
+		setFile("test/schema/bad_json.json");
 	}
 	
 	/**
@@ -179,7 +179,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
 	 */
 	@Test 
 	public void testEmptyBody() throws JsonParseException, JsonMappingException, IOException {
-		setFile("swaggen/test/schema/empty_body.json");
+		setFile("test/schema/empty_body.json");
 		
 		assertEquals(schema.getSchema(), SCHEMA);
 		assertEquals(schema.getId(), "http://example.com/root.json");
