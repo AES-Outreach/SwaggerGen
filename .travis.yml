@@ -22,10 +22,8 @@ jobs:
         - mvn javadoc:javadoc -s ../assets/settings.xml
         - cd ../sample-project 
         - mvn clean install #sample-project
+        - cd generated/swagger/
         - ls
-        - cd generated
-        - ls
-        - sh generate_docs.sh
 stages:
   - name: compile
 notifications:
