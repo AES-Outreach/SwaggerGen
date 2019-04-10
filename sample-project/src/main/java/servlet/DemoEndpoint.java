@@ -29,11 +29,11 @@ public class DemoEndpoint {
 	}
 	
 	@SwaggerGen(
-			url= "/localhost/test/post",
+			url= "/localhost/test/put",
 			method="PUT",
 			title="Meeting",
 			description="This is a sample PUT endpoint description to be printed in a Swagger format HTML documentation file.",
-			headers={"Content-Type=application/json", "langHeader=expected language of the request"},
+			headers={"Content-Type=application/json", "authorization=token used for authorization", "langHeader=expected language of the request"},
 			body="schemas/all/meetingPut.json",
 			responses={"200=OK", "400", "404", "401", "403"},
 			scheme="HTTP"
