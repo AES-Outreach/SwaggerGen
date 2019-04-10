@@ -13,6 +13,7 @@ public class MockPostEndpoint {
 	@SwaggerGen(
 		url="/base/endpoint",
 		method="POST",
+		title="Serverlet Title",
 		description="Serverlet Description",
 		headers={"Content-Type=application/json"},
 		queryParams={

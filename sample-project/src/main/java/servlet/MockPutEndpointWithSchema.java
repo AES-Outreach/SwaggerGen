@@ -14,6 +14,7 @@ public class MockPutEndpointWithSchema {
 	@SwaggerGen(
 		url="/base/all-methods-endpoint",
 		method="PUT",
+				title="Put",
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/fakePutSchema.json",

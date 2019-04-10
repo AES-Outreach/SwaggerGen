@@ -31,7 +31,7 @@ public class annotationTests {
 		Endpoint endpoint = path.get("/base/endpoint").get(RequestMethod.POST);
 		
 		assertEquals(endpoint.getDescription(), "Serverlet Description");
-		assertEquals(endpoint.getSummary(), "Serverlet Description");
+		assertEquals(endpoint.getSummary(), "Serverlet Title");
 		assertEquals(endpoint.getResponses().size(), 3);
 		assertEquals(endpoint.getParameters().size(), 5);
 		assertEquals(endpoint.getParameters().get(0).getSchema().getType(), ParamType.STRING);
