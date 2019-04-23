@@ -1,7 +1,5 @@
 package tests.swagger;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 import mock.endpoint.MinimalGetEndpointTest;
@@ -21,7 +19,7 @@ public class SwaggerCliTests {
 	@Test
 	public void AllMethodsEndpointTest() {
 		try {
-			assertEquals(0, SwagValidator.validate("generated/swagger/AllMethodsEndpointYaml.yaml", MockAllMethodsEndpoint.class));
+			TestSwaggerGenerator.generate("generated/swagger/AllMethodsEndpointYaml.yaml", MockAllMethodsEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -39,7 +37,7 @@ public class SwaggerCliTests {
 	@Test
 	public void PostEndpointTest() {
 		try {
-			assertEquals(0, SwagValidator.validate("generated/swagger/PostEndpointYaml.yaml", MockPostEndpoint.class));
+			TestSwaggerGenerator.generate("generated/swagger/PostEndpointYaml.yaml", MockPostEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -57,7 +55,7 @@ public class SwaggerCliTests {
 	@Test
 	public void PutEndpointTest() {
 		try {
-			assertEquals(0, SwagValidator.validate("generated/swagger/PutEndpointYaml.yaml", MockPutEndpointWithSchema.class));
+			TestSwaggerGenerator.generate("generated/swagger/PutEndpointYaml.yaml", MockPutEndpointWithSchema.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -75,7 +73,7 @@ public class SwaggerCliTests {
 	@Test
 	public void MinimalEndpointTest() {
 		try {
-			assertEquals(0, SwagValidator.validate("generated/swagger/MinimalYaml.yaml", MinimalGetEndpointTest.class));
+			TestSwaggerGenerator.generate("generated/swagger/MinimalYaml.yaml", MinimalGetEndpointTest.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);

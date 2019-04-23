@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import generator.SwaggerGenerator;
 
-public class SwagValidator {
+public class TestSwaggerGenerator {
 
 	/**
 	 * Function that generates the Swagger file of an endpoint that is passed in. We
@@ -24,24 +24,9 @@ public class SwagValidator {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static int validate(String filelocation, Class<?> klass)
+	public static void generate(String filelocation, Class<?> klass)
 			throws JsonParseException, JsonMappingException, IOException {
 		generateSwagger(filelocation, klass);
-		Process process = runSwaggerCLIProcess(filelocation);
-		return process.exitValue();
-	}
-
-	/**
-	 * Function that handles the generation of the swagger-cli processes.
-	 * 
-	 * @param filelocation locations of the swagger file to be tested.
-	 * @return the object reference to the subprocess
-	 * @throws IOException
-	 */
-	private static Process runSwaggerCLIProcess(String filelocation) throws IOException {
-		Process process = Runtime.getRuntime().exec("cmd /c swagger-cli validate " + filelocation);
-		readOutput(process);
-		return process;
 	}
 
 	/**
@@ -59,16 +44,5 @@ public class SwagValidator {
 		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass }, filelocation);
 	}
 
-	/**
-	 * Utility function to read the stream of the process.
-	 * @param process swagger-cli process
-	 * @throws IOException
-	 */
-	private static void readOutput(Process process) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		String s;
-		while ((s = reader.readLine()) != null) {
-			System.out.println(s);
-		}
-	}
+
 }

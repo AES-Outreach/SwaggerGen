@@ -18,7 +18,7 @@ public class EndpointFactory {
 	 */
 	public static Endpoint Endpoint(SwaggerGen annotation) {
 		Endpoint endpoint = new Endpoint();
-		endpoint.setSummary(annotation.description());
+		endpoint.setSummary(annotation.title());
 		endpoint.setDescription(annotation.description());
 		endpoint.setParameters(ParameterFactory.Parameters(annotation));
 		endpoint.setRequestBody(RequestBodyFactory.RequestBody(annotation));
