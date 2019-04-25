@@ -5,6 +5,36 @@
 
 Using a minimal set of Java decorators, we automagically generate Swagger *.yml* files and self-packaged *HTML* pages. We initially wanted to create this solution for ourselves because wiki pages, google docs, and javadocs weren't really up to the task. We required complete obfuscation of the backend code from our front-end developers, without forcing the backend staff to manage documentation separately from the code. We achieved this by using a simple set of class & method annotations that can represent all of the meaningful information that can describe an API.
 
+# Installation #
+This solution requires a **Maven Java project** to work. It is currently tightly bound to those tools in its current iteration.
+Assuming that your Maven project is created and good to go, all you need to do is add the dependency and build option below to your *POM* file, if that isn't the case, you should learn about [maven](https://maven.apache.org/guides/getting-started/) before continuing.
+
+Currently, the process of setting up the project will require you to clone the repo and run *mvn clean install* inside of the swaggen folder to add the dependency to your local *.m2* folder. We're waiting on a response to add our project to the public maven repositories.
+
+```
+<!-- SwaggerGen plugin -->
+<dependency>
+  <groupId>com.swaggen</groupId>
+  <artifactId>annotations</artifactId>
+  <version>0.0.1</version>
+</dependency>
+```
+```
+<plugin>
+<groupId>com.swaggen</groupId>
+<artifactId>annotations</artifactId>
+<version>0.0.1</version>
+<executions>
+  <execution>
+    <phase>install</phase>
+    <goals>
+      <goal>process-annotations</goal>
+    </goals>
+  </execution>
+</executions>
+</plugin>
+```
+
 # Example #
 Given a sample servlet method meant to capture a PUT request:
 ```
