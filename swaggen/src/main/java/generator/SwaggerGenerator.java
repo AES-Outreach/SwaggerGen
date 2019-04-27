@@ -9,11 +9,11 @@ import org.apache.maven.plugin.logging.Log;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import domain.Swagger;
-import domain.SwaggerInfo;
-import domain.path.Endpoint;
+import domain.output.Swagger;
+import domain.output.SwaggerInfo;
+import domain.output.path.Endpoint;
 import enums.RequestMethod;
-import utils.FileMapper;
+import utils.io.FileMapper;
 
 /**
  * Connects the plugin with the SwaggerGen logic
@@ -33,26 +33,10 @@ public class SwaggerGenerator {
 	 * @throws IOException
 	 **/
 	public static void generateSwaggerFile(Class<?>[] klasses, String filename) throws JsonParseException, JsonMappingException, IOException {
-		Map<String, Map<RequestMethod, Endpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
-//		Set<String> schemaFilenames = new HashSet<>();
-
-		// TODO: Use this code when we are ready to add schemas.
-//		for(Path path : paths) {
-//			for(RequestMethod endpointMethodType : path.getEndpoints().keySet()) {
-//				Endpoint endpoint = path.getEndpoints().get(endpointMethodType);
-//				if(endpoint.getRequestBody() != null) {
-//					schemaFilenames.add(endpoint.getRequestBody().getFilename());
-//				}
-//				if(endpoint.getResponses() != null) {
-//					for(Response response : endpoint.getResponses()) {
-//						if(response.getBody() != null) {
-//							schemaFilenames.add(response.getBody().getFilename());
-//						}
-//					}
-//				}
-//			}
-//		}
 		
+		// Create Paths
+		Map<String, Map<RequestMethod, Endpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
+
 		Swagger swagger = new Swagger();
 		swagger.setVersion("3.0.0");
 		

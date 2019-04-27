@@ -1,13 +1,14 @@
 package factory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import annotation.SwaggerGen;
-import domain.path.Parameter;
+import domain.input.parameter.ParsedParameter;
+import domain.output.path.Parameter;
 import enums.ParamLocation;
+import utils.stringparsing.ParameterParser;
+import utils.stringparsing.exceptions.ParseException;
 
 /**
  * Creates a list of Parameters from an annotation.
@@ -15,16 +16,8 @@ import enums.ParamLocation;
  * @author William Gardiner (7267012)
  */
 public class ParameterFactory {
-
-	/**
-	 * Delimiter between param name and description
-	 */
-	private static final String DELIMITER = "=";
 	
-	/**
-	 * delimiter between param type and param definition
-	 */
-	private static final String TYPE_DELIMITER = " ";
+	private static final String NO_DESCRIPTION = "No Description";
 	
 	/**
 	 * Starting symbol for path parameters
@@ -42,11 +35,11 @@ public class ParameterFactory {
 	 * @param annotation the annotation
 	 * @return the list of parameters
 	 */
-	public static List<Parameter> Parameters(SwaggerGen annotation) {
+	public static List<Parameter> createParameters(SwaggerGen annotation) {
 		List<Parameter> parameters = new ArrayList<>();
 		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));
 		parameters.addAll(getParamList(ParamLocation.QUERY, annotation.queryParams()));
-		parameters.addAll(getPathVariableList(annotation.url()));
+		parameters.addAll(getParamList(ParamLocation.PATH, getPathVariables(annotation.url())));
 		return parameters;
 	}
 	
@@ -59,42 +52,27 @@ public class ParameterFactory {
 	 */
 	private static List<Parameter> getParamList(ParamLocation loc, String[] params) {
 		List<Parameter> paramList = new ArrayList<>();
-		Map<String, String> paramMap = splitParams(params);
-		for(String key : paramMap.keySet()) {
-			String name = key;
-			String type = null;
-			String[] keySplit = key.split(TYPE_DELIMITER);
-			if(keySplit.length == 2) {
-				type = keySplit[0];
-				name = keySplit[1];
+		ParameterParser parser = new ParameterParser(
+				ParameterParser.DEFAULT_TYPE_DELIMITER, 
+				ParameterParser.DEFAULT_DESCRIPTION_DELIMITER);
+		for(String param : params) {
+			try {
+				ParsedParameter parsedParameter = parser.parse(param);
+				Parameter parameter = new Parameter();
+				parameter.setName(parsedParameter.getName());
+				parameter.setDescription(
+						parsedParameter.getDescription() != null ? 
+						parsedParameter.getDescription() : NO_DESCRIPTION);
+				parameter.setLoc(loc);
+				parameter.setRequired(false);
+				parameter.setSchema(
+						ParamSchemaFactory.createParamSchema(parsedParameter.getType()));
+				paramList.add(parameter);
+			} catch (ParseException e) {
+				throw new IllegalArgumentException(e);
 			}
-			Parameter parameter = new Parameter();
-			parameter.setName(name);
-			parameter.setDescription(paramMap.get(key));
-			parameter.setLoc(loc);
-			parameter.setRequired(false);
-			parameter.setSchema(ParamSchemaFactory.ParamSchema(type));
-			paramList.add(parameter);
 		}
 		return paramList;
-	}
-	
-	/**
-	 * Maps parameter names to their descriptions.
-	 * 
-	 * @param params the list of parameter descriptions
-	 * @return the map
-	 */
-	private static Map<String, String> splitParams(String[] params) {
-		Map<String, String> paramMap = new HashMap<>();
-		for(String param : params) {
-			String[] split = param.split(DELIMITER);
-			if(split.length != 2) {
-				throw new IllegalArgumentException();
-			}
-			paramMap.put(split[0].trim(), split[1].trim());
-		}
-		return paramMap;
 	}
 	
 	/**
@@ -103,24 +81,18 @@ public class ParameterFactory {
 	 * @param url the url
 	 * @return the list of parameters
 	 */
-	private static List<Parameter> getPathVariableList(String url) {
-		List<Parameter> paramList = new ArrayList<>();
+	private static String[] getPathVariables(String url) {
+		List<String> paramList = new ArrayList<>();
 		int index = 0;
 		while(index < url.length() && url.indexOf(OPEN, index) != -1) {
 			int open = url.indexOf(OPEN, index);
 			int close = url.indexOf(CLOSE, open);
 			if(close != -1) {
-				String key = url.substring(open + 1, close);
-				Parameter parameter = new Parameter();
-				parameter.setName(key);
-				parameter.setDescription(key);
-				parameter.setLoc(ParamLocation.PATH);
-				parameter.setRequired(true);
-				parameter.setSchema(ParamSchemaFactory.ParamSchema());
+				String parameter = url.substring(open + 1, close);
 				paramList.add(parameter);
 			}
 		}
-		return paramList;
+		return paramList.toArray(new String[paramList.size()]);
 	}
 
 }

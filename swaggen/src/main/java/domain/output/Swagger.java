@@ -1,11 +1,11 @@
-package domain;
+package domain.output;
 
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import domain.path.Endpoint;
+import domain.output.path.Endpoint;
 import enums.RequestMethod;
 
 /**
@@ -52,6 +52,11 @@ public class Swagger {
 		return swagger;
 	}
 
+	/**
+	 * Field name is openapi for version 3.x, swagger for 2.0
+	 * 
+	 * @param version the version number.
+	 */
 	public void setVersion(String version) {
 		if("2.0".equals(version)) {
 			openapi = null;

@@ -1,4 +1,4 @@
-package domain.path;
+package domain.output.path;
 
 import java.util.List;
 import java.util.Map;

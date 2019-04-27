@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import domain.path.Endpoint;
+import domain.output.path.Endpoint;
 import enums.ParamType;
 import enums.RequestMethod;
 import generator.PathGenerator;

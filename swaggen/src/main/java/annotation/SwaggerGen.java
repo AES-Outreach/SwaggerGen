@@ -36,14 +36,14 @@ public @interface SwaggerGen {
 	String description() default "";
 	
 	/**
-	 * List of headers of the form "{name}={description}"
+	 * List of headers of the form "{type} {name}={description}"
 	 * 
 	 * @return
 	 */
 	String[] headers() default {};
 	
 	/**
-	 * List of query parameters of the form "{name}={description}"
+	 * List of query parameters of the form "{type} {name}={description}"
 	 * 
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public @interface SwaggerGen {
 	String body() default "";
 	
 	/**
-	 * A list of response codes of the form "{name}={description}"
+	 * A list of response codes of the form "{type} {name}={description}"
 	 * 
 	 * @return
 	 */

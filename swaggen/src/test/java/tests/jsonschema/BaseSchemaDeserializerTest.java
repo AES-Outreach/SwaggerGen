@@ -11,10 +11,10 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import domain.input.jsonschema.JsonSchema;
+import domain.input.jsonschema.Property;
 import enums.PropertyType;
-import resource.jsonschema.JsonSchema;
-import resource.jsonschema.Property;
-import utils.FileMapper;
+import utils.io.FileMapper;
 
 /**
  * Tests the JsonSchema Deserializer

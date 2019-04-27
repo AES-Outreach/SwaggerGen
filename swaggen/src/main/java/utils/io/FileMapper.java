@@ -1,4 +1,4 @@
-package utils;
+package utils.io;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
- * Maps JSON to POJOs
+ * Converts between POJOs and files.
  * 
  * @author William Gardiner (7267012)
  */

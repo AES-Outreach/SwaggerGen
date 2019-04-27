@@ -1,6 +1,6 @@
 package factory;
 
-import domain.path.ParamSchema;
+import domain.output.path.ParamSchema;
 import enums.ParamFormat;
 import enums.ParamType;
 
@@ -11,11 +11,11 @@ import enums.ParamType;
  */
 public class ParamSchemaFactory {
 
-	public static ParamSchema ParamSchema() {
-		return ParamSchema(null);
+	public static ParamSchema createParamSchema() {
+		return createParamSchema(null);
 	}
 
-	// TODO: Update the method below to use a static map istead of a switch statement.
+	// TODO: Update the method below to use a static map instead of a switch statement.
 	
 	/**
 	 * Creates a ParamSchema based on the schema identifier
@@ -23,7 +23,7 @@ public class ParamSchemaFactory {
 	 * @param schemaIdentifier the schema identifier
 	 * @return the schema
 	 */
-	public static ParamSchema ParamSchema(String schemaIdentifier) {
+	public static ParamSchema createParamSchema(String schemaIdentifier) {
 		ParamSchema schema = new ParamSchema();
 		if(schemaIdentifier == null || "".contentEquals(schemaIdentifier)) {
 			schemaIdentifier = "s";

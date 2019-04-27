@@ -1,6 +1,6 @@
-package domain.content;
+package domain.output.content;
 
-import resource.jsonschema.JsonSchema;
+import domain.input.jsonschema.JsonSchema;
 
 /**
  * Object mapping a filename to a schema POJO.

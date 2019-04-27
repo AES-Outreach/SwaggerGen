@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import mock.yaml.MockYamlBase;
 import mock.yaml.factory.MockYamlFactory;
-import utils.FileMapper;
+import utils.io.FileMapper;
 
 /**
  * Tests the YAML file writer

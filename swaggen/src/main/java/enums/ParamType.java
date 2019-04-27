@@ -38,6 +38,11 @@ public enum ParamType {
 	 */
 	private String value;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param value the String representation
+	 */
 	private ParamType(String value) {
 		this.value = value;
 	}
@@ -45,7 +50,7 @@ public enum ParamType {
 	/**
 	 * Converts the ENUM to the String representation
 	 * 
-	 * @return
+	 * @return the String representation
 	 */
 	@JsonValue
 	public String value() {
@@ -55,8 +60,8 @@ public enum ParamType {
 	/**
 	 * Converts the String representation to the ENUM
 	 * 
-	 * @param value
-	 * @return
+	 * @param value the String representation
+	 * @return the ENUM value
 	 */
 	@JsonCreator
 	public PropertyType type(String value) {

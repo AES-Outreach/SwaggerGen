@@ -12,8 +12,8 @@ import org.junit.Test;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import domain.input.jsonschema.Property;
 import enums.PropertyType;
-import resource.jsonschema.Property;
 
 /**
  * Tests the JSON Schema Parsing

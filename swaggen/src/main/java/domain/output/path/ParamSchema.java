@@ -1,4 +1,4 @@
-package domain.path;
+package domain.output.path;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,6 +13,24 @@ import enums.ParamType;
  */
 @JsonInclude(Include.NON_NULL)
 public class ParamSchema {
+	
+	/**
+	 * Default constructor
+	 */
+	public ParamSchema() {
+		
+	}
+	
+	/**
+	 * Constructs a ParamSchema with type and format.
+	 * 
+	 * @param type the param type
+	 * @param format the param format
+	 */
+	public ParamSchema(ParamType type, ParamFormat format) {
+		this.type = type;
+		this.format = format;
+	}
 	
 	/**
 	 * The type
