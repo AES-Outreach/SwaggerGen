@@ -76,7 +76,7 @@ public class ParameterFactory {
 	}
 	
 	/**
-	 * Gets a list of parameters from a URL
+	 * Gets an array of parameters from a URL
 	 * 
 	 * @param url the url
 	 * @return the list of parameters
