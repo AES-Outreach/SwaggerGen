@@ -33,6 +33,13 @@ public @interface SwaggerGen {
 	 * 
 	 * @return
 	 */
+	String title() default "";
+	
+	/**
+	 * The description of the endpoint
+	 * 
+	 * @return
+	 */
 	String description() default "";
 	
 	/**

@@ -1,19 +1,17 @@
 package servlet;
 import annotation.SwaggerGen;
+
 /**
  * A Fake endpoint for testing.
  * 
  * @author William Gardiner (7267012)
  */
 public class MockPostEndpoint {
-	/**
-	 * Fake endpoint for testing purposes
-	 * @param request fake request object
-	 * @param resp fake response object
-	 */
+
 	@SwaggerGen(
 		url="/base/endpoint",
 		method="POST",
+				title="Post",
 		description="Serverlet Description",
 		headers={"Content-Type=application/json"},
 		queryParams={
@@ -23,11 +21,11 @@ public class MockPostEndpoint {
 				"param4 = Another String Param"
 				},
 		body="body.scheme",
-		responses={"200=OK", "400", "404"},
+		responses={"200=OK", "400=Bad Request", "404"},
 		responseBody= "response.scheme",
 		scheme="HTTP"
 	)
-	public void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
 		// Implementation not important.
 	}
 }
