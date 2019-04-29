@@ -1,4 +1,4 @@
-#safelist
+dist: xenial
 branches:
   only:
       - master
