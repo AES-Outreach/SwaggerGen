@@ -1,5 +1,11 @@
 # SwaggerGen #
+Develop
+
 ![Travis - Develop branch](https://travis-ci.com/AES-Outreach/SwaggerGen.svg?token=cukQqq8P2pkD1EpgeNAZ&branch=develop)
+
+Master 
+
+[![Build Status](https://travis-ci.com/AES-Outreach/SwaggerGen.svg?token=Q2Kk8fYfCWzCrC5pSjcD&branch=master)](https://travis-ci.com/AES-Outreach/SwaggerGen)
 
 **SwaggerGen** is API documentation at the code level.
 
