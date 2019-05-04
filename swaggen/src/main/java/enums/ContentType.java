@@ -23,12 +23,17 @@ public enum ContentType {
 	 */
 	private String value;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param value
+	 */
 	private ContentType(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * Converts the ENUM to the String representation
+	 * Converts the ENUM to the String representation.
 	 * 
 	 * @return
 	 */
@@ -38,10 +43,10 @@ public enum ContentType {
 	}
 
 	/**
-	 * Converts the String representation to the ENUM
+	 * Converts the String representation to the ENUM.
 	 * 
-	 * @param value
-	 * @return
+	 * @param value the String representation
+	 * @return the ENUM value
 	 */
 	@JsonCreator
 	public PropertyType type(String value) {

@@ -1,7 +1,7 @@
 package factory;
 
 import annotation.SwaggerGen;
-import domain.path.RequestBody;
+import domain.output.path.RequestBody;
 
 /**
  * Generates a RequestBody from the responseBody in the annotation.
@@ -16,7 +16,7 @@ public class ResponseBodyFactory {
 	 * @param annotation the annotation
 	 * @return the response body.
 	 */
-	public static RequestBody RequestBody(SwaggerGen annotation) {
+	public static RequestBody createRequestBody(SwaggerGen annotation) {
 		// TODO: Implement
 		return null;
 	}

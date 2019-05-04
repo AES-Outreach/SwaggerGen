@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import annotation.SwaggerGen;
-import domain.path.Endpoint;
+import domain.output.path.Endpoint;
 import enums.RequestMethod;
 import factory.EndpointFactory;
 
@@ -56,7 +56,7 @@ public class PathGenerator {
 	 */
 	private static Map<RequestMethod, Endpoint> generatePathFromAnnotation(SwaggerGen annotation) {
 		Map<RequestMethod, Endpoint> endpointMap = new HashMap<>();
-		endpointMap.put(RequestMethod.valueOf(annotation.method()), EndpointFactory.Endpoint(annotation));
+		endpointMap.put(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation));
 		return endpointMap;
 	}
 }

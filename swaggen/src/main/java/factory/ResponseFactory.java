@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import annotation.SwaggerGen;
-import domain.path.Response;
+import domain.output.path.Response;
 
 /**
  * Creates a response from the annotation
@@ -39,7 +39,7 @@ public class ResponseFactory {
 	 * @param annotation the annotation
 	 * @return the map
 	 */
-	public static Map<String, Response> Responses(SwaggerGen annotation) {
+	public static Map<String, Response> creaeteResponses(SwaggerGen annotation) {
 		Map<String, Response> responses = new HashMap<>();
 		String expectedResponseCode = "";
 		for(String responseString : annotation.responses()) {			
@@ -57,7 +57,7 @@ public class ResponseFactory {
 			}
 		}
 		if(annotation.responses().length > 0) {
-			responses.get(expectedResponseCode).setBody(ResponseBodyFactory.RequestBody(annotation));
+			responses.get(expectedResponseCode).setBody(ResponseBodyFactory.createRequestBody(annotation));
 		}
 		return responses;
 	}

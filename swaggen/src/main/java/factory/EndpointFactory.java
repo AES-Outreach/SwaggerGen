@@ -1,7 +1,7 @@
 package factory;
 
 import annotation.SwaggerGen;
-import domain.path.Endpoint;
+import domain.output.path.Endpoint;
 
 /**
  * Creates a Swagger Endpoint from the annotation.
@@ -16,13 +16,13 @@ public class EndpointFactory {
 	 * @param annotation the annotation
 	 * @return the endpoint
 	 */
-	public static Endpoint Endpoint(SwaggerGen annotation) {
+	public static Endpoint createEndpoint(SwaggerGen annotation) {
 		Endpoint endpoint = new Endpoint();
 		endpoint.setSummary(annotation.title());
 		endpoint.setDescription(annotation.description());
-		endpoint.setParameters(ParameterFactory.Parameters(annotation));
-		endpoint.setRequestBody(RequestBodyFactory.RequestBody(annotation));
-		endpoint.setResponses(ResponseFactory.Responses(annotation));
+		endpoint.setParameters(ParameterFactory.createParameters(annotation));
+		endpoint.setRequestBody(RequestBodyFactory.createRequestBody(annotation));
+		endpoint.setResponses(ResponseFactory.creaeteResponses(annotation));
 		return endpoint;
 	}
 }

@@ -1,4 +1,4 @@
-package domain.path;
+package domain.output.path;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

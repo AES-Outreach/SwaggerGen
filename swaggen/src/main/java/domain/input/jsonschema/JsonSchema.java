@@ -1,4 +1,4 @@
-package resource.jsonschema;
+package domain.input.jsonschema;
 
 import java.util.Map;
 
