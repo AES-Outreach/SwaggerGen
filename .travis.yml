@@ -17,8 +17,8 @@ jobs:
         - cd swaggen
       script:
         - npm install -g redoc-cli
-        - mvn -U -s ../assets/settings.xml clean install #plugin
-        - mvn javadoc:javadoc -s ../assets/settings.xml
+        - mvn clean install #plugin
+        - mvn javadoc:javadoc
         - cd ../sample-project 
         - mvn clean install #sample-project
         - cd ..
