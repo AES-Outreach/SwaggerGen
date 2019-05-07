@@ -1,29 +1,31 @@
 dist: xenial
 branches:
   only:
-      - master
-      - develop
+  - master
+  - develop
 language: java
 jdk:
-  - openjdk11
-node_js: "10"
+- openjdk11
+node_js: '10'
 cache:
-    directories:
-        - $HOME/.m2
+  directories:
+  - "$HOME/.m2"
 jobs:
   include:
-    - stage: compile
-      before_script:
-        - cd swaggen
-      script:
-        - npm install -g redoc-cli
-        - mvn clean install #plugin
-        - mvn javadoc:javadoc
-        - cd ../sample-project 
-        - mvn clean install #sample-project
-        - cd ..
-        - sh generate_docs.sh
+  - stage: compile
+    before_script:
+    - cd swaggen
+    script:
+    - npm install -g swagger-cli
+    - npm install -g redoc-cli
+    - mvn clean install
+    - cd ../sample-project
+    - mvn clean install
+    - cd ..
+    - sh generate_docs.sh
 stages:
-  - name: compile
+- name: compile
 notifications:
-  slack: swaggen:Ykqb64SVX8bgvp5ZDi9KcJ3A
+  slack:
+    rooms:
+      secure: lPaPUHdyTJ4gbdEgV93pAuLy+IPLKdtTLthnEsPJRlGXEB6fIu5QYh9QA1eSNXSleXbp4Se5F1vTujrGRP9Yd8gDDDJGef+n6fYEh8YYp6IzCifVKFad+P46uHVpxyeeevk43MycuydvixD/Cvg73kenpHAUk6AqT4E+LM/D2wZjm6O21tVR6cp9ejVgzhcI87R1SS+o9nwn4kGRejvzkYa1La18tZQhtM037FilrJNDrVmWiKTwXvF21rfJ9WaFm3RBC8Z00pHealEi5CHFgyobd+O41MwqGZkfjAxAv6HZJxT2Bqu++rMliMJqmLl9uw0P3GFKZmHgw/esz9y6jWRNzVjVKPNPAJr4tYxLug1A4KFVcPCe7Ri6X4Ehb2YCGxlHXzomuTT76I2fSPOuwaLuXVrRLw2Rs4HGwvfLTRQxY1R5u+n0RGOE28TxHx6IVrYhCOJAYeQINTBFLZYZBm02ySaRjUrApXGZNGnmgn1r9Vfxw5NJKHO7Cz2PRWunpzIQSrhX18pi03FKBhnWCeiGErkJ9UpGWAPvLg2JzjohjuN/he+TOkhNOPpztDZOhhia91Jn0NFHZCB05vdgbdMJDNSGU7tD89EEtpGHXljj0oLpXA6+0foyF+Hd5qbqo5VAzCOwo+WJm9nhmgbun4K8r4esk2kn3XZ2AfBe2to=
