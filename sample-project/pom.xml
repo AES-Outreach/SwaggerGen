@@ -20,7 +20,7 @@
 
 		<!-- SwaggerGen -->
 		<dependency>
-			<groupId>com.github.aes.outreach.swaggergen</groupId>
+			<groupId>com.github.aes-outreach</groupId>
 			<artifactId>swaggen-annotations</artifactId>
 			<version>0.0.1</version>
 		</dependency>
@@ -28,7 +28,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.github.aes.outreach.swaggergen</groupId>
+				<groupId>com.github.aes-outreach</groupId>
 				<artifactId>swaggen-annotations</artifactId>
 				<version>0.0.1</version>
 				<executions>
