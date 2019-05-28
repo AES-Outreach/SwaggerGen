@@ -20,16 +20,16 @@
 
 		<!-- SwaggerGen -->
 		<dependency>
-			<groupId>com.github.aes.outreach.swaggergen</groupId>
-			<artifactId>swaggen-annotations</artifactId>
+			<groupId>com.swaggen</groupId>
+			<artifactId>annotations</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.github.aes.outreach.swaggergen</groupId>
-				<artifactId>swaggen-annotations</artifactId>
+				<groupId>com.swaggen</groupId>
+				<artifactId>annotations</artifactId>
 				<version>0.0.1</version>
 				<executions>
 					<execution>
