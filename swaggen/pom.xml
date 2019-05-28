@@ -8,44 +8,6 @@
 	<version>0.0.1</version>
 	<packaging>maven-plugin</packaging>
 
-	<name>SwaggerGen</name>
-	<description>Maven plugin that can be used to annotate servlet methods to auto generate Swagger documentation files in .yml format.</description>
-	<url>https://github.com/AES-Outreach/SwaggerGen</url>
-
-	<licenses>
-		<license>
-			<name>The Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<name>Alexandre Seguin</name>
-			<email>segualex@gmail.com</email>
-			<organization>SwaggerGen</organization>
-			<organizationUrl>https://github.com/AES-Outreach/SwaggerGen</organizationUrl>
-		</developer>
-		<developer>
-			<name>Danny Petitclerc</name>
-			<email>DPETI071@uottawa.ca</email>
-			<organization>SwaggerGen</organization>
-			<organizationUrl>https://github.com/AES-Outreach/SwaggerGen</organizationUrl>
-		</developer>
-		<developer>
-			<name>William Gardiner</name>
-			<email>BGARD017@uottawa.ca</email>
-			<organization>SwaggerGen</organization>
-			<organizationUrl>https://github.com/AES-Outreach/SwaggerGen</organizationUrl>
-		</developer>
-	</developers>
-
-	<scm>
-		<connection>scm:git:git://github.com/AES-Outreach/SwaggerGen.git</connection>
-		<developerConnection>scm:git:ssh://github.com:AES-Outreach/SwaggerGen.git</developerConnection>
-		<url>https://github.com/AES-Outreach/SwaggerGen</url>
-	</scm>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -196,33 +158,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+
 			<!-- JAVADOC PLUGIN -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -248,29 +184,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- SONATYPE -->
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 </project>
