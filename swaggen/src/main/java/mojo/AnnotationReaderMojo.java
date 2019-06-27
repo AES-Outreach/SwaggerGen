@@ -1,12 +1,16 @@
 package mojo;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
@@ -35,6 +39,9 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 	@Parameter(defaultValue = "${project}", required = true, readonly = true)
 	private MavenProject project;
+	
+	@Parameter(readonly = true)
+	private String propertiesPath;
 
 	/**
 	 * Function automatically called during the install phase of a project using
@@ -48,10 +55,20 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 		try {
 
-			getLog().info("-- OBTAINING ANNOTATIONS --");
+			getLog().info("-- -- -- OBTAINING ANNOTATIONS -- -- --");
 			Class<?>[] klasses = getClassArray();
+			getLog().info("-- -- -- PROCESSING ANNOTATIONS -- -- --");
+			
 
-			getLog().info("-- PROCESSING ANNOTATIONS --");
+			getLog().info("Testing properties.");
+			try (InputStream input = new FileInputStream(propertiesPath)) {
+				getLog().info("Loaded properties file.");
+	            Properties prop = new Properties();
+	            prop.load(input);
+	            getLog().info(prop.getProperty("test"));
+	        } catch (IOException ex) {
+				throw new IOException("No valid properties file provided.", ex);
+	        }
 			
 			generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/sample.yaml");
 
