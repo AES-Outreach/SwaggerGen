@@ -67,7 +67,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 	            prop.load(input);
 	            getLog().info(prop.getProperty("test"));
 	        } catch (IOException ex) {
-				throw new IOException("No valid properties file provided.", ex);
+	        	getLog().warn("No valid properties file provided.");
 	        }
 			
 			generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/sample.yaml");
