@@ -2,6 +2,7 @@ package generator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.maven.plugin.logging.Log;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import domain.output.Swagger;
+import domain.output.SwaggerEndpoint;
 import domain.output.SwaggerInfo;
 import domain.output.path.Endpoint;
 import enums.RequestMethod;
@@ -35,7 +37,7 @@ public class SwaggerGenerator {
 	public static void generateSwaggerFile(Class<?>[] klasses, String filename) throws JsonParseException, JsonMappingException, IOException {
 		
 		// Create Paths
-		Map<String, Map<RequestMethod, Endpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
+		Map<String, List<SwaggerEndpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 
 		Swagger swagger = new Swagger();
 		swagger.setVersion("3.0.0");
@@ -49,14 +51,11 @@ public class SwaggerGenerator {
 		swagger.setInfo(info);
 		swagger.setPaths(paths);
 
-		for(Map.Entry<String, Map<RequestMethod,Endpoint>> pathEntry: paths.entrySet()) {
-			File file = new File(pathEntry.getKey());
+		for(String path: paths.keySet()) {
+			File file = new File(path);
 			file.mkdirs();
-			for (Map.Entry<RequestMethod, Endpoint> endpointEntry: pathEntry.getValue().entrySet()) {
-				//System.out.println(endpointEntry.getValue().toString());
-			}
-			String name = "/" + pathEntry.getKey().replaceAll("/", "_") + "_test.yaml";
-			FileMapper.classToYaml(pathEntry.getKey()+ name, swagger);
+			String name = "/" + path.replaceAll("/", "_") + "_test.yaml";
+			FileMapper.classToYaml(path + name, swagger);
 		}
 
 		/**

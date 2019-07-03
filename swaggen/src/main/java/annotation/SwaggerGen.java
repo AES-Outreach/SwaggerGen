@@ -15,11 +15,11 @@ import java.lang.annotation.ElementType;
 public @interface SwaggerGen {
 
 	/**
-	 * The URL of the endpoint
+	 * The URI of the endpoint
 	 * 
 	 * @return
 	 */
-	String url();
+	String uri();
 	
 	/**
 	 * The HTTP Request Method

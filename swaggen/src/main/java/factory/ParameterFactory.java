@@ -39,7 +39,7 @@ public class ParameterFactory {
 		List<Parameter> parameters = new ArrayList<>();
 		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));
 		parameters.addAll(getParamList(ParamLocation.QUERY, annotation.queryParams()));
-		parameters.addAll(getParamList(ParamLocation.PATH, getPathVariables(annotation.url())));
+		parameters.addAll(getParamList(ParamLocation.PATH, getPathVariables(annotation.uri())));
 		return parameters;
 	}
 	
@@ -76,19 +76,19 @@ public class ParameterFactory {
 	}
 	
 	/**
-	 * Gets an array of parameters from a URL
+	 * Gets an array of parameters from a uri
 	 * 
-	 * @param url the url
+	 * @param uri the uri
 	 * @return the list of parameters
 	 */
-	private static String[] getPathVariables(String url) {
+	private static String[] getPathVariables(String uri) {
 		List<String> paramList = new ArrayList<>();
 		int index = 0;
-		while(index < url.length() && url.indexOf(OPEN, index) != -1) {
-			int open = url.indexOf(OPEN, index);
-			int close = url.indexOf(CLOSE, open);
+		while(index < uri.length() && uri.indexOf(OPEN, index) != -1) {
+			int open = uri.indexOf(OPEN, index);
+			int close = uri.indexOf(CLOSE, open);
 			if(close != -1) {
-				String parameter = url.substring(open + 1, close);
+				String parameter = uri.substring(open + 1, close);
 				paramList.add(parameter);
 			}
 		}

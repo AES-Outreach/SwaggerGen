@@ -13,7 +13,7 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/put-endpoint",
+		uri="/endpoint",
 		basePath="base/all",
 		method="PUT",
 		description="Put Servlet Description",
@@ -32,7 +32,7 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/put-endpoint",
+		uri="/endpoint",
 		basePath="base/all",
 		method="POST",
 		description="Post Servlet Description",
@@ -51,7 +51,7 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/get-endpoint",
+		uri="/endpoint",
 		basePath="base/all",
 		method="GET",
 		description="Get Servlet Description",
@@ -72,7 +72,7 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/delete-endpoint",
+		uri="/endpoint",
 		basePath="base/all",
 		method="DELETE",
 		description="Delete Servlet Description",

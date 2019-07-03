@@ -1,12 +1,14 @@
 package domain.output;
 
 import java.util.Map;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import domain.output.path.Endpoint;
 import enums.RequestMethod;
+import domain.output.SwaggerEndpoint;
 
 /**
  * Domain object representing an entire Swagger file.
@@ -34,13 +36,13 @@ public class Swagger {
 	/**
 	 * Top level map, mapping all endpoints by their request method and URL
 	 */
-	private Map<String, Map<RequestMethod, Endpoint>> paths;
+	private Map<String, List<SwaggerEndpoint>> paths;
 
-	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
+	public Map<String, List<SwaggerEndpoint>> getPaths() {
 		return paths;
 	}
 
-	public void setPaths(Map<String, Map<RequestMethod, Endpoint>> paths) {
+	public void setPaths(Map<String, List<SwaggerEndpoint>> paths) {
 		this.paths = paths;
 	}
 

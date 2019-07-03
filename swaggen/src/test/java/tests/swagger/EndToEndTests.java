@@ -5,6 +5,7 @@ import org.junit.Test;
 import mock.endpoint.MinimalGetEndpointTest;
 import mock.endpoint.MockAllMethodsEndpoint;
 import mock.endpoint.MockPostEndpoint;
+import mock.endpoint.MockMinimalPutEndpoint;
 import mock.endpoint.MockPutEndpointWithSchema;
 
 public class EndToEndTests {
@@ -63,7 +64,20 @@ public class EndToEndTests {
 			assert(false);
 		}
 	}
-	
+
+	/**
+	 * Test to generate Swagger file in same folder from different classes.
+	 */
+ 
+	@Test
+	public void MinimalPutEndpointTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger("generated/swagger/MinimalYaml.yaml", MockMinimalPutEndpoint.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
 	
 
 }
