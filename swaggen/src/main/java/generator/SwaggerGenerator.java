@@ -48,17 +48,25 @@ public class SwaggerGenerator {
 		
 		swagger.setInfo(info);
 		swagger.setPaths(paths);
-		
-		File file = new File(filename);
-		file.getParentFile().mkdirs();
 
+		for(Map.Entry<String, Map<RequestMethod,Endpoint>> pathEntry: paths.entrySet()) {
+			File file = new File(pathEntry.getKey());
+			file.mkdirs();
+			for (Map.Entry<RequestMethod, Endpoint> endpointEntry: pathEntry.getValue().entrySet()) {
+				//System.out.println(endpointEntry.getValue().toString());
+			}
+			String name = "/" + pathEntry.getKey().replaceAll("/", "_") + "_test.yaml";
+			FileMapper.classToYaml(pathEntry.getKey()+ name, swagger);
+		}
+
+		/**
 		for (String path: paths.keySet()) {
-			System.out.println(path);
 			File filed = new File(path);
 			filed.mkdirs();
 		}
+		*/
+
 		
-		FileMapper.classToYaml(filename, swagger);
 		
 	}
 	
