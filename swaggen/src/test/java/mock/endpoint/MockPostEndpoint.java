@@ -11,7 +11,8 @@ import mock.service.MockSlingServerletResponse;
 public class MockPostEndpoint {
 
 	@SwaggerGen(
-		url="/base/endpoint",
+		url="/endpoint",
+		basePath="base",
 		method="POST",
 		title="Serverlet Title",
 		description="Serverlet Description",

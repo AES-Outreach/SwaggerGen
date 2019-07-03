@@ -28,7 +28,7 @@ public class annotationTests {
 		Class<?>[] klasses = {MockPostEndpoint.class};
 		Map<String, Map<RequestMethod, Endpoint>> path = PathGenerator.generatePathsFromClassList(klasses);
 		
-		Endpoint endpoint = path.get("/base/endpoint").get(RequestMethod.POST);
+		Endpoint endpoint = path.get("base/endpoint").get(RequestMethod.POST);
 		
 		assertEquals(endpoint.getDescription(), "Serverlet Description");
 		assertEquals(endpoint.getSummary(), "Serverlet Title");

@@ -13,7 +13,8 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/base/all/put-endpoint",
+		url="/put-endpoint",
+		basePath="base/all",
 		method="PUT",
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -31,7 +32,8 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/base/all/put-endpoint",
+		url="/put-endpoint",
+		basePath="base/all",
 		method="POST",
 		description="Post Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -49,7 +51,8 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/base/all/get-endpoint",
+		url="/get-endpoint",
+		basePath="base/all",
 		method="GET",
 		description="Get Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -69,7 +72,8 @@ public class MockAllMethodsEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/base/all/delete-endpoint",
+		url="/delete-endpoint",
+		basePath="base/all",
 		method="DELETE",
 		description="Delete Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},

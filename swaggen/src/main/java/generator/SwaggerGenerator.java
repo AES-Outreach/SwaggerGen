@@ -51,6 +51,12 @@ public class SwaggerGenerator {
 		
 		File file = new File(filename);
 		file.getParentFile().mkdirs();
+
+		for (String path: paths.keySet()) {
+			System.out.println(path);
+			File filed = new File(path);
+			filed.mkdirs();
+		}
 		
 		FileMapper.classToYaml(filename, swagger);
 		

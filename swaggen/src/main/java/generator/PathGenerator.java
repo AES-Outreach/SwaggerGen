@@ -42,7 +42,7 @@ public class PathGenerator {
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			if(annotation != null) {
-				pathMap.put(annotation.url(), generatePathFromAnnotation(annotation));
+				pathMap.put(annotation.basePath() + annotation.url(), generatePathFromAnnotation(annotation));
 			}
 		}
 		return pathMap;

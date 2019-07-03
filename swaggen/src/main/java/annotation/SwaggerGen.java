@@ -85,4 +85,9 @@ public @interface SwaggerGen {
 	 */
 	String scheme() default "HTTP";
 
+	/**
+	 * The base path
+	 * @return
+	 */
+	String basePath() default "";
 }
