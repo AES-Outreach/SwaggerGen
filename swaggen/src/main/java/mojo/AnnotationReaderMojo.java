@@ -60,18 +60,16 @@ public class AnnotationReaderMojo extends AbstractMojo {
 			getLog().info("-- -- -- PROCESSING ANNOTATIONS -- -- --");
 			
 
-			getLog().info("Testing properties.");
 			try (InputStream input = new FileInputStream(propertiesPath)) {
 				getLog().info("Loaded properties file.");
-	            Properties prop = new Properties();
-	            prop.load(input);
-	            getLog().info(prop.getProperty("test"));
+	            Properties config = new Properties();
+	            config.load(input);
+	            getLog().info(config.getProperty("version"));
+				generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/sample.yaml", config);
 	        } catch (IOException ex) {
-	        	getLog().warn("No valid properties file provided.");
+	        	getLog().warn("No valid properties file provided. Please add a <propertiesPath> tag to the plugin's build configuration tag.");
+				throw new MojoExecutionException("File not found.");
 	        }
-			
-			generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/sample.yaml");
-
 		} catch (Exception e) {
 			// Can add other catches here for more complete error handling
 			getLog().error(e.toString());
@@ -80,7 +78,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 		getLog().info("-- DONE --");
 	}
-
+	
 	/**
 	 * Uses reflections to obtain the classes that have the SwaggerGen annotation in
 	 * the importing Maven project.

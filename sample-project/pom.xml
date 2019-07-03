@@ -32,7 +32,7 @@
 				<artifactId>swaggen-annotations</artifactId>
 				<version>0.0.1</version>
 				<configuration>
-					<propertiesPath>test.properties</propertiesPath>
+					<propertiesPath>config.properties</propertiesPath>
 				</configuration>
 				<executions>
 					<execution>

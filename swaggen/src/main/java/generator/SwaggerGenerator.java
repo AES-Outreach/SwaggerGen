@@ -3,6 +3,7 @@ package generator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.maven.plugin.logging.Log;
 
@@ -32,19 +33,19 @@ public class SwaggerGenerator {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 **/
-	public static void generateSwaggerFile(Class<?>[] klasses, String filename) throws JsonParseException, JsonMappingException, IOException {
+	public static void generateSwaggerFile(Class<?>[] klasses, String filename, Properties config) throws JsonParseException, JsonMappingException, IOException {
 		
 		// Create Paths
 		Map<String, Map<RequestMethod, Endpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 
 		Swagger swagger = new Swagger();
-		swagger.setVersion("3.0.0");
+		swagger.setVersion(config.getProperty("version"));
 		
 		SwaggerInfo info = new SwaggerInfo();
 		// These will be read from a config file.
-		info.setTitle("Title");
-		info.setDescription("Description");
-		info.setVersion("0.0");
+		info.setTitle("Documentation file");
+		info.setDescription("Trying to see where this description goes");
+		info.setVersion("0.0.1");
 		
 		swagger.setInfo(info);
 		swagger.setPaths(paths);

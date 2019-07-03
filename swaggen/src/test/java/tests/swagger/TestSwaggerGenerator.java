@@ -1,6 +1,7 @@
 package tests.swagger;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -21,7 +22,9 @@ public class TestSwaggerGenerator {
 	 */
 	public static void generateSwagger(String filelocation, Class<?> klass)
 			throws JsonParseException, JsonMappingException, IOException {
-		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass }, filelocation);
+		Properties prop = new Properties();
+		prop.put("version", "3.0.0");
+		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass }, filelocation, prop);
 	}
 
 
