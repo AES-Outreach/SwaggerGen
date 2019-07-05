@@ -13,7 +13,7 @@ public class MinimalGetEndpointTest {
 	 */
 	@SwaggerGen(
 		uri="/minified-endpoint",
-		basePath="base",
+		basePath="/base",
 		method="GET"
 	)
 	public void doGet(Object request, Object resp) {

@@ -13,7 +13,7 @@ public class MockPutEndpointWithSchema {
 	 */
 	@SwaggerGen(
 		uri="/all-methods-endpoint",
-		basePath="base",
+		basePath="/base",
 		method="PUT",
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},

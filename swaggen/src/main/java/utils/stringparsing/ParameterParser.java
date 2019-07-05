@@ -93,8 +93,8 @@ public class ParameterParser implements StringParser<ParsedParameter> {
 	 * Constructs a parser with the given delimiters. Will parse
 	 * a String with the format "type{typeDelimiter}name{descriptionDelimiter}description"
 	 * 
-	 * @param typeDelimiter
-	 * @param descriptionDelimiter
+	 * @param typeDelimiter The type delimiter
+	 * @param descriptionDelimiter The description delimiter
 	 */
 	public ParameterParser(String typeDelimiter, String descriptionDelimiter) {
 		fullParameter = Pattern.compile(TYPE+typeDelimiter+NAME+descriptionDelimiter+DESCRIPTION);

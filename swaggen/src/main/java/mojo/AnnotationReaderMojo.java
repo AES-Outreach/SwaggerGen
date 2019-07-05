@@ -53,7 +53,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 			getLog().info("-- PROCESSING ANNOTATIONS --");
 			
-			generator.SwaggerGenerator.generateSwaggerFile(klasses, "generated/swagger/sample.yaml");
+			generator.SwaggerGenerator.generateSwaggerFile(klasses);
 
 		} catch (Exception e) {
 			// Can add other catches here for more complete error handling
@@ -86,22 +86,6 @@ public class AnnotationReaderMojo extends AbstractMojo {
 		}
 
 		return klasses.toArray(new Class<?>[klasses.size()]);
-	}
-
-	/**
-	 * Uses reflections to obtain the methods that have the SwaggerGen annotation in
-	 * the importing Maven project.
-	 * 
-	 * @return array of classes that contain methods annotated with SwaggerGen
-	 * @throws DependencyResolutionRequiredException if mojo is misconfigured
-	 * @throws MalformedURLException
-	 */
-	private Method[] getMethodArray() throws MalformedURLException, DependencyResolutionRequiredException {
-		Reflections loadedMethods = new Reflections(
-			new ConfigurationBuilder().addUrls(ClasspathHelper.forClassLoader(getClassLoader()))
-					.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
-		Set<Method> swaggenMethods = loadedMethods.getMethodsAnnotatedWith(SwaggerGen.class);
-		return swaggenMethods.toArray(new Method[swaggenMethods.size()]);
 	}
 
 	/**

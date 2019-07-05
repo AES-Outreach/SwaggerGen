@@ -3,7 +3,6 @@ package tests.annotation;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -11,7 +10,6 @@ import domain.output.path.Endpoint;
 import domain.output.SwaggerEndpoint;
 import enums.ParamType;
 import enums.RequestMethod;
-import generator.PathGenerator;
 import mock.endpoint.MockPostEndpoint;
 
 
@@ -29,15 +27,9 @@ public class annotationTests {
 	public void testAnnotation() {
 		
 		Class<?>[] klasses = {MockPostEndpoint.class};
-		Map<String, List<SwaggerEndpoint>> path = generator.PathGenerator.generatePathsFromClassList(klasses);
-		
-		Endpoint endpoint = null;
-
-		for (SwaggerEndpoint Swagger: path.get("base/endpoint")) {
-			if (Swagger.getEndpoint(RequestMethod.POST) != null) {
-				endpoint = Swagger.getEndpoint(RequestMethod.POST);
-			}
-		}
+		Map<String, SwaggerEndpoint> path = generator.PathGenerator.generatePathsFromClassList(klasses);
+	
+		Endpoint endpoint = path.get("/base/endpoint").getEndpoint(RequestMethod.POST);
 		
 		assertEquals(endpoint.getDescription(), "Serverlet Description");
 		assertEquals(endpoint.getSummary(), "Serverlet Title");

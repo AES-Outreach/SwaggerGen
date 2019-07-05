@@ -1,7 +1,7 @@
 package domain.output;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -17,6 +17,10 @@ import domain.output.SwaggerEndpoint;
  */
 @JsonInclude(Include.NON_NULL)
 public class Swagger {
+
+	public Swagger() {
+		this.paths = new HashMap<>();
+	}
 
 	/**
 	 * The OpenAPI Version
@@ -36,13 +40,13 @@ public class Swagger {
 	/**
 	 * Top level map, mapping all endpoints by their request method and URL
 	 */
-	private Map<String, List<SwaggerEndpoint>> paths;
+	private Map<String, Map<RequestMethod, Endpoint>> paths;
 
-	public Map<String, List<SwaggerEndpoint>> getPaths() {
+	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
 		return paths;
 	}
 
-	public void setPaths(Map<String, List<SwaggerEndpoint>> paths) {
+	public void setPaths(Map<String, Map<RequestMethod, Endpoint>> paths) {
 		this.paths = paths;
 	}
 

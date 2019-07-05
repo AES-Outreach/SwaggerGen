@@ -14,7 +14,7 @@ public interface StringParser<T> {
 	 * 
 	 * @param s the string
 	 * @return the object
-	 * @throws ParseException 
+	 * @throws ParseException ParseException
 	 */
 	public T parse(String s) throws ParseException;
 

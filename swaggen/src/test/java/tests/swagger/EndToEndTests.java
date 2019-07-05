@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import mock.endpoint.MinimalGetEndpointTest;
 import mock.endpoint.MockAllMethodsEndpoint;
+import mock.endpoint.MockMinimalPostEndpoint;
 import mock.endpoint.MockPostEndpoint;
 import mock.endpoint.MockMinimalPutEndpoint;
 import mock.endpoint.MockPutEndpointWithSchema;
@@ -17,7 +18,7 @@ public class EndToEndTests {
 	@Test
 	public void AllMethodsEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger("generated/swagger/AllMethodsEndpointYaml.yaml", MockAllMethodsEndpoint.class);
+			TestSwaggerGenerator.generateSwagger(MockAllMethodsEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -31,7 +32,7 @@ public class EndToEndTests {
 	@Test
 	public void PostEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger("generated/swagger/PostEndpointYaml.yaml", MockPostEndpoint.class);
+			TestSwaggerGenerator.generateSwagger(MockPostEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -45,7 +46,7 @@ public class EndToEndTests {
 	@Test
 	public void PutEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger("generated/swagger/PutEndpointYaml.yaml", MockPutEndpointWithSchema.class);
+			TestSwaggerGenerator.generateSwagger(MockPutEndpointWithSchema.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -58,7 +59,7 @@ public class EndToEndTests {
 	@Test
 	public void MinimalEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger("generated/swagger/MinimalYaml.yaml", MinimalGetEndpointTest.class);
+			TestSwaggerGenerator.generateSwagger(MinimalGetEndpointTest.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -68,16 +69,14 @@ public class EndToEndTests {
 	/**
 	 * Test to generate Swagger file in same folder from different classes.
 	 */
- 
 	@Test
-	public void MinimalPutEndpointTest() {
+	public void MultipleFileEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger("generated/swagger/MinimalYaml.yaml", MockMinimalPutEndpoint.class);
+			TestSwaggerGenerator.generateSwagger(MockMinimalPutEndpoint.class);
+			TestSwaggerGenerator.generateSwagger(MockMinimalPostEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
 		}
 	}
-	
-
 }

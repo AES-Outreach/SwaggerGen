@@ -1,9 +1,7 @@
 package generator;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import annotation.SwaggerGen;
@@ -21,11 +19,11 @@ public class PathGenerator {
 	/**
 	 * Generates a Map of URLs and RequestMethods to Endpoints.
 	 * 
-	 * @param klasses s list of annotated classes
+	 * @param klasses s set of annotated classes
 	 * @return the map
 	 */
-	public static Map<String, List<SwaggerEndpoint>> generatePathsFromClassList(Class<?>[] klasses) {
-		Map<String, List<SwaggerEndpoint>> pathMap = new HashMap<>();
+	public static Map<String, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
+		Map<String, SwaggerEndpoint> pathMap = new HashMap<>();
 		for(Class<?> klass : klasses) {
 			pathMap.putAll(generatePathsFromClass(klass));
 		}
@@ -38,17 +36,18 @@ public class PathGenerator {
 	 * @param klass the annotated class
 	 * @return the map
 	 */
-	private static Map<String, List<SwaggerEndpoint>> generatePathsFromClass(Class<?> klass) {
-		Map<String, List<SwaggerEndpoint>> pathMap = new HashMap<>();
+	private static Map<String, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
+		Map<String, SwaggerEndpoint> pathMap = new HashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			if(annotation != null) {
 				if (!pathMap.containsKey(annotation.basePath() + annotation.uri())){
-					List<SwaggerEndpoint> empty = new ArrayList<>();
-					pathMap.put(annotation.basePath() + annotation.uri(), empty);
+					pathMap.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
+				} else {
+					pathMap.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
 				}
-				pathMap.get(annotation.basePath() + annotation.uri()).add(generatePathFromAnnotation(annotation));
+				
 			}
 		}
 		return pathMap;
@@ -61,8 +60,8 @@ public class PathGenerator {
 	 * @return the path
 	 */
 	private static SwaggerEndpoint generatePathFromAnnotation(SwaggerGen annotation) {
-		SwaggerEndpoint endpoint = new SwaggerEndpoint(new HashMap<>());
-		endpoint.addEndpointMap(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation));
+		SwaggerEndpoint endpoint = new SwaggerEndpoint();
+		endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation));
 		return endpoint;
 	}
 }

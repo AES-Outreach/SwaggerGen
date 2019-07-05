@@ -19,9 +19,9 @@ public class TestSwaggerGenerator {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static void generateSwagger(String filelocation, Class<?> klass)
+	public static void generateSwagger(Class<?> klass)
 			throws JsonParseException, JsonMappingException, IOException {
-		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass }, filelocation);
+		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass });
 	}
 
 

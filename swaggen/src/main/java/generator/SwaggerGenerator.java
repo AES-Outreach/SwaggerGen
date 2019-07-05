@@ -2,7 +2,6 @@ package generator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.maven.plugin.logging.Log;
@@ -30,14 +29,15 @@ public class SwaggerGenerator {
 	 * generate a list of associated paths and POJO
 	 * 
 	 * @param klasses an array of classes that contain methods annotated with SwaggerGen
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
+	 * 
+	 * @throws JsonParseException JsonParseException
+	 * @throws JsonMappingException JsonMappingException
+	 * @throws IOException IOException
 	 **/
-	public static void generateSwaggerFile(Class<?>[] klasses, String filename) throws JsonParseException, JsonMappingException, IOException {
+	public static void generateSwaggerFile(Class<?>[] klasses) throws JsonParseException, JsonMappingException, IOException {
 		
 		// Create Paths
-		Map<String, List<SwaggerEndpoint>> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
+		Map<String, SwaggerEndpoint> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 
 		Swagger swagger = new Swagger();
 		swagger.setVersion("3.0.0");
@@ -49,24 +49,15 @@ public class SwaggerGenerator {
 		info.setVersion("0.0");
 		
 		swagger.setInfo(info);
-		swagger.setPaths(paths);
+		swagger.setPaths(SwaggerEndpoint.convertToValid(paths));
 
 		for(String path: paths.keySet()) {
-			File file = new File(path);
+			File file = new File(path.substring(1));
 			file.mkdirs();
-			String name = "/" + path.replaceAll("/", "_") + "_test.yaml";
-			FileMapper.classToYaml(path + name, swagger);
-		}
 
-		/**
-		for (String path: paths.keySet()) {
-			File filed = new File(path);
-			filed.mkdirs();
+			String name = "/" + path.substring(1).replaceAll("/", "_") + "_test.yaml";
+			FileMapper.classToYaml((path + name).substring(1), swagger);
 		}
-		*/
-
-		
-		
 	}
 	
 }

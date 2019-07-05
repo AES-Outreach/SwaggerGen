@@ -35,7 +35,7 @@ public enum ContentType {
 	/**
 	 * Converts the ENUM to the String representation.
 	 * 
-	 * @return
+	 * @return the string representation of the ENUM
 	 */
 	@JsonValue
 	public String value() {
