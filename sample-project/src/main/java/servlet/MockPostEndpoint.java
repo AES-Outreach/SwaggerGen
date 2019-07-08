@@ -9,7 +9,8 @@ import annotation.SwaggerGen;
 public class MockPostEndpoint {
 
 	@SwaggerGen(
-		url="/base/endpoint",
+		uri="/endpoint",
+		basePath="/base",
 		method="POST",
 				title="Post",
 		description="Serverlet Description",

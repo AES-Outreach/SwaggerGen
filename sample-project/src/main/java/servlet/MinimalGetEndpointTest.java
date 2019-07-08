@@ -12,7 +12,8 @@ public class MinimalGetEndpointTest {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/base/minified-endpoint",
+		uri="/minified-endpoint",
+		basePath="/base",
 		title="Minimum",
 		method="GET"
 	)
