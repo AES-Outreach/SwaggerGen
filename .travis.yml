@@ -22,7 +22,7 @@ jobs:
     - cd ../sample-project
     - mvn clean install
     - cd ..
-    - sh generate_docs.sh
+    - ruby generate_docs.ruby
 stages:
 - name: compile
 notifications:
