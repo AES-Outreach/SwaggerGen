@@ -58,7 +58,8 @@ public class FileMapper {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 		File file = new File(filename);
-		// Check for existing endpoints in yaml file
+
+		// Check for existing endpoints in yaml file and add request methods to the new one
 		if (file.exists() && newSwagger instanceof Swagger) {
 			Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
 			for (String newURL: ((Swagger)newSwagger).getPaths().keySet()) {
@@ -70,13 +71,14 @@ public class FileMapper {
 			}
 		}
 
-		// Discard any endpoints from the given swagger that don't belong in the file
+		// Discard any different endpoints from the given swagger that don't belong in the file
 		if (newSwagger instanceof Swagger) {
 			for (Map.Entry<String, Map<RequestMethod, Endpoint>> path: ((Swagger)newSwagger).getPaths().entrySet()) {
-				String key = path.getKey();
+				String url = path.getKey();
 				int basePathIndex = filename.lastIndexOf("/");
 				String basePath = "/" + filename.substring(0, basePathIndex);
-				if (key.equals(basePath)) {
+
+				if (url.equals(basePath)) {
 					Swagger toYaml = new Swagger();
 					toYaml.setInfo(((Swagger)newSwagger).getInfo());
 					toYaml.setVersion(((Swagger)newSwagger).getOpenapi());

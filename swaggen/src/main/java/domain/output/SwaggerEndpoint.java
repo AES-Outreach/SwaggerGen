@@ -7,6 +7,11 @@ import java.util.Map;
 import enums.RequestMethod;
 import domain.output.path.Endpoint;
 
+/**
+ * Class containing a map of the request method and endpoint required
+ * to make a swagger file.
+ * 
+ */
 public class SwaggerEndpoint {
   private Map<RequestMethod, Endpoint> endpoint;
 
@@ -34,6 +39,13 @@ public class SwaggerEndpoint {
     this.endpoint.putAll(endpoint.getEndpoint());
   }
 
+  /**
+   * Extracts the map from the variable so that it will be compatible
+   * as a swagger file.
+   * 
+   * @param paths The map with SwaggerEndpoints as values
+   * @return Swagger compatible map (Map<String, Map<RequestMethod,Endpoint>>)
+   */
   public static Map<String, Map<RequestMethod, Endpoint>> convertToValid(Map<String, SwaggerEndpoint> paths) {
     Map <String, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
     for (Map.Entry<String, SwaggerEndpoint> endpoints: paths.entrySet()) {

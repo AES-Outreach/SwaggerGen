@@ -27,6 +27,9 @@ public class PathGenerator {
 		for(Class<?> klass : klasses) {
 			Map<String, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
 			if (!pathMap.isEmpty()) {
+				// Checks if URL is already in the path map, and if it is, appends the swagger
+				// endpoints to the URL
+				// Case: multiple classes with the same endpoint
 				for(Map.Entry<String, SwaggerEndpoint> pathEntry: pathMap.entrySet()) {
 					for(Map.Entry<String, SwaggerEndpoint> classEntry: classPaths.entrySet()) {
 						if (pathEntry.getKey().equals(classEntry.getKey())) {
@@ -55,7 +58,14 @@ public class PathGenerator {
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			if(annotation != null) {
-				pathMap.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
+				// Checks if there are any other request methods within a class
+				// and puts it in the swagger endpoints map
+				// Case: multiple request methods within the same class
+				if (!pathMap.containsKey(annotation.basePath() + annotation.uri())){
+					pathMap.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
+				} else {
+					pathMap.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
+				}
 			}
 		}
 		return pathMap;

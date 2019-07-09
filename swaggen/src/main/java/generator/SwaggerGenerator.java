@@ -50,7 +50,7 @@ public class SwaggerGenerator {
 		for(String path: swagger.getPaths().keySet()) {
 			File file = new File(path.substring(1));
 			file.mkdirs();
-
+			// yaml file's name will be the base path and the class name
 			String name = "/" + path.substring(1).replaceAll("/", "_") + "-test.yaml";
 			FileMapper.classToYaml((path + name).substring(1), swagger);
 		}
