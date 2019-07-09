@@ -72,8 +72,23 @@ public class EndToEndTests {
 	@Test
 	public void MultipleFileEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger(MockMinimalPutEndpoint.class);
-			TestSwaggerGenerator.generateSwagger(MockMinimalPostEndpoint.class);
+			TestSwaggerGenerator.generateSwaggerClasses(new Class<?>[]{MockMinimalPutEndpoint.class, 
+				MockMinimalPostEndpoint.class, MinimalGetEndpointTest.class});
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+
+	/**
+	 * Test to generate Swagger file with more than one class
+	 */
+	@Test
+	public void MultipleClassesEndpointTest() {
+		try {
+			TestSwaggerGenerator.generateSwaggerClasses(new Class<?>[]{MockMinimalPutEndpoint.class, 
+				MockPutEndpointWithSchema.class, MockMinimalPostEndpoint.class, MinimalGetEndpointTest.class,
+				MockAllMethodsEndpoint.class, MockPostEndpoint.class});
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);

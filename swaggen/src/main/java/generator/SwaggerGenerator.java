@@ -4,16 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.maven.plugin.logging.Log;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import domain.output.Swagger;
 import domain.output.SwaggerEndpoint;
 import domain.output.SwaggerInfo;
-import domain.output.path.Endpoint;
-import enums.RequestMethod;
 import utils.io.FileMapper;
 
 /**
@@ -51,11 +47,11 @@ public class SwaggerGenerator {
 		swagger.setInfo(info);
 		swagger.setPaths(SwaggerEndpoint.convertToValid(paths));
 
-		for(String path: paths.keySet()) {
+		for(String path: swagger.getPaths().keySet()) {
 			File file = new File(path.substring(1));
 			file.mkdirs();
 
-			String name = "/" + path.substring(1).replaceAll("/", "_") + "_test.yaml";
+			String name = "/" + path.substring(1).replaceAll("/", "_") + "-test.yaml";
 			FileMapper.classToYaml((path + name).substring(1), swagger);
 		}
 	}

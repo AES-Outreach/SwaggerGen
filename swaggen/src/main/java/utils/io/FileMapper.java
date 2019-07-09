@@ -3,8 +3,14 @@ package utils.io;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.Map;
+import java.util.HashMap;
+
+
 import domain.output.Swagger;
-import domain.output.SwaggerEndpoint;
+import enums.RequestMethod;
+import domain.output.path.Endpoint;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -52,8 +58,8 @@ public class FileMapper {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 		File file = new File(filename);
-
-		if (file.exists()) {
+		// Check for existing endpoints in yaml file
+		if (file.exists() && newSwagger instanceof Swagger) {
 			Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
 			for (String newURL: ((Swagger)newSwagger).getPaths().keySet()) {
 				for (String oldURL: existingSwagger.getPaths().keySet()) {
@@ -63,7 +69,28 @@ public class FileMapper {
 				}
 			}
 		}
-		objectMapper.writeValue(file, newSwagger);
-	}
 
+		// Discard any endpoints from the given swagger that don't belong in the file
+		if (newSwagger instanceof Swagger) {
+			for (Map.Entry<String, Map<RequestMethod, Endpoint>> path: ((Swagger)newSwagger).getPaths().entrySet()) {
+				String key = path.getKey();
+				int basePathIndex = filename.lastIndexOf("/");
+				String basePath = "/" + filename.substring(0, basePathIndex);
+				if (key.equals(basePath)) {
+					Swagger toYaml = new Swagger();
+					toYaml.setInfo(((Swagger)newSwagger).getInfo());
+					toYaml.setVersion(((Swagger)newSwagger).getOpenapi());
+
+					Map<String, Map<RequestMethod, Endpoint>> exactEndpoint = new HashMap<>();
+					exactEndpoint.put(path.getKey(), path.getValue());
+					toYaml.setPaths(exactEndpoint);
+
+					objectMapper.writeValue(file, toYaml);
+					break;
+				}
+			}
+		}else{
+			objectMapper.writeValue(file, newSwagger);
+		}
+	}
 }

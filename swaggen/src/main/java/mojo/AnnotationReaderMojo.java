@@ -50,7 +50,11 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 			getLog().info("-- OBTAINING ANNOTATIONS --");
 			Class<?>[] klasses = getClassArray();
-
+			getLog().info("????");
+			for (Class<?> klass: klasses) {
+				getLog().info(klass.toString());
+				getLog().info("!!!");
+			}
 			getLog().info("-- PROCESSING ANNOTATIONS --");
 			
 			generator.SwaggerGenerator.generateSwaggerFile(klasses);

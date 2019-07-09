@@ -1,8 +1,8 @@
 package generator;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import annotation.SwaggerGen;
 import domain.output.SwaggerEndpoint;
@@ -23,9 +23,22 @@ public class PathGenerator {
 	 * @return the map
 	 */
 	public static Map<String, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
-		Map<String, SwaggerEndpoint> pathMap = new HashMap<>();
+		Map<String, SwaggerEndpoint> pathMap = new ConcurrentHashMap<>();
 		for(Class<?> klass : klasses) {
-			pathMap.putAll(generatePathsFromClass(klass));
+			Map<String, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
+			if (!pathMap.isEmpty()) {
+				for(Map.Entry<String, SwaggerEndpoint> pathEntry: pathMap.entrySet()) {
+					for(Map.Entry<String, SwaggerEndpoint> classEntry: classPaths.entrySet()) {
+						if (pathEntry.getKey().equals(classEntry.getKey())) {
+							pathEntry.getValue().addEndpoint(classEntry.getValue());
+						} else {
+							pathMap.putAll(classPaths);
+						}
+					}
+				}
+			}	else {
+			pathMap.putAll(classPaths);
+			}
 		}
 		return pathMap;
 	}
@@ -37,17 +50,12 @@ public class PathGenerator {
 	 * @return the map
 	 */
 	private static Map<String, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
-		Map<String, SwaggerEndpoint> pathMap = new HashMap<>();
+		Map<String, SwaggerEndpoint> pathMap = new ConcurrentHashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			if(annotation != null) {
-				if (!pathMap.containsKey(annotation.basePath() + annotation.uri())){
-					pathMap.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
-				} else {
-					pathMap.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
-				}
-				
+				pathMap.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
 			}
 		}
 		return pathMap;
