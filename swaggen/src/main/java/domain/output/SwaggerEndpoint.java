@@ -23,7 +23,7 @@ public class SwaggerEndpoint {
     return this.endpoint.get(request);
   }
 
-  public Map<RequestMethod, Endpoint> getEndpoint() {
+  public Map<RequestMethod, Endpoint> getEndpointMap() {
     return this.endpoint;
   }
 
@@ -36,7 +36,7 @@ public class SwaggerEndpoint {
   }
 
   public void addEndpoint(SwaggerEndpoint endpoint) {
-    this.endpoint.putAll(endpoint.getEndpoint());
+    this.endpoint.putAll(endpoint.getEndpointMap());
   }
 
   /**
@@ -49,7 +49,7 @@ public class SwaggerEndpoint {
   public static Map<String, Map<RequestMethod, Endpoint>> convertToValid(Map<String, SwaggerEndpoint> paths) {
     Map <String, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
     for (Map.Entry<String, SwaggerEndpoint> endpoints: paths.entrySet()) {
-			newPaths.put(endpoints.getKey(), endpoints.getValue().getEndpoint());
+			newPaths.put(endpoints.getKey(), endpoints.getValue().getEndpointMap());
     }	
     return newPaths;
   }
