@@ -44,7 +44,7 @@ public class SwaggerEndpoint {
    * as a swagger file.
    * 
    * @param paths The map with SwaggerEndpoints as values
-   * @return Swagger compatible map (Map<String, Map<RequestMethod,Endpoint>>)
+   * @return Swagger compatible map 
    */
   public static Map<String, Map<RequestMethod, Endpoint>> convertToValid(Map<String, SwaggerEndpoint> paths) {
     Map <String, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
