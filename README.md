@@ -20,15 +20,15 @@ Currently, the process of setting up the project will require you to clone the r
 ```
 <!-- SwaggerGen plugin -->
 <dependency>
-  <groupId>com.swaggen</groupId>
-  <artifactId>annotations</artifactId>
+  <groupId>com.github.aes-outreach</groupId>
+  <artifactId>swaggen-annotations</artifactId>
   <version>0.0.1</version>
 </dependency>
 ```
 ```
 <plugin>
-<groupId>com.swaggen</groupId>
-<artifactId>annotations</artifactId>
+<groupId>com.github.aes-outreach</groupId>
+<artifactId>swaggen-annotations</artifactId>
 <version>0.0.1</version>
 <executions>
   <execution>
