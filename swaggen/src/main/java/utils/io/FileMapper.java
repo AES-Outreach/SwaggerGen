@@ -50,7 +50,7 @@ public class FileMapper {
 	 * @param newSwagger the Java object, typically swagger object 
 	 * @param <T> The type
 	 * 
-	 * @throws JsonParseException JsonParseException
+	 * @throws JsonGenerationException JsonGenerationException
 	 * @throws JsonMappingException JsonMappingException
 	 * @throws IOException IOException
 	 */
@@ -59,40 +59,67 @@ public class FileMapper {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 		File file = new File(filename);
 
-		// Check for existing endpoints in yaml file and add request methods to the new one
-		if (file.exists() && newSwagger instanceof Swagger) {
+		checkExistingEndpoints(newSwagger, file, objectMapper);
+
+		if (newSwagger instanceof Swagger) {
+			Swagger toYaml = convertSwagger(newSwagger, filename, file, objectMapper);
+			objectMapper.writeValue(file, toYaml);
+		} else {
+			objectMapper.writeValue(file, newSwagger);
+		}
+	}
+
+	/**
+	 * Checks for existing endpoints in yaml files and if matched, add the existing
+	 * request methods to the new Swagger file.
+	 * @param swagger the swagger object containing all the endpoitns
+	 * @param file file object, containing where it is supposed to be placed
+	 * @param objectMapper the ObjectMapper
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	private static <T> void checkExistingEndpoints(T swagger, File file, ObjectMapper objectMapper) 
+		throws JsonGenerationException, JsonMappingException, IOException {
+		if (file.exists() && swagger instanceof Swagger) {
 			Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
-			for (String newURL: ((Swagger)newSwagger).getPaths().keySet()) {
+			for (String newURL: ((Swagger)swagger).getPaths().keySet()) {
 				for (String oldURL: existingSwagger.getPaths().keySet()) {
 					if (newURL.equals(oldURL)) {
-						((Swagger)newSwagger).getPaths().get(newURL).putAll(existingSwagger.getPaths().get(oldURL));
+						((Swagger)swagger).getPaths().get(newURL).putAll(existingSwagger.getPaths().get(oldURL));
 					}
 				}
 			}
 		}
+	}
 
-		// Discard any different endpoints from the given swagger that don't belong in the file
-		if (newSwagger instanceof Swagger) {
-			for (Map.Entry<String, Map<RequestMethod, Endpoint>> path: ((Swagger)newSwagger).getPaths().entrySet()) {
-				String url = path.getKey();
-				int basePathIndex = filename.lastIndexOf("/");
-				String basePath = "/" + filename.substring(0, basePathIndex);
 
-				if (url.equals(basePath)) {
-					Swagger toYaml = new Swagger();
-					toYaml.setInfo(((Swagger)newSwagger).getInfo());
-					toYaml.setVersion(((Swagger)newSwagger).getOpenapi());
+	/**
+	 * Finds the correct request method and endpoint within the swagger map given the filename, and writes
+	 * it to a yaml file
+	 * @param swagger the swagger object containing all the endpoints
+	 * @param filename name of the file
+	 * @param file file object, containing where it is supposed to be placed
+	 * @param objectMapper the ObjectMapper
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	private static <T> Swagger convertSwagger(T swagger, String filename, File file, ObjectMapper objectMapper)
+		throws JsonGenerationException, JsonMappingException, IOException {
+		for (Map.Entry<String, Map<RequestMethod, Endpoint>> path: ((Swagger)swagger).getPaths().entrySet()) {
+			String url = path.getKey();
+			int basePathIndex = filename.lastIndexOf("/");
+			String basePath = "/" + filename.substring(0, basePathIndex);
 
-					Map<String, Map<RequestMethod, Endpoint>> exactEndpoint = new HashMap<>();
-					exactEndpoint.put(path.getKey(), path.getValue());
-					toYaml.setPaths(exactEndpoint);
-
-					objectMapper.writeValue(file, toYaml);
-					break;
-				}
+			if (url.equals(basePath)) {
+				Swagger toYaml = new Swagger(((Swagger)swagger));
+				Map<String, Map<RequestMethod, Endpoint>> exactEndpoint = new HashMap<>();
+				exactEndpoint.put(path.getKey(), path.getValue());
+				toYaml.setPaths(exactEndpoint);
+				return toYaml;
 			}
-		}else{
-			objectMapper.writeValue(file, newSwagger);
 		}
+		return new Swagger();
 	}
 }

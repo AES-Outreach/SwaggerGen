@@ -23,27 +23,12 @@ public class PathGenerator {
 	 * @return the map
 	 */
 	public static Map<String, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
-		Map<String, SwaggerEndpoint> pathMap = new ConcurrentHashMap<>();
+		Map<String, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
 		for(Class<?> klass : klasses) {
 			Map<String, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
-			if (!pathMap.isEmpty()) {
-				// Checks if URL is already in the path map, and if it is, appends the swagger
-				// endpoints to the URL
-				// Case: multiple classes with the same endpoint
-				for(Map.Entry<String, SwaggerEndpoint> pathEntry: pathMap.entrySet()) {
-					for(Map.Entry<String, SwaggerEndpoint> classEntry: classPaths.entrySet()) {
-						if (pathEntry.getKey().equals(classEntry.getKey())) {
-							pathEntry.getValue().addEndpoint(classEntry.getValue());
-						} else {
-							pathMap.putAll(classPaths);
-						}
-					}
-				}
-			}	else {
-			pathMap.putAll(classPaths);
-			}
+			checkClassEndpoints(existingPaths, classPaths);
 		}
-		return pathMap;
+		return existingPaths;
 	}
 
 	/**
@@ -53,22 +38,13 @@ public class PathGenerator {
 	 * @return the map
 	 */
 	private static Map<String, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
-		Map<String, SwaggerEndpoint> pathMap = new ConcurrentHashMap<>();
+		Map<String, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
-			if(annotation != null) {
-				// Checks if there are any other request methods within a class
-				// and puts it in the swagger endpoints map
-				// Case: multiple request methods within the same class
-				if (!pathMap.containsKey(annotation.basePath() + annotation.uri())){
-					pathMap.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
-				} else {
-					pathMap.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
-				}
-			}
+			checkRequestMethods(annotation, existingPaths);
 		}
-		return pathMap;
+		return existingPaths;
 	}
 	
 	/**
@@ -81,5 +57,45 @@ public class PathGenerator {
 		SwaggerEndpoint endpoint = new SwaggerEndpoint();
 		endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation));
 		return endpoint;
+	}
+
+	/**
+	 * Checks if URL is already in the existing map, and if it is, appends the swagger
+	 * endpoints to the URL
+	 * Case: multiple classes with the same endpoint
+	 * @param existingPaths Map of existing Swagger Endpoints
+	 * @param classPaths Map of new Swagger Endpoints in the class
+	 */
+	private static void checkClassEndpoints(Map<String, SwaggerEndpoint> existingPaths, Map<String, SwaggerEndpoint> classPaths) {
+		if (!existingPaths.isEmpty()) {
+			for(Map.Entry<String, SwaggerEndpoint> pathEntry: existingPaths.entrySet()) {
+				for(Map.Entry<String, SwaggerEndpoint> classEntry: classPaths.entrySet()) {
+					if (pathEntry.getKey().equals(classEntry.getKey())) {
+						pathEntry.getValue().addEndpoint(classEntry.getValue());
+					} else {
+						existingPaths.putAll(classPaths);
+					}
+				}
+			}
+		}	else {
+		existingPaths.putAll(classPaths);
+		}
+	}
+
+	/**
+	 * Checks if there are any other request methods within a class
+	 * and puts it in the swagger endpoints map
+	 * Case: multiple request methods within the same class
+	 * @param annotation SwaggerGen annotation
+	 * @param existingPaths Map of existing Swagger Endpoints
+	 */
+	private static void checkRequestMethods(SwaggerGen annotation, Map<String, SwaggerEndpoint> existingPaths) {
+		if(annotation != null) {
+			if (!existingPaths.containsKey(annotation.basePath() + annotation.uri())){
+				existingPaths.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
+			} else {
+				existingPaths.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
+			}
+		}
 	}
 }

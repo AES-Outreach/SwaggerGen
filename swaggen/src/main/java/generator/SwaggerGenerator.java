@@ -47,6 +47,11 @@ public class SwaggerGenerator {
 		swagger.setInfo(info);
 		swagger.setPaths(SwaggerEndpoint.convertToValid(paths));
 
+		createYamlFiles(swagger);
+		
+	}
+
+	private static void createYamlFiles(Swagger swagger) throws JsonParseException, JsonMappingException, IOException {
 		for(String path: swagger.getPaths().keySet()) {
 			File file = new File(path.substring(1));
 			file.mkdirs();

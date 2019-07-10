@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import domain.output.path.Endpoint;
 import enums.RequestMethod;
-import domain.output.SwaggerEndpoint;
 
 /**
  * Domain object representing an entire Swagger file.
@@ -20,6 +19,16 @@ public class Swagger {
 
 	public Swagger() {
 		this.paths = new HashMap<>();
+	}
+
+	/**
+	 * copy constructor
+	 * @param swagger Swagger object
+	 */
+	public Swagger(Swagger swagger) {
+		this.info = swagger.getInfo();
+		this.setVersion(swagger.getOpenapi());
+		this.paths = swagger.getPaths();
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class TestSwaggerGenerator {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static void generateSwaggerClasses(Class<?>[] klasses) 
+	public static void generateSwagger(Class<?>[] klasses) 
 		throws JsonParseException, JsonMappingException, IOException {
 		SwaggerGenerator.generateSwaggerFile(klasses);
 	}

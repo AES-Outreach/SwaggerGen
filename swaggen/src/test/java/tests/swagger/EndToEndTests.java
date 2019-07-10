@@ -8,6 +8,7 @@ import mock.endpoint.MockMinimalPostEndpoint;
 import mock.endpoint.MockPostEndpoint;
 import mock.endpoint.MockMinimalPutEndpoint;
 import mock.endpoint.MockPutEndpointWithSchema;
+import mock.endpoint.MultiplePathsEndpoint;
 
 public class EndToEndTests {
 
@@ -72,7 +73,7 @@ public class EndToEndTests {
 	@Test
 	public void MultipleFileEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwaggerClasses(new Class<?>[]{MockMinimalPutEndpoint.class, 
+			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MockMinimalPutEndpoint.class, 
 				MockMinimalPostEndpoint.class, MinimalGetEndpointTest.class});
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,9 +87,22 @@ public class EndToEndTests {
 	@Test
 	public void MultipleClassesEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwaggerClasses(new Class<?>[]{MockMinimalPutEndpoint.class, 
+			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MockMinimalPutEndpoint.class, 
 				MockPutEndpointWithSchema.class, MockMinimalPostEndpoint.class, MinimalGetEndpointTest.class,
 				MockAllMethodsEndpoint.class, MockPostEndpoint.class});
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+
+	/**
+	 * Test to generate different paths from the same class
+	 */
+	@Test
+	public void MultiplePathsEndpointTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MultiplePathsEndpoint.class});
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
