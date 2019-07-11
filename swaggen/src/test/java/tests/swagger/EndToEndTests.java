@@ -2,7 +2,7 @@ package tests.swagger;
 
 import org.junit.Test;
 
-import mock.endpoint.MinimalGetEndpointTest;
+import mock.endpoint.MockMinimalGetEndpoint;
 import mock.endpoint.MockAllMethodsEndpoint;
 import mock.endpoint.MockGetPostEndpoint;
 import mock.endpoint.MockMinimalPostEndpoint;
@@ -59,12 +59,12 @@ public class EndToEndTests {
 	}
 
 	/**
-	 * Test to generate a Swagger file using the MinimalGetEndpointTest mock endpoint.
+	 * Test to generate a Swagger file using the MockMinimalGetEndpointTest mock endpoint.
 	 */
 	@Test
 	public void MinimalEndpointTest() {
 		try {
-			TestSwaggerGenerator.generateSwagger(MinimalGetEndpointTest.class);
+			TestSwaggerGenerator.generateSwagger(MockMinimalGetEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -78,7 +78,7 @@ public class EndToEndTests {
 	public void MultipleFileEndpointTest() {
 		try {
 			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MockMinimalPutEndpoint.class, 
-				MockMinimalPostEndpoint.class, MinimalGetEndpointTest.class});
+				MockMinimalPostEndpoint.class, MockMinimalGetEndpoint.class});
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
@@ -92,7 +92,7 @@ public class EndToEndTests {
 	public void MultipleClassesEndpointTest() {
 		try {
 			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MockMinimalPutEndpoint.class, 
-				MockPutEndpointWithSchema.class, MockMinimalPostEndpoint.class, MinimalGetEndpointTest.class,
+				MockPutEndpointWithSchema.class, MockMinimalPostEndpoint.class, MockMinimalGetEndpoint.class,
 				MockAllMethodsEndpoint.class, MockPostEndpoint.class});
 		} catch (Exception e) {
 			e.printStackTrace();

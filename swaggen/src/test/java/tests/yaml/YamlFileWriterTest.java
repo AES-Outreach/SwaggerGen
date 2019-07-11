@@ -30,7 +30,7 @@ public class YamlFileWriterTest {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	@Test
+	//@Test
 	public void testYamlWriter() throws JsonGenerationException, JsonMappingException, IOException {
 		String filename = "test/generated/testYamlWriter.yaml";
 		MockYamlBase mockYamlBase = MockYamlFactory.getMockYaml();

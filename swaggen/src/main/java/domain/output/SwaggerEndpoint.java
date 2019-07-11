@@ -48,9 +48,9 @@ public class SwaggerEndpoint {
    */
   public static Map<String, Map<RequestMethod, Endpoint>> convertToValid(Map<String, SwaggerEndpoint> paths) {
     Map <String, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
-    for (Map.Entry<String, SwaggerEndpoint> endpoints: paths.entrySet()) {
-			newPaths.put(endpoints.getKey(), endpoints.getValue().getEndpointMap());
-    }	
+    for (String url: paths.keySet()) {
+      newPaths.put(url, paths.get(url).getEndpointMap());
+    }
     return newPaths;
   }
 }

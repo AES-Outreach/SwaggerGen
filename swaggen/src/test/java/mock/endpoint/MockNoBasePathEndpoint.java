@@ -28,7 +28,7 @@ public class MockNoBasePathEndpoint {
 	@SwaggerGen(
 		uri="/base",
 		method="GET",
-		description="Put Servlet Description",
+		description="Get Servlet Description",
 		responses={"200=OK", "400", "404"},
 		scheme="HTTP"
   )

@@ -19,7 +19,7 @@ public class PathGenerator {
 	/**
 	 * Generates a Map of URLs and RequestMethods to Endpoints.
 	 * 
-	 * @param klasses s set of annotated classes
+	 * @param klasses list of annotated classes
 	 * @return the map
 	 */
 	public static Map<String, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
@@ -67,18 +67,17 @@ public class PathGenerator {
 	 * @param classPaths Map of new Swagger Endpoints in the class
 	 */
 	private static void checkClassEndpoints(Map<String, SwaggerEndpoint> existingPaths, Map<String, SwaggerEndpoint> classPaths) {
-		if (!existingPaths.isEmpty()) {
-			for(Map.Entry<String, SwaggerEndpoint> pathEntry: existingPaths.entrySet()) {
-				for(Map.Entry<String, SwaggerEndpoint> classEntry: classPaths.entrySet()) {
-					if (pathEntry.getKey().equals(classEntry.getKey())) {
-						pathEntry.getValue().addEndpoint(classEntry.getValue());
-					} else {
-						existingPaths.putAll(classPaths);
-					}
-				}
+		if (existingPaths.isEmpty()) {
+			existingPaths.putAll(classPaths);
+			return;
+		}
+
+		for(String pathKey: existingPaths.keySet()) {
+			if (classPaths.containsKey(pathKey)) {
+				existingPaths.get(pathKey).addEndpoint(classPaths.get(pathKey));
+			} else {
+				existingPaths.putAll(classPaths);
 			}
-		}	else {
-		existingPaths.putAll(classPaths);
 		}
 	}
 
@@ -90,12 +89,13 @@ public class PathGenerator {
 	 * @param existingPaths Map of existing Swagger Endpoints
 	 */
 	private static void checkRequestMethods(SwaggerGen annotation, Map<String, SwaggerEndpoint> existingPaths) {
-		if(annotation != null) {
-			if (!existingPaths.containsKey(annotation.basePath() + annotation.uri())){
-				existingPaths.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
-			} else {
-				existingPaths.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
-			}
+		if (annotation == null) {
+			throw new IllegalArgumentException("annotation cannot be null");
+		}
+		if (!existingPaths.containsKey(annotation.basePath() + annotation.uri())){
+			existingPaths.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
+		} else {
+			existingPaths.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
 		}
 	}
 }

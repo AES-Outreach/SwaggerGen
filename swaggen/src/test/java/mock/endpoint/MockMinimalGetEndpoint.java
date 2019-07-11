@@ -5,7 +5,7 @@ import annotation.SwaggerGen;
  * 
  * @author Alexandre Seguin (7663995)
  */
-public class MinimalGetEndpointTest {
+public class MockMinimalGetEndpoint {
 	/**
 	 * Fake endpoint for testing purposes
 	 * @param request fake request object

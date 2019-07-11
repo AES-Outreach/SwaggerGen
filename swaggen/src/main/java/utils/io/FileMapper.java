@@ -47,26 +47,38 @@ public class FileMapper {
 	 * Maps a Java object to a YAML file.
 	 * 
 	 * @param filename the name of the YAML file
-	 * @param newSwagger the Java object, typically swagger object 
+	 * @param object the Java object
 	 * @param <T> The type
 	 * 
 	 * @throws JsonGenerationException JsonGenerationException
 	 * @throws JsonMappingException JsonMappingException
 	 * @throws IOException IOException
 	 */
-	public static <T> void classToYaml(String filename, T newSwagger)
+	public static <T> void classToYaml(String filename, T object)
 			throws JsonGenerationException, JsonMappingException, IOException {
+		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+		objectMapper.writeValue(new File(filename), object);
+	}
+
+	/**
+	 * Maps a Swagger object to a YAML file.
+	 * 
+	 * @param filename the name of the YAML file
+	 * @param newSwagger the Swagger
+	 * 
+	 * @throws JsonGenerationException JsonGenerationException
+	 * @throws JsonMappingException JsonMappingException
+	 * @throws IOException IOException
+	 */
+	public static void classToYaml(String filename, Swagger newSwagger)
+		throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 		File file = new File(filename);
 
 		checkExistingEndpoints(newSwagger, file, objectMapper);
 
-		if (newSwagger instanceof Swagger) {
-			Swagger toYaml = convertSwagger(newSwagger, filename, file, objectMapper);
-			objectMapper.writeValue(file, toYaml);
-		} else {
-			objectMapper.writeValue(file, newSwagger);
-		}
+		Swagger toYaml = convertSwagger(newSwagger, filename, file, objectMapper);
+		objectMapper.writeValue(file, toYaml);
 	}
 
 	/**
@@ -79,15 +91,16 @@ public class FileMapper {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	private static <T> void checkExistingEndpoints(T swagger, File file, ObjectMapper objectMapper) 
+	private static void checkExistingEndpoints(Swagger swagger, File file, ObjectMapper objectMapper) 
 		throws JsonGenerationException, JsonMappingException, IOException {
-		if (file.exists() && swagger instanceof Swagger) {
-			Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
-			for (String newURL: ((Swagger)swagger).getPaths().keySet()) {
-				for (String oldURL: existingSwagger.getPaths().keySet()) {
-					if (newURL.equals(oldURL)) {
-						((Swagger)swagger).getPaths().get(newURL).putAll(existingSwagger.getPaths().get(oldURL));
-					}
+		if(!file.exists()) {
+			return;
+		}
+		Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
+		for (String newURL: swagger.getPaths().keySet()) {
+			for (String oldURL: existingSwagger.getPaths().keySet()) {
+				if (existingSwagger.getPaths().containsKey(newURL)) {
+					swagger.getPaths().get(newURL).putAll(existingSwagger.getPaths().get(oldURL));
 				}
 			}
 		}
@@ -105,17 +118,16 @@ public class FileMapper {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	private static <T> Swagger convertSwagger(T swagger, String filename, File file, ObjectMapper objectMapper)
+	private static Swagger convertSwagger(Swagger swagger, String filename, File file, ObjectMapper objectMapper)
 		throws JsonGenerationException, JsonMappingException, IOException {
-		for (Map.Entry<String, Map<RequestMethod, Endpoint>> path: ((Swagger)swagger).getPaths().entrySet()) {
-			String url = path.getKey();
+		for (String url: swagger.getPaths().keySet()) {
 			int basePathIndex = filename.lastIndexOf("/");
 			String basePath = "/" + filename.substring(0, basePathIndex);
 
 			if (url.equals(basePath)) {
-				Swagger toYaml = new Swagger(((Swagger)swagger));
+				Swagger toYaml = new Swagger(swagger);
 				Map<String, Map<RequestMethod, Endpoint>> exactEndpoint = new HashMap<>();
-				exactEndpoint.put(path.getKey(), path.getValue());
+				exactEndpoint.put(url, swagger.getPaths().get(url));
 				toYaml.setPaths(exactEndpoint);
 				return toYaml;
 			}

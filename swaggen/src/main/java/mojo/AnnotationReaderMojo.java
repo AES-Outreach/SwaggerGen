@@ -76,8 +76,9 @@ public class AnnotationReaderMojo extends AbstractMojo {
 		Reflections loadedKlasses = new Reflections(
 				new ConfigurationBuilder().addUrls(ClasspathHelper.forClassLoader(getClassLoader()))
 						.setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
-
+		getLog().info("Reflections instantiated");
 		Set<Method> swaggenMethods = loadedKlasses.getMethodsAnnotatedWith(SwaggerGen.class);
+		getLog().info("Swaggen Methods instatiated");
 		Set<Class<?>> klasses = new HashSet<Class<?>>();
 		for (Method method : swaggenMethods) {
 				klasses.add(method.getDeclaringClass());
@@ -99,10 +100,12 @@ public class AnnotationReaderMojo extends AbstractMojo {
 	private ClassLoader getClassLoader() throws DependencyResolutionRequiredException, MalformedURLException {
 		Set<URL> urls = new HashSet<>();
 		List<String> elements = project.getRuntimeClasspathElements();
+		getLog().info("Printing elements");
 		for (String element : elements) {
 			urls.add(new File(element).toURI().toURL());
+			getLog().info(element);
 		}
-
+		getLog().info("End of class path elements");
 		ClassLoader contextClassLoader = URLClassLoader.newInstance(urls.toArray(new URL[0]),
 				Thread.currentThread().getContextClassLoader());
 
