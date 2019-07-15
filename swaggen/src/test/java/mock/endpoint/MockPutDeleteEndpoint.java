@@ -10,7 +10,7 @@ public class MockPutDeleteEndpoint {
 
 	@SwaggerGen(
 		uri="/combined",
-		basePath="/base/all",
+		basePath="base/all",
 		method="PUT",
 		title="Put Serverlet Title",
 		description="Put Serverlet Description"
@@ -21,7 +21,7 @@ public class MockPutDeleteEndpoint {
   
   @SwaggerGen(
 		uri="/combined",
-		basePath="/base/all",
+		basePath="base/all",
 		method="DELETE",
 		title="Delete Serverlet Title",
 		description="Delete Serverlet Description"

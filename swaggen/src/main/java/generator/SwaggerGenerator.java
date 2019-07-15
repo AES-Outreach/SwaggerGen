@@ -51,7 +51,7 @@ public class SwaggerGenerator {
 		info.setDescription("Description");
 		info.setVersion("0.0");
 
-		ServerURL serverURL = new ServerURL("api.example.com", "This is its description");
+		ServerURL serverURL = new ServerURL("http://api.example.com", "This is its description");
 		
 		swagger.setInfo(info);
 		swagger.setServers(new ArrayList<ServerURL>(Arrays.asList(serverURL)));
@@ -63,10 +63,10 @@ public class SwaggerGenerator {
 
 	private static void createYamlFiles(Swagger swagger) throws JsonParseException, JsonMappingException, IOException {
 		for(PathURL path: swagger.getSwaggerPaths().keySet()) {
-			File file = new File(path.getFullPath().substring(1));
+			File file = new File(path.getFullPath());
 			file.mkdirs();
 			// yaml file's name will be the base path and the class name
-			String name = "/" + path.getFullPath().substring(1).replaceAll("/", "_") + "-test.yaml";
+			String name = "/" + path.getFullPath().replaceAll("/", "_") + "-test.yaml";
 			path.setFilename(path.getFullPath() + name);
 
 			Swagger toYaml = new Swagger(swagger);

@@ -6,7 +6,7 @@ import annotation.SwaggerGen;
 public class MultiplePathsEndpoint {
   @SwaggerGen(
     uri="/all-methods-endpoint",
-    basePath="/base",
+    basePath="base",
     method="GET",
     description="Get Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -19,7 +19,7 @@ public class MultiplePathsEndpoint {
 
   @SwaggerGen(
     uri="/endpoint",
-    basePath="/base",
+    basePath="base",
     method="PUT",
     description="Put Servlet Description",
     headers={"Content-Type=application/json", "langHeader=en"},

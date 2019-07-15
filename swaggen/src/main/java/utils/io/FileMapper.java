@@ -67,7 +67,7 @@ public class FileMapper {
 	public static void classToYaml(String path, Swagger newSwagger)
 		throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-		File file = new File(path.substring(1));
+		File file = new File(path);
 
 		checkExistingEndpoints(newSwagger, file, objectMapper);
 		objectMapper.writeValue(file, newSwagger);
