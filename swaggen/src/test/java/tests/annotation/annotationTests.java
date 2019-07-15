@@ -7,6 +7,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import domain.output.path.Endpoint;
+import domain.output.PathURL;
 import domain.output.SwaggerEndpoint;
 import enums.ParamType;
 import enums.RequestMethod;
@@ -27,9 +28,8 @@ public class annotationTests {
 	public void testAnnotation() {
 		
 		Class<?>[] klasses = {MockPostEndpoint.class};
-		Map<String, SwaggerEndpoint> path = generator.PathGenerator.generatePathsFromClassList(klasses);
-	
-		Endpoint endpoint = path.get("/base/endpoint").getEndpoint(RequestMethod.POST);
+		Map<PathURL, SwaggerEndpoint> path = generator.PathGenerator.generatePathsFromClassList(klasses);
+		Endpoint endpoint = path.get(path.keySet().toArray()[0]).getEndpoint(RequestMethod.POST);
 		
 		assertEquals(endpoint.getDescription(), "Serverlet Description");
 		assertEquals(endpoint.getSummary(), "Serverlet Title");

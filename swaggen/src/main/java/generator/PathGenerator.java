@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import annotation.SwaggerGen;
 import domain.output.SwaggerEndpoint;
+import domain.output.PathURL;
 import enums.RequestMethod;
 import factory.EndpointFactory;
 
@@ -22,10 +23,10 @@ public class PathGenerator {
 	 * @param klasses list of annotated classes
 	 * @return the map
 	 */
-	public static Map<String, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
-		Map<String, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
+	public static Map<PathURL, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
+		Map<PathURL, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
 		for(Class<?> klass : klasses) {
-			Map<String, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
+			Map<PathURL, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
 			checkClassEndpoints(existingPaths, classPaths);
 		}
 		return existingPaths;
@@ -37,8 +38,8 @@ public class PathGenerator {
 	 * @param klass the annotated class
 	 * @return the map
 	 */
-	private static Map<String, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
-		Map<String, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
+	private static Map<PathURL, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
+		Map<PathURL, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
@@ -66,13 +67,13 @@ public class PathGenerator {
 	 * @param existingPaths Map of existing Swagger Endpoints
 	 * @param classPaths Map of new Swagger Endpoints in the class
 	 */
-	private static void checkClassEndpoints(Map<String, SwaggerEndpoint> existingPaths, Map<String, SwaggerEndpoint> classPaths) {
+	private static void checkClassEndpoints(Map<PathURL, SwaggerEndpoint> existingPaths, Map<PathURL, SwaggerEndpoint> classPaths) {
 		if (existingPaths.isEmpty()) {
 			existingPaths.putAll(classPaths);
 			return;
 		}
 
-		for(String pathKey: existingPaths.keySet()) {
+		for(PathURL pathKey: existingPaths.keySet()) {
 			if (classPaths.containsKey(pathKey)) {
 				existingPaths.get(pathKey).addEndpoint(classPaths.get(pathKey));
 			} else {
@@ -88,14 +89,24 @@ public class PathGenerator {
 	 * @param annotation SwaggerGen annotation
 	 * @param existingPaths Map of existing Swagger Endpoints
 	 */
-	private static void checkRequestMethods(SwaggerGen annotation, Map<String, SwaggerEndpoint> existingPaths) {
+	private static void checkRequestMethods(SwaggerGen annotation, Map<PathURL, SwaggerEndpoint> existingPaths) {
 		if (annotation == null) {
 			throw new IllegalArgumentException("annotation cannot be null");
 		}
-		if (!existingPaths.containsKey(annotation.basePath() + annotation.uri())){
-			existingPaths.put(annotation.basePath() + annotation.uri(), generatePathFromAnnotation(annotation));
+		
+		PathURL pathURL = new PathURL(annotation.basePath(), annotation.uri());
+		if (!existingPaths.containsKey(pathURL)){
+			existingPaths.put(pathURL, generatePathFromAnnotation(annotation));
 		} else {
-			existingPaths.get(annotation.basePath() + annotation.uri()).addEndpoint(generatePathFromAnnotation(annotation));
+			existingPaths.get(pathURL).addEndpoint(generatePathFromAnnotation(annotation));
 		}
+		// for (PathURL paths : existingPaths.keySet()) {
+		// 	PathURL pathURL = new PathURL(annotation.basePath(), annotation.uri());
+		// 	if (!paths.getFullPath().equals(fullPath)){
+		// 		existingPaths.put(pathURL, generatePathFromAnnotation(annotation));
+		// 	} else {
+		// 		existingPaths.get(pathURL).addEndpoint(generatePathFromAnnotation(annotation));
+		// 	}
+		// }
 	}
 }

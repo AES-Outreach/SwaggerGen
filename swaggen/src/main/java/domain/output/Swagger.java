@@ -5,8 +5,11 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import domain.output.path.Endpoint;
+import domain.output.PathURL;
 import enums.RequestMethod;
 
 /**
@@ -28,7 +31,6 @@ public class Swagger {
 	public Swagger(Swagger swagger) {
 		this.info = swagger.getInfo();
 		this.setVersion(swagger.getOpenapi());
-		this.paths = swagger.getPaths();
 	}
 
 	/**
@@ -51,6 +53,9 @@ public class Swagger {
 	 */
 	private Map<String, Map<RequestMethod, Endpoint>> paths;
 
+	@JsonIgnore
+	private Map<PathURL, Map<RequestMethod, Endpoint>> swaggerPaths;
+
 	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
 		return paths;
 	}
@@ -65,6 +70,16 @@ public class Swagger {
 	
 	public String getSwagger() {
 		return swagger;
+	}
+
+	@JsonProperty
+	public Map<PathURL, Map<RequestMethod, Endpoint>> getSwaggerPaths() {
+		return swaggerPaths;
+	}
+
+	@JsonIgnore
+	public void setSwaggerPaths(Map<PathURL, Map<RequestMethod, Endpoint>> swaggerPaths) {
+		this.swaggerPaths = swaggerPaths;
 	}
 
 	/**
