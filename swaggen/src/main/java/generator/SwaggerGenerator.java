@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -12,6 +14,7 @@ import domain.output.Swagger;
 import domain.output.SwaggerEndpoint;
 import domain.output.SwaggerInfo;
 import domain.output.PathURL;
+import domain.output.ServerURL;
 import enums.RequestMethod;
 import domain.output.path.Endpoint;
 import utils.io.FileMapper;
@@ -47,8 +50,11 @@ public class SwaggerGenerator {
 		info.setTitle("Title");
 		info.setDescription("Description");
 		info.setVersion("0.0");
+
+		ServerURL serverURL = new ServerURL("api.example.com", "This is its description");
 		
 		swagger.setInfo(info);
+		swagger.setServers(new ArrayList<ServerURL>(Arrays.asList(serverURL)));
 		swagger.setSwaggerPaths(SwaggerEndpoint.convertToValid(paths));
 
 		createYamlFiles(swagger);
