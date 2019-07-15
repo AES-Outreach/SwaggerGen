@@ -3,9 +3,15 @@ package generator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+=======
+import java.util.Properties;
+
+import org.apache.maven.plugin.logging.Log;
+>>>>>>> 22c2a914603f876a1ecde0b8ebed628ef35451ea
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -37,21 +43,19 @@ public class SwaggerGenerator {
 	 * @throws JsonMappingException JsonMappingException
 	 * @throws IOException IOException
 	 **/
-	public static void generateSwaggerFile(Class<?>[] klasses) throws JsonParseException, JsonMappingException, IOException {
+	public static void generateSwaggerFile(Class<?>[] klasses, Properties config) throws JsonParseException, JsonMappingException, IOException {
 		
 		// Create Paths
 		Map<PathURL, SwaggerEndpoint> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 
 		Swagger swagger = new Swagger();
-		swagger.setVersion("3.0.0");
+		swagger.setVersion(config.getProperty("version"));
 		
 		SwaggerInfo info = new SwaggerInfo();
-		// These will be read from a config file.
-		info.setTitle("Title");
-		info.setDescription("Description");
-		info.setVersion("0.0");
-
 		ServerURL serverURL = new ServerURL("http://api.example.com", "This is its description");
+		info.setTitle("Documentation file");
+		info.setDescription("Trying to see where this description goes");
+		info.setVersion("0.0.1");
 		
 		swagger.setInfo(info);
 		swagger.setServers(new ArrayList<ServerURL>(Arrays.asList(serverURL)));

@@ -97,10 +97,10 @@ public class Swagger {
 	 * @param version the version number.
 	 */
 	public void setVersion(String version) {
-		if("2.0".equals(version)) {
+		 if("2.0".equals(version)) {
 			openapi = null;
 			swagger = version;
-		} else {
+		 } else {
 			swagger = null;
 			openapi = version;
 		}
