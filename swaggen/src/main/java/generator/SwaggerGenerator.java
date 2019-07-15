@@ -3,15 +3,10 @@ package generator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Arrays;
-=======
 import java.util.Properties;
-
-import org.apache.maven.plugin.logging.Log;
->>>>>>> 22c2a914603f876a1ecde0b8ebed628ef35451ea
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -25,6 +20,8 @@ import enums.RequestMethod;
 import domain.output.path.Endpoint;
 import utils.io.FileMapper;
 
+import org.apache.maven.plugin.logging.Log;
+
 /**
  * Connects the plugin with the SwaggerGen logic
  * 
@@ -32,7 +29,6 @@ import utils.io.FileMapper;
  */
 
 public class SwaggerGenerator {
-	
 	/**
 	 * Given an array of classes that contain methods annotated with SwaggerGen,
 	 * generate a list of associated paths and POJO
@@ -42,7 +38,7 @@ public class SwaggerGenerator {
 	 * @throws JsonParseException JsonParseException
 	 * @throws JsonMappingException JsonMappingException
 	 * @throws IOException IOException
-	 **/
+	 **/	
 	public static void generateSwaggerFile(Class<?>[] klasses, Properties config) throws JsonParseException, JsonMappingException, IOException {
 		
 		// Create Paths
@@ -52,7 +48,7 @@ public class SwaggerGenerator {
 		swagger.setVersion(config.getProperty("version"));
 		
 		SwaggerInfo info = new SwaggerInfo();
-		ServerURL serverURL = new ServerURL("http://api.example.com", "This is its description");
+		ServerURL serverURL = new ServerURL(config.getProperty("server"), config.getProperty("serverDescription"));
 		info.setTitle("Documentation file");
 		info.setDescription("Trying to see where this description goes");
 		info.setVersion("0.0.1");
@@ -77,8 +73,8 @@ public class SwaggerGenerator {
 			Map<String, Map<RequestMethod, Endpoint>> exactEndpoint = new HashMap<>();
 			exactEndpoint.put(path.getFullPath(), swagger.getSwaggerPaths().get(path));
 			toYaml.setPaths(exactEndpoint);
+			
 			FileMapper.classToYaml(path.getFilename(), toYaml);
 		}
 	}
-	
 }

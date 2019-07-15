@@ -24,6 +24,8 @@ public class TestSwaggerGenerator {
 			throws JsonParseException, JsonMappingException, IOException {
 		Properties prop = new Properties();
 		prop.put("version", "3.0.0");
+		prop.put("server", "http://api.example.com");
+		prop.put("serverDescription", "This is the server description.");
 		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass }, prop);
 	}
 
@@ -39,7 +41,11 @@ public class TestSwaggerGenerator {
 	 */
 	public static void generateSwagger(Class<?>[] klasses) 
 		throws JsonParseException, JsonMappingException, IOException {
-		SwaggerGenerator.generateSwaggerFile(klasses);
+		Properties prop = new Properties();
+		prop.put("version", "3.0.0");
+		prop.put("server", "http://api.example.com");
+		prop.put("serverDescription", "This is the server description.");
+		SwaggerGenerator.generateSwaggerFile(klasses, prop);
 	}
 
 }
