@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import domain.output.Swagger;
 import domain.output.SwaggerEndpoint;
 import domain.output.SwaggerInfo;
-import domain.output.PathURL;
+import domain.output.PathUri;
 import enums.RequestMethod;
 import domain.output.path.Endpoint;
 import utils.io.FileMapper;
@@ -37,7 +37,7 @@ public class SwaggerGenerator {
 	public static void generateSwaggerFile(Class<?>[] klasses) throws JsonParseException, JsonMappingException, IOException {
 		
 		// Create Paths
-		Map<PathURL, SwaggerEndpoint> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
+		Map<PathUri, SwaggerEndpoint> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
 
 		Swagger swagger = new Swagger();
 		swagger.setVersion("3.0.0");
@@ -56,7 +56,7 @@ public class SwaggerGenerator {
 	}
 
 	private static void createYamlFiles(Swagger swagger) throws JsonParseException, JsonMappingException, IOException {
-		for(PathURL path: swagger.getSwaggerPaths().keySet()) {
+		for(PathUri path: swagger.getSwaggerPaths().keySet()) {
 			File file = new File(path.getFullPath().substring(1));
 			file.mkdirs();
 			// yaml file's name will be the base path and the class name

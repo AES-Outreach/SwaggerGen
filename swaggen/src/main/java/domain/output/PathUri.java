@@ -3,14 +3,14 @@ package domain.output;
 /**
  * The path and base path of the server
  */
-public class PathURL {
+public class PathUri {
   private String uri;
   private String basePath;
   private String filename;
-  public PathURL() {
+  public PathUri() {
 
   }
-  public PathURL(String basePath, String uri) {
+  public PathUri(String basePath, String uri) {
     this.uri = uri;
     this.basePath = basePath;
   }

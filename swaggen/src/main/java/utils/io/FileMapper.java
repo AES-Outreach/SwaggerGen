@@ -89,11 +89,9 @@ public class FileMapper {
 			return;
 		}
 		Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
-		for (String newURL: swagger.getPaths().keySet()) {
-			for (String oldURL: existingSwagger.getPaths().keySet()) {
-				if (existingSwagger.getPaths().containsKey(newURL)) {
-					swagger.getPaths().get(newURL).putAll(existingSwagger.getPaths().get(oldURL));
-				}
+		for (String Uri: existingSwagger.getPaths().keySet()) {
+			if(swagger.getPaths().containsKey(Uri)) {
+				swagger.getPaths().get(Uri).putAll(existingSwagger.getPaths().get(Uri));
 			}
 		}
 	}

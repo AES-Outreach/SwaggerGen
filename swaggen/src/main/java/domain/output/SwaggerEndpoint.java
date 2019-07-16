@@ -6,7 +6,7 @@ import java.util.Map;
 
 import enums.RequestMethod;
 import domain.output.path.Endpoint;
-import domain.output.PathURL;
+import domain.output.PathUri;
 
 /**
  * Class containing a map of the request method and endpoint required
@@ -47,9 +47,9 @@ public class SwaggerEndpoint {
    * @param paths The map with SwaggerEndpoints as values
    * @return Swagger compatible map 
    */
-  public static Map<PathURL, Map<RequestMethod, Endpoint>> convertToValid(Map<PathURL, SwaggerEndpoint> paths) {
-    Map <PathURL, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
-    for (PathURL url: paths.keySet()) {
+  public static Map<PathUri, Map<RequestMethod, Endpoint>> convertToValid(Map<PathUri, SwaggerEndpoint> paths) {
+    Map <PathUri, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
+    for (PathUri url: paths.keySet()) {
       newPaths.put(url, paths.get(url).getEndpointMap());
     }
     return newPaths;
