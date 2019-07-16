@@ -61,6 +61,16 @@ public class SwaggerGenerator {
 		
 	}
 
+	/**
+	 * Sets up the file name and swagger class to be written to
+	 * a yaml file
+	 * 
+	 * @param swagger swagger class with all the paths and request methods
+	 * 
+	 * @throws JsonParseException JsonParseException
+	 * @throws JsonMappingException JsonMappingException
+	 * @throws IOException IOException
+	 **/	
 	private static void createYamlFiles(Swagger swagger) throws JsonParseException, JsonMappingException, IOException {
 		for(PathURL path: swagger.getSwaggerPaths().keySet()) {
 			File file = new File(path.getFullPath());

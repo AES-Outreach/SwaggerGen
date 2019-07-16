@@ -58,7 +58,7 @@ public class MockNoBasePathEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		uri="/base",
+		uri="base",
 		method="DELETE",
 		description="Delete Servlet Description",
 		responses={"200=OK", "400", "404"},
