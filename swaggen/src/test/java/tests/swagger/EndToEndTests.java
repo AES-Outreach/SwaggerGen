@@ -13,6 +13,7 @@ import mock.endpoint.MockShareBasePath;
 import mock.endpoint.MultiplePathsEndpoint;
 import mock.endpoint.MockNoBasePathEndpoint;
 import mock.endpoint.MockPutDeleteEndpoint;
+import mock.endpoint.MockNonSwaggerMethods;
 
 public class EndToEndTests {
 
@@ -159,6 +160,19 @@ public class EndToEndTests {
 		try {
 			TestSwaggerGenerator.generateSwagger(MockPostEndpoint.class);
 			TestSwaggerGenerator.generateSwagger(MockPostEndpoint.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+
+	/**
+	 * Test to generate yaml with non annotated swagger methods
+	 */
+	@Test
+	public void NonSwaggerMethodsTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger(MockNonSwaggerMethods.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);

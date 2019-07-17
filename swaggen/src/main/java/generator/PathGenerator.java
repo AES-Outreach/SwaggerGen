@@ -3,13 +3,13 @@ package generator;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 import annotation.SwaggerGen;
 import domain.output.SwaggerEndpoint;
 import domain.output.PathURL;
 import enums.RequestMethod;
 import factory.EndpointFactory;
-
 /**
  * Generates a list of paths from a list of classes. Main entry point for managing the input.
  * 
@@ -41,7 +41,13 @@ public class PathGenerator {
 	private static Map<PathURL, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
 		Map<PathURL, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
 		Method[] methods = klass.getDeclaredMethods();
+		ArrayList<Method> swaggerMethods = new ArrayList<Method>();
 		for(Method method : methods) {
+			if (method.isAnnotationPresent(SwaggerGen.class)) {
+				swaggerMethods.add(method);
+			}
+		}
+		for(Method method : swaggerMethods){
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
 			checkRequestMethods(annotation, existingPaths);
 		}
