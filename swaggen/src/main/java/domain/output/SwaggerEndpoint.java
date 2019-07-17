@@ -2,7 +2,7 @@ package domain.output;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.concurrent.ConcurrentHashMap;
 
 import enums.RequestMethod;
 import domain.output.path.Endpoint;
@@ -48,7 +48,7 @@ public class SwaggerEndpoint {
    * @return Swagger compatible map 
    */
   public static Map<PathUri, Map<RequestMethod, Endpoint>> convertToValid(Map<PathUri, SwaggerEndpoint> paths) {
-    Map <PathUri, Map<RequestMethod, Endpoint>> newPaths = new HashMap<>();
+    Map <PathUri, Map<RequestMethod, Endpoint>> newPaths = new ConcurrentHashMap<>();
     for (PathUri url: paths.keySet()) {
       newPaths.put(url, paths.get(url).getEndpointMap());
     }

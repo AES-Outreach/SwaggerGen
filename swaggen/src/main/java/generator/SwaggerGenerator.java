@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -50,6 +51,23 @@ public class SwaggerGenerator {
 		
 		swagger.setInfo(info);
 		swagger.setSwaggerPaths(SwaggerEndpoint.convertToValid(paths));
+		// Map<PathUri, Map<RequestMethod, Endpoint>> path = SwaggerEndpoint.convertToValid(paths);
+		// Map<PathUri, Map<RequestMethod, Endpoint>> minifiedPath = new ConcurrentHashMap<>();
+
+		// for (PathUri originalPath: path.keySet()) {
+		// 	if (minifiedPath.isEmpty()) {
+		// 		minifiedPath.put(originalPath, path.get(originalPath));
+		// 	}
+		// 	for (PathUri minifyPath: minifiedPath.keySet()){
+		// 		if (originalPath.getFullPath().equals(minifyPath.getFullPath())) {
+		// 			minifiedPath.get(minifyPath).putAll(path.get(originalPath));
+		// 		} else {
+		// 			minifiedPath.put(originalPath, path.get(originalPath));
+		// 		}
+		// 	}
+		// }
+
+		// swagger.setSwaggerPaths(minifiedPath);
 
 		createYamlFiles(swagger);
 		
