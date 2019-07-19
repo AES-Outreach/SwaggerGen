@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import mock.endpoint.MockMinimalGetEndpoint;
 import mock.endpoint.MockAllMethodsEndpoint;
+import mock.endpoint.MockClassAnnotationEndpoint;
 import mock.endpoint.MockGetPostEndpoint;
 import mock.endpoint.MockMinimalPostEndpoint;
 import mock.endpoint.MockPostEndpoint;
@@ -158,6 +159,18 @@ public class EndToEndTests {
 	public void MultiplePathsEndpointTest() {
 		try {
 			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MultiplePathsEndpoint.class, MockPostEndpoint.class});
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+	/**
+	 * Test for using class level annotation 
+	 */
+	@Test
+	public void ClassAnnotationsTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MockClassAnnotationEndpoint.class});
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);

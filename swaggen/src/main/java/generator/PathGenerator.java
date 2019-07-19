@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import annotation.SwaggerGen;
+import annotation.SwaggerGenClass;
 import domain.output.SwaggerEndpoint;
 import domain.output.PathUri;
 import enums.RequestMethod;
@@ -43,7 +44,7 @@ public class PathGenerator {
 		Method[] methods = klass.getDeclaredMethods();
 		for(Method method : methods) {
 			SwaggerGen annotation = method.getAnnotation(SwaggerGen.class);
-			checkRequestMethods(annotation, existingPaths);
+			checkRequestMethods(annotation, existingPaths, klass);
 		}
 		return existingPaths;
 	}
@@ -54,7 +55,7 @@ public class PathGenerator {
 	 * @param annotation the annotation
 	 * @return the path
 	 */
-	private static SwaggerEndpoint generatePathFromAnnotation(SwaggerGen annotation) {
+	private static SwaggerEndpoint generatePathFromAnnotation(SwaggerGen annotation, Class<?> klass) {
 		SwaggerEndpoint endpoint = new SwaggerEndpoint();
 		endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation));
 		return endpoint;
@@ -88,22 +89,26 @@ public class PathGenerator {
 	 * @param annotation SwaggerGen annotation
 	 * @param existingPaths Map of existing Swagger Endpoints
 	 */
-	private static void checkRequestMethods(SwaggerGen annotation, Map<PathUri, SwaggerEndpoint> existingPaths) {
+	private static void checkRequestMethods(SwaggerGen annotation, Map<PathUri, SwaggerEndpoint> existingPaths, Class<?> klass) {
 		if (annotation == null) {
 			throw new IllegalArgumentException("annotation cannot be null");
 		}
-		
-		PathUri pathUri = new PathUri(annotation.basePath(), annotation.uri());
+		String basePath = annotation.basePath();
+		SwaggerGenClass classAnnotation = klass.getAnnotation(SwaggerGenClass.class);
+		if (annotation.basePath().isBlank() && classAnnotation != null) {
+			basePath = classAnnotation.basePath();
+		}
+		PathUri pathUri = new PathUri(basePath, annotation.uri());
 
 		if (existingPaths.isEmpty()) {
-			existingPaths.put(pathUri, generatePathFromAnnotation(annotation));
+			existingPaths.put(pathUri, generatePathFromAnnotation(annotation, klass));
 		}
 		for (PathUri existingPath: existingPaths.keySet()) {
 			if ((existingPath.getBasePath().equals(pathUri.getBasePath())) && 
 			(existingPath.getURI().equals(pathUri.getURI()))) {
-				existingPaths.get(existingPath).addEndpoint(generatePathFromAnnotation(annotation));
+				existingPaths.get(existingPath).addEndpoint(generatePathFromAnnotation(annotation, klass));
 			} else {
-				existingPaths.put(pathUri, generatePathFromAnnotation(annotation));
+				existingPaths.put(pathUri, generatePathFromAnnotation(annotation, klass));
 			}
 		}
 	}
