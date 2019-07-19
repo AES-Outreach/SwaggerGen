@@ -93,11 +93,18 @@ public class PathGenerator {
 			throw new IllegalArgumentException("annotation cannot be null");
 		}
 		
-		PathUri PathUri = new PathUri(annotation.basePath(), annotation.uri());
-		if (!existingPaths.containsKey(PathUri)){
-			existingPaths.put(PathUri, generatePathFromAnnotation(annotation));
-		} else {
-			existingPaths.get(PathUri).addEndpoint(generatePathFromAnnotation(annotation));
+		PathUri pathUri = new PathUri(annotation.basePath(), annotation.uri());
+
+		if (existingPaths.isEmpty()) {
+			existingPaths.put(pathUri, generatePathFromAnnotation(annotation));
+		}
+		for (PathUri existingPath: existingPaths.keySet()) {
+			if ((existingPath.getBasePath().equals(pathUri.getBasePath())) && 
+			(existingPath.getURI().equals(pathUri.getURI()))) {
+				existingPaths.get(existingPath).addEndpoint(generatePathFromAnnotation(annotation));
+			} else {
+				existingPaths.put(pathUri, generatePathFromAnnotation(annotation));
+			}
 		}
 	}
 }

@@ -99,19 +99,6 @@ public class EndToEndTests {
 			assert(false);
 		}
 	}
-
-	/**
-	 * Test to generate different paths from the same class
-	 */
-	@Test
-	public void MultiplePathsEndpointTest() {
-		try {
-			TestSwaggerGenerator.generateSwagger(MultiplePathsEndpoint.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-			assert(false);
-		}
-	}
 	/**
 	 * Test to generate endpoints that share base paths
 	 */
@@ -124,7 +111,6 @@ public class EndToEndTests {
 			assert(false);
 		}
 	}
-
 	/**
 	 * Test to generate endpoint that have no base path
 	 */
@@ -160,6 +146,18 @@ public class EndToEndTests {
 		try {
 			TestSwaggerGenerator.generateSwagger(MockPostEndpoint.class);
 			TestSwaggerGenerator.generateSwagger(MockPostEndpoint.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+	/**
+	 * Test to generate different paths from the same class
+	 */
+	@Test
+	public void MultiplePathsEndpointTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MultiplePathsEndpoint.class, MockPostEndpoint.class});
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);
