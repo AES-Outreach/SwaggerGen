@@ -152,7 +152,8 @@ public class EndToEndTests {
 	}
 
 	/**
-	 * Test to generate an endpoint that is already generated
+	 * Test to generate an endpoint that is already generated to see if there is 
+	 * duplication
 	 */
 	@Test
 	public void AlreadyGeneratedEndpointTest() {

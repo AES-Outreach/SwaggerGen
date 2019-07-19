@@ -51,31 +51,20 @@ public class SwaggerGenerator {
 		
 		swagger.setInfo(info);
 		swagger.setSwaggerPaths(SwaggerEndpoint.convertToValid(paths));
-		// Map<PathUri, Map<RequestMethod, Endpoint>> path = SwaggerEndpoint.convertToValid(paths);
-		// Map<PathUri, Map<RequestMethod, Endpoint>> minifiedPath = new ConcurrentHashMap<>();
-
-		// for (PathUri originalPath: path.keySet()) {
-		// 	if (minifiedPath.isEmpty()) {
-		// 		minifiedPath.put(originalPath, path.get(originalPath));
-		// 	}
-		// 	for (PathUri minifyPath: minifiedPath.keySet()){
-		// 		if (originalPath.getFullPath().equals(minifyPath.getFullPath())) {
-		// 			minifiedPath.get(minifyPath).putAll(path.get(originalPath));
-		// 		} else {
-		// 			minifiedPath.put(originalPath, path.get(originalPath));
-		// 		}
-		// 	}
-		// }
-
-		// swagger.setSwaggerPaths(minifiedPath);
 
 		createYamlFiles(swagger);
-		
 	}
 
+	/**
+	 * Sets up a swagger object to be written to a yaml file
+	 * @param swagger Swagger object with all the paths
+	 * @throws JsonParseException JsonParseException
+	 * @throws JsonMappingException JsonMappingException
+	 * @throws IOException IOException
+	 */
 	private static void createYamlFiles(Swagger swagger) throws JsonParseException, JsonMappingException, IOException {
 		for(PathUri path: swagger.getSwaggerPaths().keySet()) {
-			File file = new File(path.getFullPath().substring(1));
+			File file = new File("swagger/" + path.getFullPath().substring(1));
 			file.mkdirs();
 			// yaml file's name will be the base path and the class name
 			String name = "/" + path.getFullPath().substring(1).replaceAll("/", "_") + "-test.yaml";
@@ -88,5 +77,4 @@ public class SwaggerGenerator {
 			FileMapper.classToYaml(path.getFilename(), toYaml);
 		}
 	}
-	
 }

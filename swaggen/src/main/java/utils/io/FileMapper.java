@@ -67,32 +67,8 @@ public class FileMapper {
 	public static void classToYaml(String path, Swagger newSwagger)
 		throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-		File file = new File(path.substring(1));
-
-		checkExistingEndpoints(newSwagger, file, objectMapper);
+		File file = new File("swagger/" + path);
+		
 		objectMapper.writeValue(file, newSwagger);
-	}
-
-	/**
-	 * Checks for existing endpoints in yaml files and if matched, add the existing
-	 * request methods to the new Swagger file.
-	 * @param swagger the swagger object containing all the endpoints
-	 * @param file file object, containing where it is supposed to be placed
-	 * @param objectMapper the ObjectMapper
-	 * @throws JsonGenerationException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	private static void checkExistingEndpoints(Swagger swagger, File file, ObjectMapper objectMapper) 
-		throws JsonGenerationException, JsonMappingException, IOException {
-		if(!file.exists()) {
-			return;
-		}
-		Swagger existingSwagger = objectMapper.readValue(file, Swagger.class);
-		for (String Uri: existingSwagger.getPaths().keySet()) {
-			if(swagger.getPaths().containsKey(Uri)) {
-				swagger.getPaths().get(Uri).putAll(existingSwagger.getPaths().get(Uri));
-			}
-		}
 	}
 }

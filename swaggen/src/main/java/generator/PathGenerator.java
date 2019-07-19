@@ -27,7 +27,7 @@ public class PathGenerator {
 		Map<PathUri, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
 		for(Class<?> klass : klasses) {
 			Map<PathUri, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
-			checkClassEndpoints(existingPaths, classPaths);
+			existingPaths = checkClassEndpoints(existingPaths, classPaths);
 		}
 		return existingPaths;
 	}
@@ -67,19 +67,18 @@ public class PathGenerator {
 	 * @param existingPaths Map of existing Swagger Endpoints
 	 * @param classPaths Map of new Swagger Endpoints in the class
 	 */
-	private static void checkClassEndpoints(Map<PathUri, SwaggerEndpoint> existingPaths, Map<PathUri, SwaggerEndpoint> classPaths) {
-		if (existingPaths.isEmpty()) {
-			existingPaths.putAll(classPaths);
-			return;
-		}
-
-		for (PathUri pathKey : classPaths.keySet()) {
-			if(existingPaths.containsKey(pathKey)) {
-				existingPaths.get(pathKey).addEndpoint(classPaths.get(pathKey));
-			} else {
-				existingPaths.put(pathKey, classPaths.get(pathKey));
+	private static Map<PathUri, SwaggerEndpoint> checkClassEndpoints(Map<PathUri, SwaggerEndpoint> existingPaths, Map<PathUri, SwaggerEndpoint> classPaths) {
+		for (PathUri existingPath: existingPaths.keySet()) {
+			for (PathUri pathKey : classPaths.keySet()) {
+				if ((existingPath.getBasePath().equals(pathKey.getBasePath())) && 
+					(existingPath.getURI().equals(pathKey.getURI()))) {
+					existingPaths.get(existingPath).addEndpoint(classPaths.get(pathKey));
+					classPaths.remove(pathKey);
+				}
 			}
 		}
+		existingPaths.putAll(classPaths);
+		return existingPaths;
 	}
 
 	/**
