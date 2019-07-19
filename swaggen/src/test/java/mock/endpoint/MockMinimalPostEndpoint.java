@@ -5,8 +5,6 @@ import mock.service.MockSlingServerletResponse;
 
 /**
  * A Fake endpoint for testing.
- * 
- * @author Bill Zhang
  */
 public class MockMinimalPostEndpoint {
   @SwaggerGen(

@@ -6,16 +6,28 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.ElementType;
 
 /**
- * SwaggerGen annotation description.
- * 
- * @author William Gardiner (7267012)
+ * SwaggerGen class level annotation description.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SwaggerGenClass {
   /**
    * The base path
+   * 
    * @return the base path
    */
   String basePath() default "";
+  	/**
+	 * The title of the endpoint
+	 * 
+	 * @return the title of the endpoint
+	 */
+	String title() default "";
+	
+	/**
+	 * The description of the endpoint
+	 * 
+	 * @return the description of the endpoint
+	 */
+	String description() default "";
 }
