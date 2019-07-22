@@ -128,9 +128,15 @@ public class PathGenerator {
 		String[] servers = (klassAnnotation != null) ? klassAnnotation.servers() : new String[0];
 		ArrayList<ServerURL> serverURL = new ArrayList<ServerURL>(); 
 		for (String server: servers) {
-			String[] urlAndDesc = server.split("=");
-			ServerURL newServerUrl = new ServerURL(urlAndDesc[0], urlAndDesc[1]);
-			serverURL.add(newServerUrl);
+			try {
+				String[] urlAndDesc = server.split("=", 2);
+				urlAndDesc[0] = urlAndDesc[0].replaceAll("\\s+", "");
+				urlAndDesc[1] = urlAndDesc[1].trim();
+				ServerURL newServerUrl = new ServerURL(urlAndDesc[0], urlAndDesc[1]); 
+				serverURL.add(newServerUrl);
+			} catch (ArrayIndexOutOfBoundsException ex) { 
+				throw new ArrayIndexOutOfBoundsException("Declared server incorrectly, missing \"=\" sign with method");
+			}
 		}
 		return new PathInfo(basePath, annotation.uri(), serverURL);
 	}

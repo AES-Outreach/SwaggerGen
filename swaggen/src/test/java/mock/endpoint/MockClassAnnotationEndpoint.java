@@ -2,7 +2,7 @@ package mock.endpoint;
 import annotation.SwaggerGenClass;
 import annotation.SwaggerGen;
 /**
- * A Fake endpoint for testing.
+ * A Fake endpoint for testing class level annotations.
  * 
  */
 @SwaggerGenClass(
@@ -10,7 +10,8 @@ import annotation.SwaggerGen;
   title = "Class Test Title",
 	description = "Class Test Description",
 	servers = {
-		"http://classapi.example.com=This is its description"
+		"http://classapi.example.com = This is its description",
+		"https://classapi2.example.com=This is the second description",
 	}
 )
 public class MockClassAnnotationEndpoint {
@@ -38,7 +39,7 @@ public class MockClassAnnotationEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/class",
-    basePath="/base/endpoint",
+    basePath="base/endpoint",
 		method="POST",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/all/orderPost.json",
