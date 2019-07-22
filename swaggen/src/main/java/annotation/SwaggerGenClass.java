@@ -36,5 +36,5 @@ public @interface SwaggerGenClass {
    * 
    * @return the server url
    */
-  String serverUrl() default "";
+  String[] servers() default "";
 }

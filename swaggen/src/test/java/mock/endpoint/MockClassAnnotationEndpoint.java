@@ -6,9 +6,12 @@ import annotation.SwaggerGen;
  * 
  */
 @SwaggerGenClass(
-  basePath = "/base",
+  basePath = "base",
   title = "Class Test Title",
-  description = "Class Test Description"
+	description = "Class Test Description",
+	servers = {
+		"http://classapi.example.com=This is its description"
+	}
 )
 public class MockClassAnnotationEndpoint {
   /**

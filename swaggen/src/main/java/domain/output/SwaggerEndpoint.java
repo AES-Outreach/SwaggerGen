@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import enums.RequestMethod;
 import domain.output.path.Endpoint;
-import domain.output.PathUri;
+import domain.output.PathInfo;
 
 /**
  * Class containing a map of the request method and endpoint required
@@ -47,9 +47,9 @@ public class SwaggerEndpoint {
    * @param paths The map with SwaggerEndpoints as values
    * @return Swagger compatible map 
    */
-  public static Map<PathUri, Map<RequestMethod, Endpoint>> convertToValid(Map<PathUri, SwaggerEndpoint> paths) {
-    Map <PathUri, Map<RequestMethod, Endpoint>> newPaths = new ConcurrentHashMap<>();
-    for (PathUri url: paths.keySet()) {
+  public static Map<PathInfo, Map<RequestMethod, Endpoint>> convertToValid(Map<PathInfo, SwaggerEndpoint> paths) {
+    Map <PathInfo, Map<RequestMethod, Endpoint>> newPaths = new ConcurrentHashMap<>();
+    for (PathInfo url: paths.keySet()) {
       newPaths.put(url, paths.get(url).getEndpointMap());
     }
     return newPaths;

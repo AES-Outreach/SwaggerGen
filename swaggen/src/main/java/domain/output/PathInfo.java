@@ -1,18 +1,25 @@
 package domain.output;
+import java.util.List;
+import java.util.ArrayList;
+
+import domain.output.ServerURL;
 
 /**
  * The path and base path of the server
  */
-public class PathUri {
+public class PathInfo {
   private String uri;
   private String basePath;
   private String filename;
-  public PathUri() {
+  private ArrayList<ServerURL> server;
+  public PathInfo() {
 
   }
-  public PathUri(String basePath, String uri) {
+
+  public PathInfo(String basePath, String uri, ArrayList<ServerURL> server) {
     this.uri = uri;
     this.basePath = basePath;
+    this.server = server;
   }
 
   public String getURI() {
@@ -25,6 +32,10 @@ public class PathUri {
 
   public String getFilename() {
     return this.filename;
+  }
+
+  public ArrayList<ServerURL> getServer() {
+    return this.server;
   }
 
   public String getFullPath() {
@@ -41,5 +52,9 @@ public class PathUri {
 
   public void setFilename(String filename) {
     this.filename = filename;
+  }
+
+  public void setServer(ArrayList<ServerURL> server) {
+    this.server = server;
   }
 }

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import domain.output.path.Endpoint;
-import domain.output.PathUri;
+import domain.output.PathInfo;
 import enums.RequestMethod;
 
 /**
@@ -63,7 +63,7 @@ public class Swagger {
 	private Map<String, Map<RequestMethod, Endpoint>> paths;
 
 	@JsonIgnore
-	private Map<PathUri, Map<RequestMethod, Endpoint>> swaggerPaths;
+	private Map<PathInfo, Map<RequestMethod, Endpoint>> swaggerPaths;
 
 	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
 		return paths;
@@ -82,12 +82,12 @@ public class Swagger {
 	}
 
 	@JsonProperty
-	public Map<PathUri, Map<RequestMethod, Endpoint>> getSwaggerPaths() {
+	public Map<PathInfo, Map<RequestMethod, Endpoint>> getSwaggerPaths() {
 		return swaggerPaths;
 	}
 
 	@JsonIgnore
-	public void setSwaggerPaths(Map<PathUri, Map<RequestMethod, Endpoint>> swaggerPaths) {
+	public void setSwaggerPaths(Map<PathInfo, Map<RequestMethod, Endpoint>> swaggerPaths) {
 		this.swaggerPaths = swaggerPaths;
 	}
 
