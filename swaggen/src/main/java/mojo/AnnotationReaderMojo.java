@@ -1,12 +1,16 @@
 package mojo;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
@@ -35,6 +39,9 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 	@Parameter(defaultValue = "${project}", required = true, readonly = true)
 	private MavenProject project;
+	
+	@Parameter(readonly = true)
+	private String propertiesPath;
 
 	/**
 	 * Function automatically called during the install phase of a project using
@@ -48,12 +55,21 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 		try {
 
-			getLog().info("-- OBTAINING ANNOTATIONS --");
+			getLog().info("-- -- -- OBTAINING ANNOTATIONS -- -- --");
 			Class<?>[] klasses = getClassArray();
-			getLog().info("-- PROCESSING ANNOTATIONS --");
+			getLog().info("-- -- -- PROCESSING ANNOTATIONS -- -- --");
 			
-			generator.SwaggerGenerator.generateSwaggerFile(klasses);
 
+			try (InputStream input = new FileInputStream(propertiesPath)) {
+				getLog().info("Loaded properties file.");
+	            Properties config = new Properties();
+	            config.load(input);
+	            getLog().info(config.getProperty("version"));
+				generator.SwaggerGenerator.generateSwaggerFile(klasses, config);
+	        } catch (IOException ex) {
+	        	getLog().warn("No valid properties file provided. Please add a <propertiesPath> tag to the plugin's build configuration tag.");
+				throw new MojoExecutionException("File not found.");
+	        }
 		} catch (Exception e) {
 			// Can add other catches here for more complete error handling
 			getLog().error(e.toString());
@@ -62,7 +78,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
 
 		getLog().info("-- DONE --");
 	}
-
+	
 	/**
 	 * Uses reflections to obtain the classes that have the SwaggerGen annotation in
 	 * the importing Maven project.

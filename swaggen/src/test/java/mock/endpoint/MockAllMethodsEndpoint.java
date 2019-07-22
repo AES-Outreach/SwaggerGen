@@ -14,7 +14,7 @@ public class MockAllMethodsEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/endpoint",
-		basePath="/base/all",
+		basePath="base/all",
 		method="PUT",
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -33,7 +33,7 @@ public class MockAllMethodsEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/endpoint",
-		basePath="/base/all",
+		basePath="base/all",
 		method="POST",
 		description="Post Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -52,7 +52,7 @@ public class MockAllMethodsEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/endpoint",
-		basePath="/base/all",
+		basePath="base/all",
 		method="GET",
 		description="Get Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
@@ -73,7 +73,7 @@ public class MockAllMethodsEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/endpoint",
-		basePath="/base/all",
+		basePath="base/all",
 		method="DELETE",
 		description="Delete Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},

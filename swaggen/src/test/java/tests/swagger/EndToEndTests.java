@@ -14,6 +14,7 @@ import mock.endpoint.MockShareBasePath;
 import mock.endpoint.MultiplePathsEndpoint;
 import mock.endpoint.MockNoBasePathEndpoint;
 import mock.endpoint.MockPutDeleteEndpoint;
+import mock.endpoint.MockNonSwaggerMethods;
 
 public class EndToEndTests {
 
@@ -171,6 +172,19 @@ public class EndToEndTests {
 	public void ClassAnnotationsTest() {
 		try {
 			TestSwaggerGenerator.generateSwagger(new Class<?>[]{MockClassAnnotationEndpoint.class});
+			} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+
+	/**
+	 * Test to generate yaml with a class that has both annotated and non annotated endpoints
+	 */
+	@Test
+	public void NonSwaggerMethodsTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger(MockNonSwaggerMethods.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);

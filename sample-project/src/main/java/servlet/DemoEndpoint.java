@@ -15,7 +15,7 @@ public class DemoEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/post",
-		basePath="/localhost/test",
+		basePath="localhost/test",
 		method="POST",
 		title="Meeting",
 		description="Post Servlet Description",
@@ -31,7 +31,7 @@ public class DemoEndpoint {
 	
 	@SwaggerGen(
 			uri= "/put",
-			basePath="/localhost/test",
+			basePath="localhost/test",
 			method="PUT",
 			title="Meeting",
 			description="This is a sample PUT endpoint description to be printed in a Swagger format HTML documentation file.",
@@ -52,7 +52,7 @@ public class DemoEndpoint {
 	 */
 	@SwaggerGen(
 		uri="/get",
-		basePath="/localhost/test",
+		basePath="localhost/test",
 		method="GET",
 		title="Meeting",
 		description="This is a sample GET endpoint description to be printed in a Swagger format HTML documentation file.",

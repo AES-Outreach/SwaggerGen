@@ -4,6 +4,7 @@ Dir.glob("../sample-project/**/*.yaml") do |filename|
   system("redoc-cli bundle #{filename}")
   filename = filename.sub(".yaml",".html")
   filename = filename.split("/")[-1]
+  puts filename
   File.rename("redoc-static.html", filename)
 end
 
@@ -14,5 +15,6 @@ Dir.glob("../swaggen/**/*.yaml") do |filename|
   system("redoc-cli bundle #{filename}")
   filename = filename.sub(".yaml",".html")
   filename = filename.split("/")[-1]
+  puts filename
   File.rename("redoc-static.html", filename)
 end

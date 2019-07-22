@@ -9,7 +9,7 @@ import mock.service.MockSlingServerletResponse;
 public class MockMinimalPostEndpoint {
   @SwaggerGen(
 		uri="/minified-endpoint",
-		basePath="/base",
+		basePath="base",
 		method="POST"
 	)
 	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {

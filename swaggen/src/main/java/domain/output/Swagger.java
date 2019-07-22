@@ -2,6 +2,8 @@ package domain.output;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -22,6 +24,7 @@ public class Swagger {
 
 	public Swagger() {
 		this.paths = new HashMap<>();
+		this.servers = new ArrayList<>();
 	}
 
 	/**
@@ -31,6 +34,7 @@ public class Swagger {
 	public Swagger(Swagger swagger) {
 		this.info = swagger.getInfo();
 		this.setVersion(swagger.getOpenapi());
+		this.servers = swagger.getServers();
 	}
 
 	/**
@@ -47,6 +51,11 @@ public class Swagger {
 	 * The API Suite Info
 	 */
 	private SwaggerInfo info;
+
+	/**
+	 * Server info
+	 */
+	private ArrayList<ServerURL> servers;
 
 	/**
 	 * Top level map, mapping all endpoints by their request method and URL
@@ -88,10 +97,10 @@ public class Swagger {
 	 * @param version the version number.
 	 */
 	public void setVersion(String version) {
-		if("2.0".equals(version)) {
+		 if("2.0".equals(version)) {
 			openapi = null;
 			swagger = version;
-		} else {
+		 } else {
 			swagger = null;
 			openapi = version;
 		}
@@ -103,5 +112,13 @@ public class Swagger {
 
 	public void setInfo(SwaggerInfo info) {
 		this.info = info;
+	}
+
+	public ArrayList<ServerURL> getServers() {
+		return this.servers;
+	}
+
+	public void setServers(ArrayList<ServerURL> server) {
+		this.servers = server;
 	}
 }

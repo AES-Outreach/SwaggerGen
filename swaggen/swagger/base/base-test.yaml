@@ -1,0 +1,52 @@
+---
+openapi: "3.0.0"
+info:
+  title: "Title"
+  description: "Description"
+  version: "0.0"
+paths:
+  /base:
+    delete:
+      summary: ""
+      description: "Delete Servlet Description"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "No description"
+        404:
+          description: "No description"
+    put:
+      summary: ""
+      description: "Put Servlet Description"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "No description"
+        404:
+          description: "No description"
+    get:
+      summary: ""
+      description: "Get Servlet Description"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "No description"
+        404:
+          description: "No description"
+    post:
+      summary: ""
+      description: "Post Servlet Description"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "No description"
+        404:
+          description: "No description"

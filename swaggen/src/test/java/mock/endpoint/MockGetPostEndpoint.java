@@ -10,7 +10,7 @@ public class MockGetPostEndpoint {
 
 	@SwaggerGen(
 		uri="/combined",
-		basePath="/base/all",
+		basePath="base/all",
 		method="POST",
 		title="Post Serverlet Title",
 		description="Post Serverlet Description",
@@ -32,7 +32,7 @@ public class MockGetPostEndpoint {
   
   @SwaggerGen(
 		uri="/combined",
-		basePath="/base/all",
+		basePath="base/all",
 		method="GET",
 		title="Get Serverlet Title",
 		description="Get Serverlet Description"
