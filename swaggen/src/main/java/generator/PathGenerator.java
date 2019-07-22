@@ -58,11 +58,8 @@ public class PathGenerator {
 	 */
 	private static SwaggerEndpoint generatePathFromAnnotation(SwaggerGen annotation, SwaggerGenClass klassAnnotation) {
 		SwaggerEndpoint endpoint = new SwaggerEndpoint();
-		if (klassAnnotation == null) {
-			endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation));
-		} else {
-			endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation, klassAnnotation));
-		}
+		endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()), EndpointFactory.createEndpoint(annotation, klassAnnotation));
+		
 		return endpoint;
 	}
 
@@ -99,10 +96,7 @@ public class PathGenerator {
 			throw new IllegalArgumentException("annotation cannot be null");
 		}
 
-		String basePath = annotation.basePath();
-		if (annotation.basePath().isBlank() && klassAnnotation != null) {
-			basePath = klassAnnotation.basePath();
-		}
+		String basePath = (annotation.basePath().isBlank() && klassAnnotation != null) ? klassAnnotation.basePath() : annotation.basePath();
 		PathUri pathUri = new PathUri(basePath, annotation.uri());
 
 		if (existingPaths.isEmpty()) {

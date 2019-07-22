@@ -29,5 +29,12 @@ public @interface SwaggerGenClass {
 	 * 
 	 * @return the description of the endpoint
 	 */
-	String description() default "";
+  String description() default "";
+  
+  /**
+   * The server url of the endpoints
+   * 
+   * @return the server url
+   */
+  String serverUrl() default "";
 }
