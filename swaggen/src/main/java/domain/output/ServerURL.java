@@ -1,5 +1,8 @@
 package domain.output;
 
+import domain.output.ServerVariable;
+import java.util.HashMap;
+
 /**
  * The server part of Swagger
  */
@@ -14,13 +17,23 @@ public class ServerURL {
    */
   private String description;
 
+  /**
+   * variables of the server
+   */
+  private HashMap<String, ServerVariable> variables;
+
   public ServerURL() {
 
   }
 
   public ServerURL(String url, String description) {
+    this(url, description, new HashMap<String, ServerVariable>());
+  }
+
+  public ServerURL(String url, String description, HashMap<String, ServerVariable> variables) {
     this.url = url;
     this.description = description;
+    this.variables = variables;
   }
 
   public String getURL() {
@@ -37,5 +50,13 @@ public class ServerURL {
 
   public void setDescription(String description) {
     this.description = description; 
+  }
+
+  public HashMap<String,ServerVariable> getVariables() {
+    return this.variables;
+  }
+
+  public void setVariables(HashMap<String, ServerVariable> variables) {
+    this.variables = variables;
   }
 }

@@ -47,8 +47,8 @@ public class TestSwaggerGenerator {
 	private static Properties getProps() {
 		Properties prop = new Properties();
 		prop.put("version", "3.0.0");
-		prop.put("Title", "Documentation file");
-		prop.put("Description", "This is an OpenAPI file");
+		prop.put("title", "Documentation file");
+		prop.put("description", "This is an OpenAPI file");
 		prop.put("server", "http://api.example.com");
 		prop.put("serverDescription", "This is the server description.");
 		return prop;

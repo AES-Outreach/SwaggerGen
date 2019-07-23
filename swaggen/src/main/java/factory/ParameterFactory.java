@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import annotation.SwaggerGen;
+import annotation.SwaggerGenClass;
 import domain.input.parameter.ParsedParameter;
 import domain.output.path.Parameter;
 import enums.ParamLocation;
@@ -37,6 +38,25 @@ public class ParameterFactory {
 	 */
 	public static List<Parameter> createParameters(SwaggerGen annotation) {
 		List<Parameter> parameters = new ArrayList<>();
+		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));
+		parameters.addAll(getParamList(ParamLocation.QUERY, annotation.queryParams()));
+		parameters.addAll(getParamList(ParamLocation.PATH, getPathVariables(annotation.uri())));
+		return parameters;
+	}
+
+	/**
+	 * Generates a list of parameters from method level and class level
+	 * annotations, that is not null
+	 * 
+	 * @param annotation method level annotation
+	 * @param klassAnnotation class level annotation
+	 * @return the list of parameters
+	 */
+	public static List<Parameter> createParameters(SwaggerGen annotation, SwaggerGenClass klassAnnotation) {
+		List<Parameter> parameters = new ArrayList<>();
+		if (klassAnnotation.headers().length > 0) {
+			parameters.addAll(getParamList(ParamLocation.HEADER, klassAnnotation.headers()));
+		}
 		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));
 		parameters.addAll(getParamList(ParamLocation.QUERY, annotation.queryParams()));
 		parameters.addAll(getParamList(ParamLocation.PATH, getPathVariables(annotation.uri())));

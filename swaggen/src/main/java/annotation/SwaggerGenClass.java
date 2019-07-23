@@ -33,8 +33,24 @@ public @interface SwaggerGenClass {
   
   /**
    * The server url of the endpoints
+   * of the form "{url} = {description}"
    * 
    * @return the server url
    */
   String[] servers() default "";
+
+  /**
+   * The scheme of the server url
+   * Either http or https
+   * 
+   * @return the scheme
+   */
+  String scheme() default "http";
+
+  /**
+	 * List of headers of the form "{type} {name}={description}"
+	 * 
+	 * @return the list of headers
+	 */
+	String[] headers() default {};
 }

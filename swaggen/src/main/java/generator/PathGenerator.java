@@ -4,11 +4,13 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import annotation.SwaggerGen;
 import annotation.SwaggerGenClass;
 import domain.output.SwaggerEndpoint;
 import domain.output.ServerURL;
+import domain.output.ServerVariable;
 import domain.output.PathInfo;
 import enums.RequestMethod;
 import factory.EndpointFactory;
@@ -130,12 +132,15 @@ public class PathGenerator {
 		for (String server: servers) {
 			try {
 				String[] urlAndDesc = server.split("=", 2);
-				urlAndDesc[0] = urlAndDesc[0].replaceAll("\\s+", "");
-				urlAndDesc[1] = urlAndDesc[1].trim();
-				ServerURL newServerUrl = new ServerURL(urlAndDesc[0], urlAndDesc[1]); 
+				String serverUrl = urlAndDesc[0].replaceAll("\\s+", "");
+				String serverDescription = urlAndDesc[1].trim();
+				HashMap<String, ServerVariable> variables = new HashMap<>();
+				ServerVariable serverVariable = new ServerVariable(new String[]{klassAnnotation.scheme()}, klassAnnotation.scheme());
+				variables.put("scheme", serverVariable);
+				ServerURL newServerUrl = new ServerURL(serverUrl, serverDescription, variables); 
 				serverURL.add(newServerUrl);
 			} catch (ArrayIndexOutOfBoundsException ex) { 
-				throw new ArrayIndexOutOfBoundsException("Declared server incorrectly, missing \"=\" sign with method");
+				throw new ArrayIndexOutOfBoundsException("Declared server incorrectly, missing \"=\" sign with class annotation server declaration.");
 			}
 		}
 		return new PathInfo(basePath, annotation.uri(), serverURL);
