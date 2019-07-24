@@ -49,8 +49,23 @@ public @interface SwaggerGenClass {
 
   /**
 	 * List of headers of the form "{type} {name}={description}"
+   * Will append onto the headers from method level annotations
 	 * 
-	 * @return the list of headers
+	 * @return an array of headers
 	 */
-	String[] headers() default {};
+  String[] headers() default {};
+  
+  /**
+   * The port of the server
+   * 
+   * @return the port
+   */
+  String port() default "";
+
+  /**
+   * The environment server
+   * 
+   * @return the server
+   */
+  String environment() default "";
 }

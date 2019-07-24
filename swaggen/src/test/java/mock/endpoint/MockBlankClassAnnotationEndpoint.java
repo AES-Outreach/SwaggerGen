@@ -13,14 +13,10 @@ import annotation.SwaggerGen;
 		"http://classapi.example.com = This is its description",
 		"{scheme}://classapi2.example.com = This uses scheme",
 		"http://localhost:{port} = This uses port",
-		"{scheme}://{environment}.example.com = This uses environment"
-	},
-	scheme = "https",
-	headers = {"Content-Type=application/json"},
-	port = "8080",
-	environment = "api"
+		"http://{environment}.example.com = This uses environment"
+	}
 )
-public class MockClassAnnotationEndpoint {
+public class MockBlankClassAnnotationEndpoint {
   /**
 	 * Fake endpoint for testing purposes
 	 * empty headers
@@ -29,7 +25,7 @@ public class MockClassAnnotationEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		uri="/class",
+		uri="/class/empty",
 		method="PUT",
 		body="schemas/all/orderPut.json",
 		responses={"200=OK", "400", "404", "401", "403"}
@@ -46,7 +42,7 @@ public class MockClassAnnotationEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		uri="/class",
+		uri="/class/empty",
 		method="GET",
 		title="Overwriting class title",
 		description="Overwriting class description",
@@ -57,23 +53,4 @@ public class MockClassAnnotationEndpoint {
 	public void doGet(Object request, Object resp) {
 		// Implementation not important.
   }
-  
-  /**
-	 * Fake endpoint for testing purposes
-	 * Overwriting basepath
-	 * 
-	 * @param request fake request object
-	 * @param resp fake response object
-	 */
-	@SwaggerGen(
-		uri="/class",
-    basePath="base/endpoint",
-		method="POST",
-		headers={"langHeader=en"},
-		body="schemas/all/orderPost.json",
-		responses={"200=OK", "400", "404", "401", "418"}
-	)
-	public void doPost(Object request, Object resp) {
-		// Implementation not important.
-	}
 }

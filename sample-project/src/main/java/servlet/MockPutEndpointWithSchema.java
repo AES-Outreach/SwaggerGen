@@ -19,8 +19,7 @@ public class MockPutEndpointWithSchema {
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/fakePutSchema.json",
-		responses={"200=OK", "400", "404"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404"}
 	)
 	public void doPut(Object request, Object resp) {
 		// Implementation not important.

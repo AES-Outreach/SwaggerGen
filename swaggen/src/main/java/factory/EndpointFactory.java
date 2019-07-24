@@ -22,12 +22,11 @@ public class EndpointFactory {
 		if (klassAnnotation != null) {
 			endpoint.setSummary(getAttribute(annotation.title(), klassAnnotation.title()));
 			endpoint.setDescription(getAttribute(annotation.description(), klassAnnotation.description()));
-			endpoint.setParameters(ParameterFactory.createParameters(annotation, klassAnnotation));
 		} else {
 			endpoint.setSummary(annotation.title());
 			endpoint.setDescription(annotation.description());
-			endpoint.setParameters(ParameterFactory.createParameters(annotation));
 		}
+		endpoint.setParameters(ParameterFactory.createParameters(annotation, klassAnnotation));
 		endpoint.setRequestBody(RequestBodyFactory.createRequestBody(annotation));
 		endpoint.setResponses(ResponseFactory.creaeteResponses(annotation));
 		

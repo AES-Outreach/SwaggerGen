@@ -129,16 +129,18 @@ public class PathGenerator {
 		String basePath = (annotation.basePath().isBlank() && klassAnnotation != null) ? klassAnnotation.basePath() : annotation.basePath();
 		String[] servers = (klassAnnotation != null) ? klassAnnotation.servers() : new String[0];
 		ArrayList<ServerURL> serverURL = new ArrayList<ServerURL>(); 
+
 		for (String server: servers) {
 			try {
 				String[] urlAndDesc = server.split("=", 2);
 				String serverUrl = urlAndDesc[0].replaceAll("\\s+", "");
 				String serverDescription = urlAndDesc[1].trim();
-				HashMap<String, ServerVariable> variables = new HashMap<>();
-				ServerVariable serverVariable = new ServerVariable(new String[]{klassAnnotation.scheme()}, klassAnnotation.scheme());
-				variables.put("scheme", serverVariable);
-				ServerURL newServerUrl = new ServerURL(serverUrl, serverDescription, variables); 
+				
+				HashMap<String, ServerVariable> serverVariables = ServerVariable.addServerVariables(serverUrl, klassAnnotation);
+
+				ServerURL newServerUrl = new ServerURL(serverUrl, serverDescription, serverVariables); 
 				serverURL.add(newServerUrl);
+
 			} catch (ArrayIndexOutOfBoundsException ex) { 
 				throw new ArrayIndexOutOfBoundsException("Declared server incorrectly, missing \"=\" sign with class annotation server declaration.");
 			}

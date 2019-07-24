@@ -20,8 +20,7 @@ public class MockAllMethodsEndpoint {
 		description="Put Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/all/orderPut.json",
-		responses={"200=OK", "400", "404", "401", "403"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404", "401", "403"}
 	)
 	public void doPut(Object request, Object resp) {
 		// Implementation not important.
@@ -40,8 +39,7 @@ public class MockAllMethodsEndpoint {
 		description="Post Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
 		body="schemas/all/orderPost.json",
-		responses={"200=OK", "400", "404", "401", "403"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404", "401", "403"}
 	)
 	public void doPost(Object request, Object resp) {
 		// Implementation not important.
@@ -62,8 +60,7 @@ public class MockAllMethodsEndpoint {
 		queryParams={
 				"i order_id = id of the order being requested"
 				},
-		responses={"200=OK", "400", "404", "401", "403"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404", "401", "403"}
 	)
 	public void doGet(Object request, Object resp) {
 		// Implementation not important.
@@ -84,8 +81,7 @@ public class MockAllMethodsEndpoint {
 		queryParams={
 				"i order_id = id of the order being requested"
 				},
-		responses={"200=OK", "400", "404", "401", "403"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404", "401", "403"}
 	)
 	public void doDelete(Object request, Object resp) {
 		// Implementation not important.

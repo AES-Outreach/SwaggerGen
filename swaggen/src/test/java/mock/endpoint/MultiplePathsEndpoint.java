@@ -10,8 +10,7 @@ public class MultiplePathsEndpoint {
     method="GET",
     description="Get Servlet Description",
 		headers={"Content-Type=application/json", "langHeader=en"},
-		responses={"200=OK", "400", "404"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404"}
   )
   public void doGet(Object request, Object resp) {
 
@@ -23,8 +22,7 @@ public class MultiplePathsEndpoint {
     method="PUT",
     description="Put Servlet Description",
     headers={"Content-Type=application/json", "langHeader=en"},
-		responses={"200=OK", "400", "404"},
-		scheme="HTTP"
+		responses={"200=OK", "400", "404"}
   )
   public void doPut(Object request, Object resp) {
 

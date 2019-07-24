@@ -20,8 +20,6 @@ import enums.RequestMethod;
 import domain.output.path.Endpoint;
 import utils.io.FileMapper;
 
-import org.apache.maven.plugin.logging.Log;
-
 /**
  * Connects the plugin with the SwaggerGen logic
  * 

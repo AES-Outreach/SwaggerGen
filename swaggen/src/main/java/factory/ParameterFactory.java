@@ -29,20 +29,6 @@ public class ParameterFactory {
 	 * Closing symbol for path parameters
 	 */
 	private static final String CLOSE = "}";
-	
-	/**
-	 * Generates a list of parameters from an annotation.
-	 * 
-	 * @param annotation the annotation
-	 * @return the list of parameters
-	 */
-	public static List<Parameter> createParameters(SwaggerGen annotation) {
-		List<Parameter> parameters = new ArrayList<>();
-		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));
-		parameters.addAll(getParamList(ParamLocation.QUERY, annotation.queryParams()));
-		parameters.addAll(getParamList(ParamLocation.PATH, getPathVariables(annotation.uri())));
-		return parameters;
-	}
 
 	/**
 	 * Generates a list of parameters from method level and class level
@@ -54,7 +40,7 @@ public class ParameterFactory {
 	 */
 	public static List<Parameter> createParameters(SwaggerGen annotation, SwaggerGenClass klassAnnotation) {
 		List<Parameter> parameters = new ArrayList<>();
-		if (klassAnnotation.headers().length > 0) {
+		if (klassAnnotation != null) {
 			parameters.addAll(getParamList(ParamLocation.HEADER, klassAnnotation.headers()));
 		}
 		parameters.addAll(getParamList(ParamLocation.HEADER, annotation.headers()));

@@ -5,6 +5,7 @@ import org.junit.Test;
 import mock.endpoint.MockMinimalGetEndpoint;
 import mock.endpoint.MockAllMethodsEndpoint;
 import mock.endpoint.MockClassAnnotationEndpoint;
+import mock.endpoint.MockBlankClassAnnotationEndpoint;
 import mock.endpoint.MockGetPostEndpoint;
 import mock.endpoint.MockMinimalPostEndpoint;
 import mock.endpoint.MockPostEndpoint;
@@ -15,6 +16,7 @@ import mock.endpoint.MultiplePathsEndpoint;
 import mock.endpoint.MockNoBasePathEndpoint;
 import mock.endpoint.MockPutDeleteEndpoint;
 import mock.endpoint.MockNonSwaggerMethods;
+
 
 public class EndToEndTests {
 
@@ -185,6 +187,18 @@ public class EndToEndTests {
 	public void NonSwaggerMethodsTest() {
 		try {
 			TestSwaggerGenerator.generateSwagger(MockNonSwaggerMethods.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assert(false);
+		}
+	}
+	/**
+	 * Test to generate yaml with a class that has templated url with no given variables
+	 */
+	@Test
+	public void EmptyClassVariablesTest() {
+		try {
+			TestSwaggerGenerator.generateSwagger(MockBlankClassAnnotationEndpoint.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assert(false);

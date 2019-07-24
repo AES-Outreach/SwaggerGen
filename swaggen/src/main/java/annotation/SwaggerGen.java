@@ -77,13 +77,6 @@ public @interface SwaggerGen {
 	 * @return name of JSON SCHEMA file describing the response body
 	 */
 	String responseBody() default "";
-	
-	/**
-	 * The scheme: HTTP or HTTPS
-	 * 
-	 * @return the scheme
-	 */
-	String scheme() default "HTTP";
 
 	/**
 	 * The base path

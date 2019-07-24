@@ -23,8 +23,7 @@ public class MockGetPostEndpoint {
 				},
 		body="body.scheme",
 		responses={"200=OK", "400=Bad Request", "404"},
-		responseBody= "response.scheme",
-		scheme="HTTP"
+		responseBody= "response.scheme"
 	)
 	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
 		// Implementation not important.
