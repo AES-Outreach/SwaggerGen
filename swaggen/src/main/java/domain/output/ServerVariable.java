@@ -63,19 +63,31 @@ public class ServerVariable {
 	 * @return the appropriate class variables in a map
 	 */
 	public static HashMap<String, ServerVariable> addServerVariables(String serverUrl, SwaggerGenClass klassAnnotation) {
-		HashMap<String, ServerVariable> variables = new HashMap<>();
+    HashMap<String, ServerVariable> variables = new HashMap<>();
+    serverUrl = serverUrl.toLowerCase();
+    
 		if (serverUrl.contains("{scheme}")) {
-			ServerVariable scheme = new ServerVariable(klassAnnotation.scheme());
-			variables.put("scheme", scheme);
-		}
+      String scheme = klassAnnotation.scheme().toLowerCase();
+      if (!(scheme.equals("http") || scheme.equals("https"))) {
+        throw new IllegalArgumentException("scheme can only be \"http\" or \"https\"");
+      }
+			ServerVariable schemeVariable = new ServerVariable(scheme);
+			variables.put("scheme", schemeVariable);
+    }
+    
 		if (serverUrl.contains("{port}")) {
+      if (!klassAnnotation.port().matches("[0-9]+")) {
+        throw new IllegalArgumentException("port can only contain numbers");
+      }
 			ServerVariable port = new ServerVariable(klassAnnotation.port());
 			variables.put("port", port);
-		}
+    }
+    
 		if (serverUrl.contains("{environment}")) {
 			ServerVariable environment = new ServerVariable(klassAnnotation.environment());
 			variables.put("environment", environment);
-		}
+    }
+    
 		return variables;
 	}
 }
