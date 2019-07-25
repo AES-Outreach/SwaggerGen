@@ -14,76 +14,76 @@ import enums.ParamLocation;
  */
 @JsonInclude(Include.NON_NULL)
 public class Parameter {
-	
-	/**
-	 * The name/key
-	 */
-	private String name;
-	
-	/**
-	 * The description
-	 */
-	private String description;
-	
-	/**
-	 * The location (e.g. Header)
-	 */
-	@JsonProperty("in")
-	private ParamLocation loc;
-	
-	/**
-	 * The Schema (type and format)
-	 */
-	private ParamSchema schema;
-	
-	/**
-	 * Is the variable required
-	 */
-	private boolean required;
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public ParamLocation getLoc() {
-		return loc;
-	}
-	
-	public void setLoc(ParamLocation loc) {
-		this.loc = loc;
-	}
-	
-	public ParamSchema getSchema() {
-		return schema;
-	}
-	
-	public void setSchema(ParamSchema schema) {
-		this.schema = schema;
-	}
-	
-	public boolean isRequired() {
-		return required;
-	}
-	
-	public void setRequired(boolean required) {
-		this.required = required;
-	}
-	
-	@Override
-	public String toString() {
-		return "Parameter [name=" + name + ", description=" + description + ", loc=" + loc + ", schema=" + schema
-				+ ", required=" + required + "]";
-	}
+    
+    /**
+     * The name/key
+     */
+    private String name;
+    
+    /**
+     * The description
+     */
+    private String description;
+    
+    /**
+     * The location (e.g. Header)
+     */
+    @JsonProperty("in")
+    private ParamLocation loc;
+    
+    /**
+     * The Schema (type and format)
+     */
+    private ParamSchema schema;
+    
+    /**
+     * Is the variable required
+     */
+    private boolean required;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public ParamLocation getLoc() {
+        return loc;
+    }
+    
+    public void setLoc(ParamLocation loc) {
+        this.loc = loc;
+    }
+    
+    public ParamSchema getSchema() {
+        return schema;
+    }
+    
+    public void setSchema(ParamSchema schema) {
+        this.schema = schema;
+    }
+    
+    public boolean isRequired() {
+        return required;
+    }
+    
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
+    
+    @Override
+    public String toString() {
+        return "Parameter [name=" + name + ", description=" + description + ", loc=" + loc + ", schema=" + schema
+                + ", required=" + required + "]";
+    }
 }

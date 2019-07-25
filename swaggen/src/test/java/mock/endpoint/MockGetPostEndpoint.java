@@ -16,11 +16,11 @@ public class MockGetPostEndpoint {
 		description="Post Serverlet Description",
 		headers={"Content-Type=application/json"},
 		queryParams={
-				"i param = An Integer Param", 
-				"b param2 = A Boolean Param", 
-				"s64 param3 = A String Param",
-				"param4 = Another String Param"
-				},
+			"i param = An Integer Param", 
+			"b param2 = A Boolean Param", 
+			"s64 param3 = A String Param",
+			"param4 = Another String Param"
+		},
 		body="body.scheme",
 		responses={"200=OK", "400=Bad Request", "404"},
 		responseBody= "response.scheme"

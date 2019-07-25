@@ -6,14 +6,14 @@ package utils.stringparsing.exceptions;
  * @author William Gardiner (7267012)
  */
 public class ParameterParseException extends ParseException {
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param parsedString the failed parameter String
-	 */
-	public ParameterParseException(String parsedString) {
-		super("Failed to parse parameter from String: " + parsedString);
-	}
-	
+
+    /**
+     * Constructor
+     * 
+     * @param parsedString the failed parameter String
+     */
+    public ParameterParseException(String parsedString) {
+        super("Failed to parse parameter from String: " + parsedString);
+    }
+
 }

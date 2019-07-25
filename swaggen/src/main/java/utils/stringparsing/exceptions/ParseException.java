@@ -7,13 +7,13 @@ package utils.stringparsing.exceptions;
  */
 public class ParseException extends Exception {
 
-	/**
-	 * Constructor
-	 * 
-	 * @param msg the message
-	 */
-	public ParseException(String msg) {
-		super(msg);
-	}
-	
+    /**
+     * Constructor
+     * 
+     * @param msg the message
+     */
+    public ParseException(String msg) {
+        super(msg);
+    }
+
 }

@@ -8,43 +8,43 @@ package domain.input.parameter;
  */
 public class ParsedParameter {
 
-	/**
-	 * The type identifier for the parameter
-	 */
-	private String type;
-	
-	/**
-	 * The name of the parameter
-	 */
-	private String name;
-	
-	/**
-	 * The description of the parameter
-	 */
-	private String description;
+    /**
+     * The type identifier for the parameter
+     */
+    private String type;
+    
+    /**
+     * The name of the parameter
+     */
+    private String name;
+    
+    /**
+     * The description of the parameter
+     */
+    private String description;
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
 }

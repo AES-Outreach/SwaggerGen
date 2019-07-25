@@ -10,15 +10,15 @@ import domain.output.path.RequestBody;
  */
 public class ResponseBodyFactory {
 
-	/**
-	 * Generates a response body from the annotation.
-	 * 
-	 * @param annotation the annotation
-	 * @return the response body.
-	 */
-	public static RequestBody createRequestBody(SwaggerGen annotation) {
-		// TODO: Implement
-		return null;
-	}
+    /**
+     * Generates a response body from the annotation.
+     * 
+     * @param annotation the annotation
+     * @return the response body.
+     */
+    public static RequestBody createRequestBody(SwaggerGen annotation) {
+        // TODO: Implement
+        return null;
+    }
 
 }

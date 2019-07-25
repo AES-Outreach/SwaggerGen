@@ -6,22 +6,22 @@ import annotation.SwaggerGen;
  * @author Alexandre Seguin (7663995)
  */
 public class MockPutEndpointWithSchema {
-	/**
-	 * Fake endpoint for testing purposes
-	 * @param request fake request object
-	 * @param resp fake response object
-	 */
-	@SwaggerGen(
-		uri="/all-methods-endpoint",
-		basePath="base",
-		method="PUT",
-				title="Put",
-		description="Put Servlet Description",
-		headers={"Content-Type=application/json", "langHeader=en"},
-		body="schemas/fakePutSchema.json",
-		responses={"200=OK", "400", "404"}
-	)
-	public void doPut(Object request, Object resp) {
-		// Implementation not important.
-	}
+    /**
+     * Fake endpoint for testing purposes
+     * @param request fake request object
+     * @param resp fake response object
+     */
+    @SwaggerGen(
+        uri="/all-methods-endpoint",
+        basePath="base",
+        method="PUT",
+        title="Put",
+        description="Put Servlet Description",
+        headers={"Content-Type=application/json", "langHeader=en"},
+        body="schemas/fakePutSchema.json",
+        responses={"200=OK", "400", "404"}
+    )
+    public void doPut(Object request, Object resp) {
+        // Implementation not important.
+    }
 }

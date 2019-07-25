@@ -6,18 +6,18 @@ import annotation.SwaggerGen;
  * @author Alexandre Seguin (7663995)
  */
 public class MinimalGetEndpointTest {
-	/**
-	 * Fake endpoint for testing purposes
-	 * @param request fake request object
-	 * @param resp fake response object
-	 */
-	@SwaggerGen(
-		uri="/minified-endpoint",
-		basePath="base",
-		title="Minimum",
-		method="GET"
-	)
-	public void doGet(Object request, Object resp) {
-		// Implementation not important.
-	}
+    /**
+     * Fake endpoint for testing purposes
+     * @param request fake request object
+     * @param resp fake response object
+     */
+    @SwaggerGen(
+        uri="/minified-endpoint",
+        basePath="base",
+        title="Minimum",
+        method="GET"
+    )
+    public void doGet(Object request, Object resp) {
+        // Implementation not important.
+    }
 }
