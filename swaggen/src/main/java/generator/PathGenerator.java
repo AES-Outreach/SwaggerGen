@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.apache.commons.lang3.tuple.Pair;
 
 import annotation.SwaggerGen;
 import annotation.SwaggerGenClass;
@@ -12,8 +13,10 @@ import domain.output.SwaggerEndpoint;
 import domain.output.ServerURL;
 import domain.output.ServerVariable;
 import domain.output.PathInfo;
+import utils.stringparsing.ServerParsing;
 import enums.RequestMethod;
 import factory.EndpointFactory;
+
 
 /**
  * Generates a list of paths from a list of classes. Main entry point for
@@ -140,21 +143,13 @@ public class PathGenerator {
         ArrayList<ServerURL> serverURL = new ArrayList<ServerURL>();
 
         for (String server : servers) {
-            try {
-                String[] urlAndDesc = server.split("=", 2);
-                String serverUrl = urlAndDesc[0].replaceAll("\\s+", "");
-                String serverDescription = urlAndDesc[1].trim();
+            Pair<String, String> serverInfo = ServerParsing.parsePropertyWithDescription(server, "=");
 
-                HashMap<String, ServerVariable> serverVariables = ServerVariable.addServerVariables(serverUrl,
-                        klassAnnotation);
+            HashMap<String, ServerVariable> serverVariables = ServerVariable.addServerVariables(serverInfo.getKey(),
+                    klassAnnotation);
 
-                ServerURL newServerUrl = new ServerURL(serverUrl, serverDescription, serverVariables);
-                serverURL.add(newServerUrl);
-
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                throw new ArrayIndexOutOfBoundsException(
-                        "Declared server incorrectly, missing \"=\" sign with class annotation server declaration.");
-            }
+            ServerURL newServerUrl = new ServerURL(serverInfo.getKey(), serverInfo.getValue(), serverVariables);
+            serverURL.add(newServerUrl);
         }
         return new PathInfo(basePath, annotation.uri(), serverURL);
     }
