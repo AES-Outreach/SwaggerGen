@@ -16,7 +16,7 @@ public class MockNonSwaggerMethods {
 
     @SwaggerGen(
         uri="/minified-endpoint",
-        basePath="base",
+        basePath="/base",
         method="DELETE"
     )
     protected static final void doDelete(MockSlingServerletRequest request, MockSlingServerletResponse resp) {

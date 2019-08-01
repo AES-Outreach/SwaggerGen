@@ -6,10 +6,6 @@ import annotation.SwaggerGen;
  * 
  */
 @SwaggerGenClass(
-    basePath = "base",
-    title = "",
-    description = "",
-    servers = {}
 )
 public class MockBlankClassAnnotationEndpoint {
     /**

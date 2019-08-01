@@ -7,7 +7,7 @@ import annotation.SwaggerGenClass;
  * @author Alexandre Seguin (7663995)
  */
 @SwaggerGenClass(
-    basePath="localhost/test",
+    basePath="/localhost/test",
     title="Meeting",
     servers={
         "{scheme}://{environment}.localhost:{port} = This uses scheme, environment and port variables"

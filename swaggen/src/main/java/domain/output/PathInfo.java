@@ -40,7 +40,7 @@ public class PathInfo {
     }
 
     public String getFullPath() {
-        return this.basePath + this.uri;
+        return (this.basePath + this.uri).substring(1);
     }
 
     public void setURI(String uri) {

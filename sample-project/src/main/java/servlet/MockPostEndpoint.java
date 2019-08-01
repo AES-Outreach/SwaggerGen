@@ -10,7 +10,7 @@ public class MockPostEndpoint {
 
     @SwaggerGen(
         uri="/endpoint",
-        basePath="base",
+        basePath="/base",
         method="POST",
         title="Post",
         description="Serverlet Description",

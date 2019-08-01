@@ -34,11 +34,17 @@ public @interface SwaggerGenClass {
   
     /**
      * The server url of the endpoints
-     * of the form "{url} = {description}"
+     * of the form
+     * "
+     * {
+     * '[url] = [description]',
+     * '[url2] = [description2]'
+     * }
+     * "
      * 
      * @return the server url
      */
-    String[] servers() default "";
+    String[] servers() default {};
 
     /**
      * The scheme of the server url

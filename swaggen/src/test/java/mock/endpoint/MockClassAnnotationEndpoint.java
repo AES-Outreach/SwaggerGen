@@ -6,7 +6,7 @@ import annotation.SwaggerGen;
  * 
  */
 @SwaggerGenClass(
-    basePath = "base",
+    basePath = "/base",
     title = "Class Test Title",
     description = "Class Test Description",
     servers = {
@@ -67,7 +67,7 @@ public class MockClassAnnotationEndpoint {
      */
     @SwaggerGen(
         uri="/class",
-    basePath="base/endpoint",
+        basePath="/base/endpoint",
         method="POST",
         headers={"langHeader=en"},
         body="schemas/all/orderPost.json",

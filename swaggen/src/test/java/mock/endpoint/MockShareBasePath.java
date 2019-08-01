@@ -11,7 +11,7 @@ public class MockShareBasePath {
      */
     @SwaggerGen(
         uri="/in-depth",
-        basePath="base/endpoint",
+        basePath="/base/endpoint",
         method="PUT",
         description="Put Servlet Description",
         responses={"200=OK", "400", "404"}
@@ -27,7 +27,7 @@ public class MockShareBasePath {
      */
     @SwaggerGen(
         uri="/in-depth",
-        basePath="base/endpoint",
+        basePath="/base/endpoint",
         method="GET",
         description="Put Servlet Description",
         responses={"200=OK", "400", "404"}
@@ -43,7 +43,7 @@ public class MockShareBasePath {
      */
     @SwaggerGen(
         uri="/in-depth",
-        basePath="base/endpoint",
+        basePath="/base/endpoint",
         method="POST",
         description="Post Servlet Description",
         responses={"200=OK", "400", "404"}
@@ -59,7 +59,7 @@ public class MockShareBasePath {
      */
     @SwaggerGen(
         uri="/in-depth",
-        basePath="base/endpoint",
+        basePath="/base/endpoint",
         method="DELETE",
         description="Delete Servlet Description",
         responses={"200=OK", "400", "404"}

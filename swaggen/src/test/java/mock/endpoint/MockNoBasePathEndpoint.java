@@ -13,7 +13,7 @@ public class MockNoBasePathEndpoint {
      * @param resp    fake response object
      */
     @SwaggerGen(
-        uri = "base", 
+        uri = "/base", 
         method = "PUT", 
         description = "Put Servlet Description", 
         responses = { "200=OK", "400", "404" }
@@ -29,7 +29,7 @@ public class MockNoBasePathEndpoint {
      * @param resp    fake response object
      */
     @SwaggerGen(
-        uri = "base", 
+        uri = "/base", 
         method = "GET", 
         description = "Get Servlet Description", 
         responses = { "200=OK", "400", "404" }
@@ -45,7 +45,7 @@ public class MockNoBasePathEndpoint {
      * @param resp    fake response object
      */
     @SwaggerGen(
-        uri = "base", 
+        uri = "/base", 
         method = "POST", 
         description = "Post Servlet Description", 
         responses = { "200=OK", "400", "404" }
@@ -61,7 +61,7 @@ public class MockNoBasePathEndpoint {
      * @param resp    fake response object
      */
     @SwaggerGen(
-        uri = "base", 
+        uri = "/base", 
         method = "DELETE", 
         description = "Delete Servlet Description", 
         responses = { "200=OK", "400", "404" }

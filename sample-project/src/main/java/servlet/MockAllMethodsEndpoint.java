@@ -14,7 +14,7 @@ public class MockAllMethodsEndpoint {
      */
     @SwaggerGen(
         uri="/put-endpoint",
-        basePath="base/all",
+        basePath="/base/all",
         method="PUT",
         title="All",
         description="Put Servlet Description",
@@ -33,7 +33,7 @@ public class MockAllMethodsEndpoint {
      */
     @SwaggerGen(
         uri="/put-endpoint",
-        basePath="base/all",
+        basePath="/base/all",
         method="POST",
         title="All",
         description="Post Servlet Description",
@@ -52,7 +52,7 @@ public class MockAllMethodsEndpoint {
      */
     @SwaggerGen(
         uri="/get-endpoint",
-        basePath="base/all",
+        basePath="/base/all",
         method="GET",
         title="All",
         description="Get Servlet Description",
@@ -73,7 +73,7 @@ public class MockAllMethodsEndpoint {
      */
     @SwaggerGen(
         uri="/delete-endpoint",
-        basePath="base/all",
+        basePath="/base/all",
         method="DELETE",
         title="All",
         description="Delete Servlet Description",
