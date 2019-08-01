@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.aes-outreach</groupId>
 	<artifactId>swaggen-annotations</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>SwaggerGen</name>
@@ -48,10 +48,7 @@
 			<id>repo.outreach.uottawa.io-release</id>
 			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
 		</repository>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
+
 	</distributionManagement>
 
 	<repositories>
@@ -61,10 +58,6 @@
 			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
 		</repository>
 
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
 	</repositories>
 
 	<scm>
@@ -72,6 +65,52 @@
 		<developerConnection>scm:git:ssh://github.com:AES-Outreach/SwaggerGen.git</developerConnection>
 		<url>https://github.com/AES-Outreach/SwaggerGen</url>
 	</scm>
+
+
+	<profiles>
+		<!-- Deployment profile: deploys to public maven repo -->
+		<profile>
+			<id>mavenDeploy</id>
+			<activation>
+			</activation>
+				<repositories>
+					<repository>
+						<id>ossrh</id>
+						<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+					</repository>
+				</repositories>
+			<build>
+				<plugins>
+					<!-- SONATYPE -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.7</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<dependency>
@@ -217,20 +256,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -273,18 +298,6 @@
 						<phase>install</phase>
 					</execution>
 				</executions>
-			</plugin>
-			<!-- SONATYPE -->
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
