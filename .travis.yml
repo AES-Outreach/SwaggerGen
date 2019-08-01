@@ -12,7 +12,8 @@ cache:
   - "$HOME/.m2"
 jobs:
   include:
-  - stage: compile
+  - stage: test
+    name: "Testing SwaggerGen and it's sample project"
     before_script:
     - cd swaggen
     script:
@@ -23,8 +24,21 @@ jobs:
     - mvn clean install
     - cd ..
     - sh generate_docs.sh
+  - stage: deploy
+    name: "Deploying to Nexus"
+    script:
+    - cd swaggen
+    - mvn versions:set -DnewVersion=1.0.$TRAVIS_BUILD_NUMBER
+    - mvn -s ../assets/settings.xml deploy -DskipTests
+    after_success:
+      - cd $HOME/build/AES-Outreach/Registration-Application
+      - git tag 2.0.$TRAVIS_BUILD_NUMBER
+      - git push origin --tags
 stages:
-- name: compile
+- name: test
+  if: type = pull_request OR type = cron
+- name: deploy
+  if: type != pull_request AND type != cron
 notifications:
   slack:
     secure: gI9Nnduz+nMI9+VzHQscdpD1IMnPL2OkXwTFsRL9inpASrtcSsQc43u5drDbv7alS0mpESBn6vZnDP2nRjb28pPUJBfuOwy7i7NY4zdhvBCgp/KqeAB5lo+xbpsfChMNK1xlpeVUhdfgSLSfPmOJ3fYeXKryrZa0uoA5mqMCdHyLbP7nzBcHW28PYTpQNcyGJLuFCpxzTLUzKfHNR/e13nyqNYQmhXLnBAEQzRHg72nvJgh7LR4TUivdWXBoWDhHv7XXPK+Hs7GGxMocGSL+RODnwI9U3BSKgAlVZsSFnaB57w/9rLCfsF+FHEjtsKTUFYmaf0jkIbh9LVoBMb7xuk02jbi8WGJbAFPok1kKuGqiBV0pHWWBvBWZmBZ0sefMICSKrXMoKLXn79uVl5fcNL85nKxX6qOAKw+SIkghCZ9v4VDJwkT/IPYz+6duLMxI+bGV6T53Tpe1psJtFCMGSQTjaH0NbjMUCU9rWcDLR9pecCoPjD/vAF/6lWCkH72jgxnTvTrwlHCp3y3RMuKH2GPWJr1602s4HM3cYDtZqRmyh33Wt16ZGJwDhZziUDsBvWJeAMjfx7rUwMAlpCf4uBctIWUHDCk8a1bQBHcodHI+t89ZHm6sCeQfXOesftpYgidv/1eSIdh01eakmu4APJjqRzcMbxCHiyPZUjmFJiE=

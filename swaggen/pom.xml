@@ -39,6 +39,20 @@
 			<organizationUrl>https://github.com/AES-Outreach/SwaggerGen</organizationUrl>
 		</developer>
 	</developers>
+	
+	<distributionManagement>
+		<repository>
+			<id>repo.outreach.uottawa.io-release</id>
+			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>repo.outreach.uottawa.io-release</id>
+			<name>Outreach Nexus Repo</name>
+			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
+		</repository>
+	</repositories>
 
 	<scm>
 		<connection>scm:git:git://github.com/AES-Outreach/SwaggerGen.git</connection>
