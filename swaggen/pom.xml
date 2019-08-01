@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.aes-outreach</groupId>
 	<artifactId>swaggen-annotations</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>SwaggerGen</name>
@@ -39,11 +39,11 @@
 			<organizationUrl>https://github.com/AES-Outreach/SwaggerGen</organizationUrl>
 		</developer>
 	</developers>
-	
+
 
 
 	<distributionManagement>
-	
+
 		<repository>
 			<id>repo.outreach.uottawa.io-release</id>
 			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
@@ -51,66 +51,11 @@
 
 	</distributionManagement>
 
-	<repositories>
-		<repository>
-			<id>repo.outreach.uottawa.io-release</id>
-			<name>Outreach Nexus Repo</name>
-			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
-		</repository>
-
-	</repositories>
-
 	<scm>
 		<connection>scm:git:git://github.com/AES-Outreach/SwaggerGen.git</connection>
 		<developerConnection>scm:git:ssh://github.com:AES-Outreach/SwaggerGen.git</developerConnection>
 		<url>https://github.com/AES-Outreach/SwaggerGen</url>
 	</scm>
-
-
-	<profiles>
-		<!-- Deployment profile: deploys to public maven repo -->
-		<profile>
-			<id>mavenDeploy</id>
-			<activation>
-			</activation>
-				<repositories>
-					<repository>
-						<id>ossrh</id>
-						<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-					</repository>
-				</repositories>
-			<build>
-				<plugins>
-					<!-- SONATYPE -->
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.7</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.5</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 
 	<dependencies>
 		<dependency>
@@ -125,7 +70,7 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.7.25</version>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -269,11 +214,11 @@
 					</execution>
 				</executions>
 			</plugin>
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-plugin-plugin</artifactId>
-	            <version>3.4</version>
-	        </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.4</version>
+			</plugin>
 			<!-- JAVADOC PLUGIN -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -301,4 +246,129 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+	<profiles>
+		<!-- Deployment profile: deploys to public maven repo -->
+		<profile>
+			<id>mavenDeploy</id>
+			<activation>
+			</activation>
+			<repositories>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</repositories>
+			<build>
+				<plugins>
+					<!-- SONATYPE -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.7</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Necessary plugins -->
+
+					<!-- Maven Surefire Plugin -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.22.0</version>
+						<configuration>
+							<argLine>
+								--illegal-access=permit
+							</argLine>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.8.0</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>descriptor</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.2.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-plugin-plugin</artifactId>
+						<version>3.4</version>
+					</plugin>
+					<!-- JAVADOC PLUGIN -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>3.0.1</version>
+						<configuration>
+							<detectJavaApiLink>false</detectJavaApiLink>
+							<excludePackageNames>com.outreach.test.*</excludePackageNames>
+							<failOnError>true</failOnError>
+							<reportOutputDirectory>${project.basedir}/apidocs</reportOutputDirectory>
+							<doclint>all</doclint>
+							<detectLinks>true</detectLinks>
+							<author>SwaggerGen
+								Team</author>
+						</configuration>
+						<executions>
+							<execution>
+								<id>aggregate</id>
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+								<phase>install</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
 </project>
