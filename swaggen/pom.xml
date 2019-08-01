@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.aes-outreach</groupId>
 	<artifactId>swaggen-annotations</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.1</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>SwaggerGen</name>
@@ -40,17 +40,30 @@
 		</developer>
 	</developers>
 	
+
+
 	<distributionManagement>
+	
 		<repository>
 			<id>repo.outreach.uottawa.io-release</id>
 			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
 		</repository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
+
 	<repositories>
 		<repository>
 			<id>repo.outreach.uottawa.io-release</id>
 			<name>Outreach Nexus Repo</name>
 			<url>http://34.204.223.49:8080/repository/maven-releases/</url>
+		</repository>
+
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</repositories>
 
@@ -275,15 +288,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 </project>

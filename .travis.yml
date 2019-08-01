@@ -30,10 +30,6 @@ jobs:
     - cd swaggen
     - mvn versions:set -DnewVersion=1.0.$TRAVIS_BUILD_NUMBER
     - mvn -s ../assets/settings.xml deploy -DskipTests
-    after_success:
-      - cd $HOME/build/AES-Outreach/Registration-Application
-      - git tag 2.0.$TRAVIS_BUILD_NUMBER
-      - git push origin --tags
 stages:
 - name: test
   if: type = pull_request OR type = cron
