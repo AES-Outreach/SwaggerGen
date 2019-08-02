@@ -51,6 +51,7 @@ public class TestSwaggerGenerator {
         prop.put("description", "This is an OpenAPI file");
         prop.put("server", "http://api.example.com");
         prop.put("serverDescription", "This is the server description.");
+        prop.put("showLogs", "false");
         return prop;
     }
 }

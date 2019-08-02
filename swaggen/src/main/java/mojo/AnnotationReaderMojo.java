@@ -58,33 +58,42 @@ public class AnnotationReaderMojo extends AbstractMojo {
      * @see org.apache.maven.plugin.Mojo#execute()
      */
     public void execute() throws MojoExecutionException {
-
+        boolean showLogs = false;
         try {
-
-            getLog().info("-- -- -- OBTAINING ANNOTATIONS -- -- --");
-            ClassLoader original = getClass().getClassLoader();
-            Class<?>[] klasses = getClassArray();
-            getLog().info("-- -- -- PROCESSING ANNOTATIONS -- -- --");
-
             try (InputStream input = new FileInputStream(propertiesPath)) {
                 Properties config = new Properties();
                 config.load(input);
-                getLog().info("Loaded properties file.");
-                getLog().info(config.getProperty("version"));
+                showLogs = Boolean.parseBoolean(config.getProperty("showLogs"));
+
+                if (showLogs) {
+                    getLog().info("Loaded properties file.");
+                    getLog().info("-- -- -- OBTAINING ANNOTATIONS -- -- --");
+                }
+                ClassLoader originalClassLoader = getClass().getClassLoader();
+                Class<?>[] klasses = getClassArray(showLogs);
+                if (showLogs) {
+                    getLog().info("-- -- -- PROCESSING ANNOTATIONS -- -- --");
+                    getLog().info("Swagger version number: " + config.getProperty("version"));
+                }
                 generator.SwaggerGenerator.generateSwaggerFile(klasses, config);
-                Thread.currentThread().setContextClassLoader(original);
+                Thread.currentThread().setContextClassLoader(originalClassLoader);
             } catch (IOException ex) {
-                getLog().warn(
-                        "No valid properties file provided. Please add a <propertiesPath> tag to the plugin's build configuration tag.");
+                if (showLogs) {
+                    getLog().warn(
+                            "No valid properties file provided. Please add a <propertiesPath> tag to the plugin's build configuration tag.");
+                }
                 throw new MojoExecutionException("File not found.");
             }
         } catch (Exception e) {
             // Can add other catches here for more complete error handling
-            getLog().error(e.toString());
+            if (showLogs) {
+                getLog().error(e.toString());
+            }
             throw new MojoExecutionException("Could not process annotations from project.", e);
         }
-
-        getLog().info("-- DONE --");
+        if (showLogs) {
+            getLog().info("-- DONE --");
+        }
     }
 
     /**
@@ -95,16 +104,20 @@ public class AnnotationReaderMojo extends AbstractMojo {
      * @throws DependencyResolutionRequiredException if mojo is misconfigured
      * @throws MalformedURLException
      */
-    private Class<?>[] getClassArray() throws MalformedURLException, DependencyResolutionRequiredException {
+    private Class<?>[] getClassArray(boolean showLogs)
+            throws MalformedURLException, DependencyResolutionRequiredException {
 
         Reflections loadedKlasses = new Reflections(
-                new ConfigurationBuilder().addUrls(ClasspathHelper.forClassLoader(getClassLoader()))
+                new ConfigurationBuilder().addUrls(ClasspathHelper.forClassLoader(getClassLoader(showLogs)))
                         .setScanners(new SubTypesScanner(false), new MethodAnnotationsScanner()));
-        getLog().info("Loaded Klasses instantiated");
-        //Thread.currentThread().setContextClassLoader(originalClassLoader);
-        getLog().info("About to find methods annotated with SwaggerGen using reflections object");
+        if (showLogs) {
+            getLog().info("Loaded Klasses instantiated");
+            getLog().info("About to find methods annotated with SwaggerGen using reflections object");
+        }
         Set<Method> swaggenMethods = loadedKlasses.getMethodsAnnotatedWith(SwaggerGen.class);
-        getLog().info("Swaggen Methods instantiated");
+        if (showLogs) {
+            getLog().info("Swaggen Methods instantiated");
+        }
         Set<Class<?>> klasses = new HashSet<Class<?>>();
         for (Method method : swaggenMethods) {
             klasses.add(method.getDeclaringClass());
@@ -121,26 +134,28 @@ public class AnnotationReaderMojo extends AbstractMojo {
      * @throws MalformedURLException                 if URLs in the classpath are
      *                                               malformed
      */
-    private ClassLoader getClassLoader() throws DependencyResolutionRequiredException, MalformedURLException {
+    private ClassLoader getClassLoader(boolean showLogs) throws DependencyResolutionRequiredException, MalformedURLException {
         Set<URL> urls = new HashSet<>();
         List<String> elements = project.getRuntimeClasspathElements();
         for (String element : elements) {
             urls.add(new File(element).toURI().toURL());
+            if (showLogs) {
+                getLog().info(element);
+            }
         }
-
-        // urls.add(new URL("file:/C:/Users/outreach31/Documents/repos/SysAdmin-Application/sysadmin/core/target/classes/"));
-
-        getLog().info("About to print URLs");
-        for (URL url: urls) {
-            getLog().info(url.toString());
+        if (showLogs) {
+            getLog().info("About to instantiate URLClassLoader object using urls and context class loader");
         }
-        getLog().info("About to instantiate URLClassLoader object using urls and context class loader");
         ClassLoader contextClassLoader = URLClassLoader.newInstance(urls.toArray(new URL[0]),
                 this.getClass().getClassLoader());
-        getLog().info("Context Class Loader instantiated with " + contextClassLoader.toString());
-        getLog().info("About to set Thread context class loader using the URLClassLoader object");
+        if (showLogs) {
+            getLog().info("Context Class Loader instantiated with " + contextClassLoader.toString());
+            getLog().info("About to set Thread context class loader using the URLClassLoader object");
+        }
         Thread.currentThread().setContextClassLoader(contextClassLoader);
-        getLog().info("Context Class Loader set with " + contextClassLoader.toString());
+        if (showLogs) {
+            getLog().info("Context Class Loader set with " + contextClassLoader.toString());
+        }
         return contextClassLoader;
     }
 }
