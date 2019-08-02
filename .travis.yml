@@ -21,7 +21,7 @@ jobs:
     - npm install -g redoc-cli
     - mvn clean install
     - cd ../sample-project
-    - mvn clean install
+    - mvn clean install -s ../assets/settings.xml -U
     - cd ..
     - sh generate_docs.sh
   - stage: deploy
