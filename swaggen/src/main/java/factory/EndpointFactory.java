@@ -28,7 +28,7 @@ public class EndpointFactory {
         }
         endpoint.setParameters(ParameterFactory.createParameters(annotation, klassAnnotation));
         endpoint.setRequestBody(RequestBodyFactory.createRequestBody(annotation));
-        endpoint.setResponses(ResponseFactory.creaeteResponses(annotation));
+        endpoint.setResponses(ResponseFactory.createResponses(annotation));
         
         return endpoint;
     }

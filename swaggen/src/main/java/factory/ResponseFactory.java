@@ -39,7 +39,7 @@ public class ResponseFactory {
      * @param annotation the annotation
      * @return the map
      */
-    public static Map<String, Response> creaeteResponses(SwaggerGen annotation) {
+    public static Map<String, Response> createResponses(SwaggerGen annotation) {
         Map<String, Response> responses = new HashMap<>();
         String expectedResponseCode = "";
         for(String responseString : annotation.responses()) {			
