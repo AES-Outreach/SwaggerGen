@@ -12,7 +12,8 @@ public class MockPutEndpointWithSchema {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url="/base/all-methods-endpoint",
+		uri="/all-methods-endpoint",
+		basePath="/base",
 		method="PUT",
 				title="Put",
 		description="Put Servlet Description",

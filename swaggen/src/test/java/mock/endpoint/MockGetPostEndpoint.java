@@ -5,17 +5,15 @@ import mock.service.MockSlingServerletResponse;
 
 /**
  * A Fake endpoint for testing.
- * 
- * @author William Gardiner (7267012)
  */
-public class MockPostEndpoint {
+public class MockGetPostEndpoint {
 
 	@SwaggerGen(
-		uri="/endpoint",
-		basePath="/base",
+		uri="/combined",
+		basePath="/base/all",
 		method="POST",
-		title="Serverlet Title",
-		description="Serverlet Description",
+		title="Post Serverlet Title",
+		description="Post Serverlet Description",
 		headers={"Content-Type=application/json"},
 		queryParams={
 				"i param = An Integer Param", 
@@ -30,5 +28,16 @@ public class MockPostEndpoint {
 	)
 	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
 		// Implementation not important.
-	}
+  }
+  
+  @SwaggerGen(
+		uri="/combined",
+		basePath="/base/all",
+		method="GET",
+		title="Get Serverlet Title",
+		description="Get Serverlet Description"
+	)
+	protected static final void doGet(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+		// Implementation not important.
+  }
 }

@@ -15,58 +15,58 @@ import java.lang.annotation.ElementType;
 public @interface SwaggerGen {
 
 	/**
-	 * The URL of the endpoint
+	 * The URI of the endpoint
 	 * 
-	 * @return
+	 * @return the URI
 	 */
-	String url();
+	String uri();
 	
 	/**
 	 * The HTTP Request Method
 	 * 
-	 * @return
+	 * @return the HTTP Request Method
 	 */
 	String method();
 	
 	/**
-	 * The description of the endpoint
+	 * The title of the endpoint
 	 * 
-	 * @return
+	 * @return the title of the endpoint
 	 */
 	String title() default "";
 	
 	/**
 	 * The description of the endpoint
 	 * 
-	 * @return
+	 * @return the description of the endpoint
 	 */
 	String description() default "";
 	
 	/**
 	 * List of headers of the form "{type} {name}={description}"
 	 * 
-	 * @return
+	 * @return the list of headers
 	 */
 	String[] headers() default {};
 	
 	/**
 	 * List of query parameters of the form "{type} {name}={description}"
 	 * 
-	 * @return
+	 * @return list of query params
 	 */
 	String[] queryParams() default {};
 	
 	/**
 	 * The name of the JSON schema file that describes the body of the request
 	 * 
-	 * @return
+	 * @return name of JSON schema file
 	 */
 	String body() default "";
 	
 	/**
 	 * A list of response codes of the form "{type} {name}={description}"
 	 * 
-	 * @return
+	 * @return list of response codes
 	 */
 	String[] responses() default {"200=OK"};
 	
@@ -74,15 +74,20 @@ public @interface SwaggerGen {
 	 * The name of the JSON schema file that describes the body of the response
 	 * corresponding to the first response code provided.
 	 * 
-	 * @return
+	 * @return name of JSON SCHEMA file describing the response body
 	 */
 	String responseBody() default "";
 	
 	/**
 	 * The scheme: HTTP or HTTPS
 	 * 
-	 * @return
+	 * @return the scheme
 	 */
 	String scheme() default "HTTP";
 
+	/**
+	 * The base path
+	 * @return the base path
+	 */
+	String basePath() default "";
 }

@@ -19,10 +19,24 @@ public class TestSwaggerGenerator {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static void generateSwagger(String filelocation, Class<?> klass)
+	public static void generateSwagger(Class<?> klass)
 			throws JsonParseException, JsonMappingException, IOException {
-		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass }, filelocation);
+		SwaggerGenerator.generateSwaggerFile(new Class<?>[] { klass });
 	}
 
+	/**
+	 * Function that calls the Swagger generation flow and eventually writes the
+	 * swagger file for the endpoint passed in to the location passed in.
+	 * 
+	 * @param filelocation location of the swagger file to be generated
+	 * @param klass class representing the test endpoint
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	public static void generateSwagger(Class<?>[] klasses) 
+		throws JsonParseException, JsonMappingException, IOException {
+		SwaggerGenerator.generateSwaggerFile(klasses);
+	}
 
 }

@@ -1,11 +1,15 @@
 package domain.output;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import domain.output.path.Endpoint;
+import domain.output.PathUri;
 import enums.RequestMethod;
 
 /**
@@ -15,6 +19,19 @@ import enums.RequestMethod;
  */
 @JsonInclude(Include.NON_NULL)
 public class Swagger {
+
+	public Swagger() {
+		this.paths = new HashMap<>();
+	}
+
+	/**
+	 * copy constructor
+	 * @param swagger Swagger object
+	 */
+	public Swagger(Swagger swagger) {
+		this.info = swagger.getInfo();
+		this.setVersion(swagger.getOpenapi());
+	}
 
 	/**
 	 * The OpenAPI Version
@@ -36,6 +53,9 @@ public class Swagger {
 	 */
 	private Map<String, Map<RequestMethod, Endpoint>> paths;
 
+	@JsonIgnore
+	private Map<PathUri, Map<RequestMethod, Endpoint>> swaggerPaths;
+
 	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
 		return paths;
 	}
@@ -50,6 +70,16 @@ public class Swagger {
 	
 	public String getSwagger() {
 		return swagger;
+	}
+
+	@JsonProperty
+	public Map<PathUri, Map<RequestMethod, Endpoint>> getSwaggerPaths() {
+		return swaggerPaths;
+	}
+
+	@JsonIgnore
+	public void setSwaggerPaths(Map<PathUri, Map<RequestMethod, Endpoint>> swaggerPaths) {
+		this.swaggerPaths = swaggerPaths;
 	}
 
 	/**

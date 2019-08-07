@@ -14,7 +14,8 @@ public class DemoEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url= "/localhost/test/post",
+		uri="/post",
+		basePath="/localhost/test",
 		method="POST",
 		title="Meeting",
 		description="Post Servlet Description",
@@ -29,7 +30,8 @@ public class DemoEndpoint {
 	}
 	
 	@SwaggerGen(
-			url= "/localhost/test/put",
+			uri= "/put",
+			basePath="/localhost/test",
 			method="PUT",
 			title="Meeting",
 			description="This is a sample PUT endpoint description to be printed in a Swagger format HTML documentation file.",
@@ -49,7 +51,8 @@ public class DemoEndpoint {
 	 * @param resp fake response object
 	 */
 	@SwaggerGen(
-		url= "/localhost/test/get",
+		uri="/get",
+		basePath="/localhost/test",
 		method="GET",
 		title="Meeting",
 		description="This is a sample GET endpoint description to be printed in a Swagger format HTML documentation file.",
