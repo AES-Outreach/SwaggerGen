@@ -131,18 +131,31 @@ public class AnnotationReaderMojo extends AbstractMojo {
         return contextClassLoader;
     }
 
+    /**
+     * Prints the info logs if showLog is true.
+     * 
+     * @param log Message to be logged
+     */
     private void infoLog(String log) {
         if (showLogs) {
             getLog().info(log);
         }
     }
 
+    /**
+     * Prints the warning logs if showLog is true.
+     * @param log Message to be logged
+     */
     private void warnLog(String log) {
         if (showLogs) {
             getLog().warn(log);
         }
     }
 
+    /**
+     * Prints the error logs if the showLog is true.
+     * @param log Message to be logged
+     */
     private void errorLog(String log) {
         if (showLogs) {
             getLog().error(log);
