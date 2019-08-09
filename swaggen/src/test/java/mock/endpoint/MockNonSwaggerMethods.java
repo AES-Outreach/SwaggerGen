@@ -6,13 +6,20 @@ import mock.service.MockSlingServerletResponse;
 /**
  * A Fake endpoint for testing.
  */
-public class MockMinimalPutEndpoint {
-  @SwaggerGen(
+public class MockNonSwaggerMethods {
+    /**
+     * non annotated method
+     */
+    public void init() {
+
+    }
+
+    @SwaggerGen(
         uri="/minified-endpoint",
         basePath="/base",
-        method="PUT"
+        method="DELETE"
     )
-    protected static final void doPut(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+    protected static final void doDelete(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
         // Implementation not important.
     }
 }

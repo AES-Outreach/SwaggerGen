@@ -2,6 +2,7 @@ package domain.output;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import domain.output.path.Endpoint;
-import domain.output.PathUri;
+import domain.output.PathInfo;
 import enums.RequestMethod;
 
 /**
@@ -20,88 +21,104 @@ import enums.RequestMethod;
 @JsonInclude(Include.NON_NULL)
 public class Swagger {
 
-	public Swagger() {
-		this.paths = new HashMap<>();
-	}
+    public Swagger() {
+        this.paths = new HashMap<>();
+        this.servers = new ArrayList<>();
+    }
 
-	/**
-	 * copy constructor
-	 * @param swagger Swagger object
-	 */
-	public Swagger(Swagger swagger) {
-		this.info = swagger.getInfo();
-		this.setVersion(swagger.getOpenapi());
-	}
+    /**
+     * copy constructor
+     * 
+     * @param swagger Swagger object
+     */
+    public Swagger(Swagger swagger) {
+        this.info = swagger.getInfo();
+        this.setVersion(swagger.getOpenapi());
+        this.servers = swagger.getServers();
+    }
 
-	/**
-	 * The OpenAPI Version
-	 */
-	private String openapi;
-	
-	/**
-	 * The Swagger Version
-	 */
-	private String swagger;
-	
-	/**
-	 * The API Suite Info
-	 */
-	private SwaggerInfo info;
+    /**
+     * The OpenAPI Version
+     */
+    private String openapi;
 
-	/**
-	 * Top level map, mapping all endpoints by their request method and URL
-	 */
-	private Map<String, Map<RequestMethod, Endpoint>> paths;
+    /**
+     * The Swagger Version
+     */
+    private String swagger;
 
-	@JsonIgnore
-	private Map<PathUri, Map<RequestMethod, Endpoint>> swaggerPaths;
+    /**
+     * The API Suite Info
+     */
+    private SwaggerInfo info;
 
-	public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
-		return paths;
-	}
+    /**
+     * Server info
+     */
+    private ArrayList<ServerURL> servers;
 
-	public void setPaths(Map<String, Map<RequestMethod, Endpoint>> paths) {
-		this.paths = paths;
-	}
+    /**
+     * Top level map, mapping all endpoints by their request method and URL
+     */
+    private Map<String, Map<RequestMethod, Endpoint>> paths;
 
-	public String getOpenapi() {
-		return openapi;
-	}
-	
-	public String getSwagger() {
-		return swagger;
-	}
+    @JsonIgnore
+    private Map<PathInfo, Map<RequestMethod, Endpoint>> swaggerPaths;
 
-	@JsonProperty
-	public Map<PathUri, Map<RequestMethod, Endpoint>> getSwaggerPaths() {
-		return swaggerPaths;
-	}
+    public Map<String, Map<RequestMethod, Endpoint>> getPaths() {
+        return paths;
+    }
 
-	@JsonIgnore
-	public void setSwaggerPaths(Map<PathUri, Map<RequestMethod, Endpoint>> swaggerPaths) {
-		this.swaggerPaths = swaggerPaths;
-	}
+    public void setPaths(Map<String, Map<RequestMethod, Endpoint>> paths) {
+        this.paths = paths;
+    }
 
-	/**
-	 * Field name is openapi for version 3.x, swagger for 2.0
-	 * 
-	 * @param version the version number.
-	 */
-	public void setVersion(String version) {
-		if("2.0".equals(version)) {
-			openapi = null;
-			swagger = version;
-		} else {
-			swagger = null;
-			openapi = version;
-		}
-	}
+    public String getOpenapi() {
+        return openapi;
+    }
 
-	public SwaggerInfo getInfo() {
-		return info;
-	}
+    public String getSwagger() {
+        return swagger;
+    }
 
-	public void setInfo(SwaggerInfo info) {
-		this.info = info;
-	}
+    @JsonProperty
+    public Map<PathInfo, Map<RequestMethod, Endpoint>> getSwaggerPaths() {
+        return swaggerPaths;
+    }
+
+    @JsonIgnore
+    public void setSwaggerPaths(Map<PathInfo, Map<RequestMethod, Endpoint>> swaggerPaths) {
+        this.swaggerPaths = swaggerPaths;
+    }
+
+    /**
+     * Field name is openapi for version 3.x, swagger for 2.0
+     * 
+     * @param version the version number.
+     */
+    public void setVersion(String version) {
+        if ("2.0".equals(version)) {
+            openapi = null;
+            swagger = version;
+        } else {
+            swagger = null;
+            openapi = version;
+        }
+    }
+
+    public SwaggerInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(SwaggerInfo info) {
+        this.info = info;
+    }
+
+    public ArrayList<ServerURL> getServers() {
+        return this.servers;
+    }
+
+    public void setServers(ArrayList<ServerURL> server) {
+        this.servers = server;
+    }
 }

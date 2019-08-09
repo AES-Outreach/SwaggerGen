@@ -8,25 +8,25 @@ import mock.service.MockSlingServerletResponse;
  */
 public class MockPutDeleteEndpoint {
 
-	@SwaggerGen(
-		uri="/combined",
-		basePath="/base/all",
-		method="PUT",
-		title="Put Serverlet Title",
-		description="Put Serverlet Description"
-	)
-	protected static final void doPut(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
-		// Implementation not important.
-  }
+    @SwaggerGen(
+        uri="/combined",
+        basePath="/base/all",
+        method="PUT",
+        title="Put Serverlet Title",
+        description="Put Serverlet Description"
+    )
+    protected static final void doPut(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+        // Implementation not important.
+    }
   
-  @SwaggerGen(
-		uri="/combined",
-		basePath="/base/all",
-		method="DELETE",
-		title="Delete Serverlet Title",
-		description="Delete Serverlet Description"
-	)
-	protected static final void doDelete(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
-		// Implementation not important.
-  }
+    @SwaggerGen(
+        uri="/combined",
+        basePath="/base/all",
+        method="DELETE",
+        title="Delete Serverlet Title",
+        description="Delete Serverlet Description"
+    )
+    protected static final void doDelete(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
+        // Implementation not important.
+    }
 }

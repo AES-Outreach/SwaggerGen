@@ -14,80 +14,73 @@ import java.lang.annotation.ElementType;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SwaggerGen {
 
-	/**
-	 * The URI of the endpoint
-	 * 
-	 * @return the URI
-	 */
-	String uri();
-	
-	/**
-	 * The HTTP Request Method
-	 * 
-	 * @return the HTTP Request Method
-	 */
-	String method();
-	
-	/**
-	 * The title of the endpoint
-	 * 
-	 * @return the title of the endpoint
-	 */
-	String title() default "";
-	
-	/**
-	 * The description of the endpoint
-	 * 
-	 * @return the description of the endpoint
-	 */
-	String description() default "";
-	
-	/**
-	 * List of headers of the form "{type} {name}={description}"
-	 * 
-	 * @return the list of headers
-	 */
-	String[] headers() default {};
-	
-	/**
-	 * List of query parameters of the form "{type} {name}={description}"
-	 * 
-	 * @return list of query params
-	 */
-	String[] queryParams() default {};
-	
-	/**
-	 * The name of the JSON schema file that describes the body of the request
-	 * 
-	 * @return name of JSON schema file
-	 */
-	String body() default "";
-	
-	/**
-	 * A list of response codes of the form "{type} {name}={description}"
-	 * 
-	 * @return list of response codes
-	 */
-	String[] responses() default {"200=OK"};
-	
-	/**
-	 * The name of the JSON schema file that describes the body of the response
-	 * corresponding to the first response code provided.
-	 * 
-	 * @return name of JSON SCHEMA file describing the response body
-	 */
-	String responseBody() default "";
-	
-	/**
-	 * The scheme: HTTP or HTTPS
-	 * 
-	 * @return the scheme
-	 */
-	String scheme() default "HTTP";
+    /**
+     * The URI of the endpoint
+     * 
+     * @return the URI
+     */
+    String uri();
+    
+    /**
+     * The HTTP Request Method
+     * 
+     * @return the HTTP Request Method
+     */
+    String method();
+    
+    /**
+     * The title of the endpoint
+     * 
+     * @return the title of the endpoint
+     */
+    String title() default "";
+    
+    /**
+     * The description of the endpoint
+     * 
+     * @return the description of the endpoint
+     */
+    String description() default "";
+    
+    /**
+     * List of headers of the form "{type} {name}={description}"
+     * 
+     * @return the list of headers
+     */
+    String[] headers() default {};
+    
+    /**
+     * List of query parameters of the form "{type} {name}={description}"
+     * 
+     * @return list of query params
+     */
+    String[] queryParams() default {};
+    
+    /**
+     * The name of the JSON schema file that describes the body of the request
+     * 
+     * @return name of JSON schema file
+     */
+    String body() default "";
+    
+    /**
+     * A list of response codes of the form "{type} {name}={description}"
+     * 
+     * @return list of response codes
+     */
+    String[] responses() default {"200=OK"};
+    
+    /**
+     * The name of the JSON schema file that describes the body of the response
+     * corresponding to the first response code provided.
+     * 
+     * @return name of JSON SCHEMA file describing the response body
+     */
+    String responseBody() default "";
 
-	/**
-	 * The base path
-	 * @return the base path
-	 */
-	String basePath() default "";
+    /**
+     * The base path
+     * @return the base path
+     */
+    String basePath() default "";
 }

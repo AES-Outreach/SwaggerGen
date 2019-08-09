@@ -33,3 +33,9 @@ hs_err_pid*
 .classpath
 swaggen/generated/
 *.html
+sample-project/.factorypath
+.vscode/settings.json
+.vscode/launch.json
+swaggen/.vscode/
+*.yaml
+*.factorypath
