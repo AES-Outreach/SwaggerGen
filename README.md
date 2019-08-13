@@ -36,17 +36,20 @@ Currently, the process of setting up the project will require you to clone the r
 ```
 ```
 <plugin>
-<groupId>com.github.aes-outreach</groupId>
-<artifactId>swaggen-annotations</artifactId>
-<version>0.0.1</version>
-<executions>
-	<execution>
-		<phase>install</phase>
-		<goals>
-			<goal>process-annotations</goal>
-		</goals>
-	</execution>
-</executions>
+	<groupId>com.github.aes-outreach</groupId>
+	<artifactId>swaggen-annotations</artifactId>
+	<configuration>
+		<propertiesPath>config.properties</propertiesPath>
+		<showLogs>false</showLogs>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>install</phase>
+			<goals>
+				<goal>process-annotations</goal>
+			</goals>
+		</execution>
+	</executions>
 </plugin>
 ```
 
