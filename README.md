@@ -18,11 +18,20 @@ Assuming that your Maven project is created and good to go, all you need to do i
 Currently, the process of setting up the project will require you to clone the repo and run *mvn clean install* inside of the swaggen folder to add the dependency to your local *.m2* folder. We're waiting on a response to add our project to the public maven repositories.
 
 ```
+<pluginRepositories>
+	<pluginRepository>
+		<id>repo.outreach.uottawa.io-release</id>
+		<name>Plugin Outreach Nexus Repository</name>
+		<url>http://34.204.223.49:8080/repository/maven-releases/</url>
+	</pluginRepository>
+</pluginRepositories>
+```
+```
 <!-- SwaggerGen plugin -->
 <dependency>
-  <groupId>com.github.aes-outreach</groupId>
-  <artifactId>swaggen-annotations</artifactId>
-  <version>0.0.1</version>
+	<groupId>com.github.aes-outreach</groupId>
+		<artifactId>swaggen-annotations</artifactId>
+	<version>0.0.1</version>
 </dependency>
 ```
 ```
@@ -31,12 +40,12 @@ Currently, the process of setting up the project will require you to clone the r
 <artifactId>swaggen-annotations</artifactId>
 <version>0.0.1</version>
 <executions>
-  <execution>
-    <phase>install</phase>
-    <goals>
-      <goal>process-annotations</goal>
-    </goals>
-  </execution>
+	<execution>
+		<phase>install</phase>
+		<goals>
+			<goal>process-annotations</goal>
+		</goals>
+	</execution>
 </executions>
 </plugin>
 ```
