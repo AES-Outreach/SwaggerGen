@@ -21,7 +21,7 @@
 	<distributionManagement>
 		<repository>
 			<id>repo.outreach.uottawa.io-release</id>
-			<url>http://repository.outstem.io/repository/maven-releases/</url>
+			<url>http://repo.outstem.io/repository/maven-releases/</url>
 		</repository>
 	</distributionManagement>
 
