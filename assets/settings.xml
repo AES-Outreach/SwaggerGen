@@ -30,7 +30,7 @@
         <repository>
           <id>repo.outreach.uottawa.io-release</id>
           <name>Outreach Nexus Repo</name>
-          <url>http://repo.outstem.io/repository/maven-releases/</url>
+          <url>https://repo.outstem.io/repository/maven-releases/</url>
         </repository>
       </repositories>
       <pluginRepositories>
