@@ -1,7 +1,4 @@
 # SwaggerGen #
-Develop
-
-![Travis - Develop branch](https://travis-ci.com/AES-Outreach/SwaggerGen.svg?token=cukQqq8P2pkD1EpgeNAZ&branch=develop)
 
 Master 
 
