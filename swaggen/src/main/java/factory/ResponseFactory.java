@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import annotation.SwaggerGen;
+import annotation.SwaggerResponse;
 import domain.output.path.Response;
 
 /**
@@ -42,22 +43,24 @@ public class ResponseFactory {
     public static Map<String, Response> createResponses(SwaggerGen annotation) {
         Map<String, Response> responses = new HashMap<>();
         String expectedResponseCode = "";
-        for(String responseString : annotation.responses()) {			
-            String[] responseSplit = responseString.split(DELIMITER);
+        for(SwaggerResponse responseAnnotation : annotation.responses()) {
+        	
             Response response = new Response();
-            if(responseSplit.length == 2) {
-                response.setDescription(responseSplit[DESCRIPTION_INDEX]);
+            if(responseAnnotation.description() != null) {
+                response.setDescription(responseAnnotation.description());
             } else {
                 response.setDescription(DEFAULT_DESCRIPTION);
             }
             
-            responses.put(responseSplit[CODE_INDEX], response);
+            String code = String.valueOf(responseAnnotation.code());
+            responses.put(code, response);
+            
             if("".contentEquals(expectedResponseCode)) {
-                expectedResponseCode = responseSplit[CODE_INDEX];
+                expectedResponseCode = code;
             }
         }
         if(annotation.responses().length > 0) {
-            responses.get(expectedResponseCode).setBody(ResponseBodyFactory.createRequestBody(annotation));
+            responses.get(expectedResponseCode).setSchema(ResponseBodyFactory.createRequestBody(annotation));
         }
         return responses;
     }

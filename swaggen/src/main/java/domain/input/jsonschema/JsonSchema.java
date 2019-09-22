@@ -15,7 +15,7 @@ import enums.PropertyType;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonSchema {
-
+	
     /**
      * The Schema used
      */

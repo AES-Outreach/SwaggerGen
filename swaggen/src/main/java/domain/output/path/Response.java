@@ -17,9 +17,9 @@ public class Response {
     private String description;
     
     /**
-     * The optional body
+     * Contains either a schema or 
      */
-    private RequestBody body;
+	private Schema schema;    
     
     public String getDescription() {
         return description;
@@ -29,12 +29,12 @@ public class Response {
         this.description = description;
     }
     
-    public RequestBody getBody() {
-        return body;
-    }
-    
-    public void setBody(RequestBody body) {
-        this.body = body;
-    }
-    
+    public Schema getSchema() {
+		return schema;
+	}
+
+	public void setSchema(Schema schema) {
+		this.schema = schema;
+	}
+
 }

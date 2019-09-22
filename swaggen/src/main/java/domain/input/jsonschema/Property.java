@@ -33,6 +33,19 @@ public class Property {
      */
     @JsonProperty("pattern")
     private String pattern;
+    
+
+    /**
+     * Minimum number of items for an array property
+     */
+    @JsonProperty("maxItems")
+    private Integer maxItems;
+    
+    /**
+     * Maximum number of items for an array property
+     */
+    @JsonProperty("minItems")
+    private Integer minItems;
 
     /**
      * The Property Type
@@ -105,4 +118,20 @@ public class Property {
         return "Property [id=" + id + ", title=" + title + ", pattern=" + pattern + ", type=" + type + ", properties="
                 + properties + ", items=" + items + "]";
     }
+
+	public Integer getMaxItems() {
+		return maxItems;
+	}
+
+	public void setMaxItems(Integer maxItems) {
+		this.maxItems = maxItems;
+	}
+
+	public Integer getMinItems() {
+		return minItems;
+	}
+
+	public void setMinItems(Integer minItems) {
+		this.minItems = minItems;
+	}
 }
