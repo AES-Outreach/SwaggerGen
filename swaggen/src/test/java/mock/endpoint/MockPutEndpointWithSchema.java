@@ -1,5 +1,6 @@
 package mock.endpoint;
 import annotation.SwaggerGen;
+import annotation.SwaggerResponse;
 /**
  * A Fake endpoint for testing.
  * 
@@ -18,7 +19,11 @@ public class MockPutEndpointWithSchema {
         description="Put Servlet Description",
         headers={"Content-Type=application/json", "langHeader=en"},
         body="schemas/fakePutSchema.json",
-        responses={"200=OK", "400", "404"}
+        responses={
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400),
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doPut(Object request, Object resp) {
         // Implementation not important.

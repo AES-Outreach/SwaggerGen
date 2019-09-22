@@ -1,5 +1,6 @@
 package mock.endpoint;
 import annotation.SwaggerGenClass;
+import annotation.SwaggerResponse;
 import annotation.SwaggerGen;
 /**
  * A Fake endpoint class for testing class level annotations.
@@ -32,7 +33,13 @@ public class MockClassAnnotationEndpoint {
         uri="/class",
         method="PUT",
         body="schemas/all/orderPut.json",
-        responses={"200=OK", "400", "404", "401", "403"}
+        responses={
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400), 
+        		@SwaggerResponse(code=401), 
+        		@SwaggerResponse(code=403),
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doPut(Object request, Object resp) {
         // Implementation not important.
@@ -52,7 +59,13 @@ public class MockClassAnnotationEndpoint {
         description="Overwriting class description",
         headers={"langHeader=en"},
         body="schemas/all/orderPut.json",
-        responses={"200=OK", "400", "404", "401", "403"}
+        responses={
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400), 
+        		@SwaggerResponse(code=401), 
+        		@SwaggerResponse(code=403),
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doGet(Object request, Object resp) {
         // Implementation not important.
@@ -71,7 +84,13 @@ public class MockClassAnnotationEndpoint {
         method="POST",
         headers={"langHeader=en"},
         body="schemas/all/orderPost.json",
-        responses={"200=OK", "400", "404", "401", "418"}
+        responses={
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400), 
+        		@SwaggerResponse(code=401), 
+        		@SwaggerResponse(code=404),
+        		@SwaggerResponse(code=418)
+        }
     )
     public void doPost(Object request, Object resp) {
         // Implementation not important.

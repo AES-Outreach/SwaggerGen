@@ -1,6 +1,7 @@
 package mock.endpoint;
 
 import annotation.SwaggerGen;
+import annotation.SwaggerResponse;
 
 /**
  * Fake endpoints for testing
@@ -16,7 +17,11 @@ public class MockNoBasePathEndpoint {
         uri = "/base", 
         method = "PUT", 
         description = "Put Servlet Description", 
-        responses = { "200=OK", "400", "404" }
+        responses = {
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400),
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doPut(Object request, Object resp) {
         // Implementation not important.
@@ -32,7 +37,11 @@ public class MockNoBasePathEndpoint {
         uri = "/base", 
         method = "GET", 
         description = "Get Servlet Description", 
-        responses = { "200=OK", "400", "404" }
+        responses = {
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400), 
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doGet(Object request, Object resp) {
         // Implementation not important.
@@ -48,7 +57,11 @@ public class MockNoBasePathEndpoint {
         uri = "/base", 
         method = "POST", 
         description = "Post Servlet Description", 
-        responses = { "200=OK", "400", "404" }
+        responses = {
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400),
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doPost(Object request, Object resp) {
         // Implementation not important.
@@ -64,7 +77,11 @@ public class MockNoBasePathEndpoint {
         uri = "/base", 
         method = "DELETE", 
         description = "Delete Servlet Description", 
-        responses = { "200=OK", "400", "404" }
+        responses = {
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400),
+        		@SwaggerResponse(code=404)
+        }
     )
     public void doDelete(Object request, Object resp) {
         // Implementation not important.

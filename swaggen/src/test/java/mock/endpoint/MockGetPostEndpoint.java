@@ -1,5 +1,6 @@
 package mock.endpoint;
 import annotation.SwaggerGen;
+import annotation.SwaggerResponse;
 import mock.service.MockSlingServerletRequest;
 import mock.service.MockSlingServerletResponse;
 
@@ -22,7 +23,13 @@ public class MockGetPostEndpoint {
 			"param4 = Another String Param"
 		},
 		body="body.scheme",
-		responses={"200=OK", "400=Bad Request", "404"},
+		responses={
+        		@SwaggerResponse(), 
+        		@SwaggerResponse(code=400, description="Bad Request"), 
+        		@SwaggerResponse(code=401), 
+        		@SwaggerResponse(code=403),
+        		@SwaggerResponse(code=404)
+        },
 		responseBody= "response.scheme"
 	)
 	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
