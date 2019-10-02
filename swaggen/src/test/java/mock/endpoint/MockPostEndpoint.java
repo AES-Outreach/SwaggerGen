@@ -1,6 +1,7 @@
 package mock.endpoint;
 import annotation.SwaggerGen;
 import annotation.SwaggerResponse;
+import annotation.body.*;
 import mock.service.MockSlingServerletRequest;
 import mock.service.MockSlingServerletResponse;
 
@@ -26,9 +27,9 @@ public class MockPostEndpoint {
                 },
         body="body.scheme",
         responses={
-        		@SwaggerResponse(), 
-        		@SwaggerResponse(code=400), 
-        		@SwaggerResponse(code=404)
+        		@SwaggerResponse(body=@SwaggerBody(value="/test/schema.json")), 
+        		@SwaggerResponse(code=400, body=@SwaggerBody(value="/test/schema.json")), 
+        		@SwaggerResponse(code=404, body=@SwaggerBody(value="/test/schema.json"))
         },
         responseBody= "response.scheme"
     )

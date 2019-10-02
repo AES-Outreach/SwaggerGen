@@ -2,9 +2,13 @@ package tests.annotation;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import domain.output.path.Endpoint;
 import domain.output.PathInfo;
@@ -23,9 +27,12 @@ public class annotationTests {
 
     /**
      * Test the annotation and factories by generating a path.
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
     @Test
-    public void testAnnotation() {
+    public void testAnnotation() throws JsonParseException, JsonMappingException, IOException {
         
         Class<?>[] klasses = {MockPostEndpoint.class};
         Map<PathInfo, SwaggerEndpoint> path = generator.PathGenerator.generatePathsFromClassList(klasses);
