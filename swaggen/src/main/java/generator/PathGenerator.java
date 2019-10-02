@@ -1,11 +1,15 @@
 package generator;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.commons.lang3.tuple.Pair;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import annotation.SwaggerGen;
 import annotation.SwaggerGenClass;
@@ -31,8 +35,11 @@ public class PathGenerator {
      * 
      * @param klasses list of annotated classes
      * @return the map
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
-    public static Map<PathInfo, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) {
+    public static Map<PathInfo, SwaggerEndpoint> generatePathsFromClassList(Class<?>[] klasses) throws JsonParseException, JsonMappingException, IOException {
         Map<PathInfo, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
         for (Class<?> klass : klasses) {
             Map<PathInfo, SwaggerEndpoint> classPaths = generatePathsFromClass(klass);
@@ -46,8 +53,11 @@ public class PathGenerator {
      * 
      * @param klass the annotated class
      * @return the map
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
-    private static Map<PathInfo, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) {
+    private static Map<PathInfo, SwaggerEndpoint> generatePathsFromClass(Class<?> klass) throws JsonParseException, JsonMappingException, IOException {
         Map<PathInfo, SwaggerEndpoint> existingPaths = new ConcurrentHashMap<>();
         Method[] methods = klass.getDeclaredMethods();
         SwaggerGenClass klassAnnotation = klass.getAnnotation(SwaggerGenClass.class);
@@ -69,8 +79,11 @@ public class PathGenerator {
      * 
      * @param annotation the annotation
      * @return the path
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
-    private static SwaggerEndpoint generatePathFromAnnotation(SwaggerGen annotation, SwaggerGenClass klassAnnotation) {
+    private static SwaggerEndpoint generatePathFromAnnotation(SwaggerGen annotation, SwaggerGenClass klassAnnotation) throws JsonParseException, JsonMappingException, IOException {
         SwaggerEndpoint endpoint = new SwaggerEndpoint();
         endpoint.addEndpoint(RequestMethod.valueOf(annotation.method()),
                 EndpointFactory.createEndpoint(annotation, klassAnnotation));
@@ -107,9 +120,12 @@ public class PathGenerator {
      * 
      * @param annotation    SwaggerGen annotation
      * @param existingPaths Map of existing Swagger Endpoints
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
     private static void checkRequestMethods(SwaggerGen annotation, Map<PathInfo, SwaggerEndpoint> existingPaths,
-            SwaggerGenClass klassAnnotation) {
+            SwaggerGenClass klassAnnotation) throws JsonParseException, JsonMappingException, IOException {
         if (annotation == null) {
             throw new IllegalArgumentException("annotation cannot be null");
         }

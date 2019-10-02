@@ -1,7 +1,11 @@
 package factory;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import annotation.SwaggerGen;
 import annotation.SwaggerResponse;
@@ -39,10 +43,12 @@ public class ResponseFactory {
      * 
      * @param annotation the annotation
      * @return the map
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
-    public static Map<String, Response> createResponses(SwaggerGen annotation) {
+    public static Map<String, Response> createResponses(SwaggerGen annotation) throws JsonParseException, JsonMappingException, IOException {
         Map<String, Response> responses = new HashMap<>();
-        String expectedResponseCode = "";
         for(SwaggerResponse responseAnnotation : annotation.responses()) {
         	
             Response response = new Response();
@@ -53,15 +59,15 @@ public class ResponseFactory {
             }
             
             String code = String.valueOf(responseAnnotation.code());
-            responses.put(code, response);
             
-            if("".contentEquals(expectedResponseCode)) {
-                expectedResponseCode = code;
+            if(!responseAnnotation.body().value().contentEquals("")) {
+            	response.setContent(ResponseBodyFactory.createRequestBody(responseAnnotation.body().value(), annotation.title(), annotation.method()));
             }
+            
+            responses.put(code, response);
+
         }
-        if(annotation.responses().length > 0) {
-            responses.get(expectedResponseCode).setSchema(ResponseBodyFactory.createRequestBody(annotation));
-        }
+       
         return responses;
     }
 

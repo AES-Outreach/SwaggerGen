@@ -57,6 +57,7 @@ public class SwaggerGenerator {
         swagger.setInfo(info);
         swagger.setServers(new ArrayList<ServerURL>(Arrays.asList(serverURL)));
         swagger.setSwaggerPaths(SwaggerEndpoint.convertToValid(paths));
+        swagger.setComponents(SwaggerEndpoint.getDefinitions(paths));
 
         createYamlFiles(swagger);
     }
