@@ -19,7 +19,8 @@ public class Response {
     /**
      * Contains either a schema or 
      */
-	private Schema schema;    
+	private Content content;    
+	
     
     public String getDescription() {
         return description;
@@ -29,12 +30,17 @@ public class Response {
         this.description = description;
     }
     
-    public Schema getSchema() {
-		return schema;
+    public Content getContent() {
+		return content;
 	}
 
-	public void setSchema(Schema schema) {
-		this.schema = schema;
+	public void setContent(Content content) {
+		this.content = content;
+	}
+
+	@Override
+	public String toString() {
+		return "Response [description=" + description + ", content=" + content + "]";
 	}
 
 }
