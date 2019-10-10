@@ -1,6 +1,7 @@
 package servlet;
 import annotation.SwaggerGen;
 import annotation.SwaggerGenClass;
+import annotation.SwaggerResponse;
 /**
  * A Fake endpoint for testing.
  * 
@@ -31,7 +32,13 @@ public class DemoEndpoint {
         description="Post Servlet Description",
         headers={"langHeader=en"},
         body="schemas/all/meetingPost.json",
-        responses={"200=OK", "400", "404", "401", "403"}
+        responses={
+        		@SwaggerResponse(),
+        		@SwaggerResponse(code=400),
+        		@SwaggerResponse(code=401),
+        		@SwaggerResponse(code=403),
+        		@SwaggerResponse(code=500)        		
+        }
     )
     public void doPost(Object request, Object resp) {
         RequestHandler.handle(request);
@@ -43,8 +50,14 @@ public class DemoEndpoint {
         method="PUT",
         description="This is a sample PUT endpoint description to be printed in a Swagger format HTML documentation file.",
         headers={"authorization=token used for authorization", "langHeader=expected language of the request"},
-        body="schemas/all/meetingPut.json",
-        responses={"200=OK", "400", "404", "401", "403"}
+        body="schemas/all/meetingPut.json", 
+        responses={
+        		@SwaggerResponse(),
+        		@SwaggerResponse(code=400),
+        		@SwaggerResponse(code=401),
+        		@SwaggerResponse(code=403),
+        		@SwaggerResponse(code=500)        		
+        }
     )
     public void doPut(Object request, Object resp) {
         RequestHandler.handle(request);
@@ -66,7 +79,13 @@ public class DemoEndpoint {
             "b detailed = boolean determining whether to get extra meeting information ",
             "meeting_minutes = notes taken during the meeting",
         },
-        responses={"200=OK", "400", "404", "401", "403"}
+        responses={
+        	@SwaggerResponse(),
+        	@SwaggerResponse(code=400),
+        	@SwaggerResponse(code=401),
+        	@SwaggerResponse(code=403),
+        	@SwaggerResponse(code=500)        		
+       }
     )
     public void doGet(Object request, Object resp) {
         RequestHandler.handle(request);
