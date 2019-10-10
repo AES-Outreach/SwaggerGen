@@ -35,7 +35,7 @@ import annotation.SwaggerGen;
  * @author Alexandre Seguin
  * 
  */
-@Mojo(name = "process-annotations", requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, configurator = "include-project-dependencies")
+@Mojo(name = "process-annotations", configurator = "include-project-dependencies", requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
 public class AnnotationReaderMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", required = true, readonly = true)

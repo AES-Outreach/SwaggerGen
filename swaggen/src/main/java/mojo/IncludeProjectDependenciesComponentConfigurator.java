@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.codehaus.classworlds.ClassRealm;
 import org.codehaus.plexus.component.annotations.Component;
+import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.configurator.AbstractComponentConfigurator;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.codehaus.plexus.component.configurator.ComponentConfigurator;
 import org.codehaus.plexus.component.configurator.ConfigurationListener;
 import org.codehaus.plexus.component.configurator.converters.composite.ObjectWithFieldsConverter;
+import org.codehaus.plexus.component.configurator.converters.lookup.ConverterLookup;
 import org.codehaus.plexus.component.configurator.converters.special.ClassRealmConverter;
 import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
 import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator;
@@ -20,13 +22,15 @@ import org.codehaus.plexus.configuration.PlexusConfiguration;
 
 /**
  * A custom ComponentConfigurator which adds the project's runtime classpath elements
- * to the plugin's. 
+ * to the plugin's.
+ * 
  * @author Brian Jackson
  * @since Aug 1, 2008 3:04:17 PM 
  */
 @Component(role=ComponentConfigurator.class, isolatedRealm = false, hint="include-project-dependencies")
 public class IncludeProjectDependenciesComponentConfigurator extends AbstractComponentConfigurator { 
 
+	@Requirement(role=ConverterLookup.class, hint="default")
     public void configureComponent( Object component, PlexusConfiguration configuration,
                                     ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm,
                                     ConfigurationListener listener )
@@ -42,7 +46,8 @@ public class IncludeProjectDependenciesComponentConfigurator extends AbstractCom
                                         expressionEvaluator, listener );
     }
 
-    private void addProjectDependenciesToClassRealm(ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm) throws ComponentConfigurationException {
+    @SuppressWarnings("unchecked")
+	private void addProjectDependenciesToClassRealm(ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm) throws ComponentConfigurationException {
         List<String> runtimeClasspathElements;
         try {
             //noinspection unchecked
