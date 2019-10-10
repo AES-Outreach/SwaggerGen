@@ -33,8 +33,9 @@ import annotation.SwaggerGen;
  * projects importing the SwaggerGen annotation project.
  * 
  * @author Alexandre Seguin
+ * 
  */
-@Mojo(name = "process-annotations", requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
+@Mojo(name = "process-annotations", requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, configurator = "include-project-dependencies")
 public class AnnotationReaderMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
