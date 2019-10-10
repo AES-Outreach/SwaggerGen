@@ -23,13 +23,8 @@ import org.codehaus.plexus.configuration.PlexusConfiguration;
  * to the plugin's. 
  * @author Brian Jackson
  * @since Aug 1, 2008 3:04:17 PM 
- * 
- * @plexus.component role="org.codehaus.plexus.component.configurator.ComponentConfigurator"
- *                   role-hint="include-project-dependencies"
- * @plexus.requirement role="org.codehaus.plexus.component.configurator.converters.lookup.ConverterLookup"
- *                   role-hint="default"
  */
-@Component(role=ComponentConfigurator.class, hint="include-project-dependencies")
+@Component(role=ComponentConfigurator.class, isolatedRealm = false, hint="include-project-dependencies")
 public class IncludeProjectDependenciesComponentConfigurator extends AbstractComponentConfigurator { 
 
     public void configureComponent( Object component, PlexusConfiguration configuration,
