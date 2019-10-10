@@ -29,6 +29,7 @@ import org.codehaus.plexus.configuration.PlexusConfiguration;
  * @plexus.requirement role="org.codehaus.plexus.component.configurator.converters.lookup.ConverterLookup"
  *                   role-hint="default"
  */
+@Component(role=ComponentConfigurator.class, hint="include-project-dependencies")
 public class IncludeProjectDependenciesComponentConfigurator extends AbstractComponentConfigurator { 
 
     public void configureComponent( Object component, PlexusConfiguration configuration,
