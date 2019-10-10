@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.codehaus.classworlds.ClassRealm;
 import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.configurator.AbstractComponentConfigurator;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.codehaus.plexus.component.configurator.ComponentConfigurator;
@@ -23,9 +22,13 @@ import org.codehaus.plexus.configuration.PlexusConfiguration;
  * A custom ComponentConfigurator which adds the project's runtime classpath elements
  * to the plugin's. 
  * @author Brian Jackson
- * @since Aug 1, 2008 3:04:17 PM
+ * @since Aug 1, 2008 3:04:17 PM 
+ * 
+ * @plexus.component role="org.codehaus.plexus.component.configurator.ComponentConfigurator"
+ *                   role-hint="include-project-dependencies"
+ * @plexus.requirement role="org.codehaus.plexus.component.configurator.converters.lookup.ConverterLookup"
+ *                   role-hint="default"
  */
-@Component(role=ComponentConfigurator.class, hint="include-project-dependencies")
 public class IncludeProjectDependenciesComponentConfigurator extends AbstractComponentConfigurator { 
 
     public void configureComponent( Object component, PlexusConfiguration configuration,
