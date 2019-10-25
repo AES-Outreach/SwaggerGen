@@ -28,7 +28,7 @@ public class DemoEndpoint {
      * @param resp fake response object
      */
     @SwaggerGen(
-        uri="/post",
+        uri="/demo",
         title="ThisGoesIntoSwagger",
         method="POST",
         description="Post Servlet Description",
@@ -47,7 +47,7 @@ public class DemoEndpoint {
     }
     
     @SwaggerGen(
-        uri= "/put",
+        uri="/demo",
         method="PUT",
         description="This is a sample PUT endpoint description to be printed in a Swagger format HTML documentation file.",
         headers={"authorization=token used for authorization", "langHeader=expected language of the request"},
@@ -70,7 +70,7 @@ public class DemoEndpoint {
      * @param resp fake response object
      */
     @SwaggerGen(
-        uri="/get",
+        uri="/demo",
         method="GET",
         description="This is a sample GET endpoint description to be printed in a Swagger format HTML documentation file.",
         headers={"authorization=authorization token", "langHeader=expected language of the request"},
