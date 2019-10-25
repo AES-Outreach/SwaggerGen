@@ -27,9 +27,9 @@ public class MockPostEndpoint {
                 },
         body="body.scheme",
         responses={
-        		@SwaggerResponse(body=@SwaggerBody(value="/test/schema.json")), 
-        		@SwaggerResponse(code=400, body=@SwaggerBody(value="/test/schema.json")), 
-        		@SwaggerResponse(code=404, body=@SwaggerBody(value="/test/schema.json"))
+        		@SwaggerResponse(body=@SwaggerBody("/test/schema.json")), 
+        		@SwaggerResponse(code=400, body=@SwaggerBody("/test/schema.json")), 
+        		@SwaggerResponse(code=404, body=@SwaggerBody("/test/schema.json"))
         },
         responseBody= "response.scheme"
     )
