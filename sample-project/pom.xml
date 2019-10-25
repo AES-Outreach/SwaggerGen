@@ -26,26 +26,24 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.github.aes-outreach</groupId>
-					<artifactId>swaggen-annotations</artifactId>
-					<version>0.0.1</version>
-					<configuration>
-						<propertiesPath>config.properties</propertiesPath>
-						<showLogs>true</showLogs>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>install</phase>
-							<goals>
-								<goal>process-annotations</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>com.github.aes-outreach</groupId>
+				<artifactId>swaggen-annotations</artifactId>
+				<version>0.0.1</version>
+				<configuration>
+					<propertiesPath>config.properties</propertiesPath>
+					<showLogs>true</showLogs>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>process-annotations</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>
