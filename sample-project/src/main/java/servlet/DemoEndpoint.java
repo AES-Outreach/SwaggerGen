@@ -34,7 +34,7 @@ public class DemoEndpoint {
         description="Post Servlet Description",
         headers={"langHeader=en"},
         responses={
-        		@SwaggerResponse(body=@SwaggerBody(value="/schemas/all/orderPost.json")),
+        		@SwaggerResponse(body=@SwaggerBody("/schemas/all/orderPost.json")),
         		@SwaggerResponse(code=400),
         		@SwaggerResponse(code=401),
         		@SwaggerResponse(code=403),
@@ -52,7 +52,7 @@ public class DemoEndpoint {
         description="This is a sample PUT endpoint description to be printed in a Swagger format HTML documentation file.",
         headers={"authorization=token used for authorization", "langHeader=expected language of the request"},
         responses={
-        		@SwaggerResponse(body=@SwaggerBody(value="/schemas/all/orderPut.json")),
+        		@SwaggerResponse(body=@SwaggerBody("/schemas/all/orderPut.json")),
         		@SwaggerResponse(code=400),
         		@SwaggerResponse(code=401),
         		@SwaggerResponse(code=403),
