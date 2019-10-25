@@ -1,12 +1,16 @@
 package domain.output;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import annotation.SwaggerGenClass;
 import java.util.HashMap;
 
 /**
  * Server variables for the server URL Currently used for specifying the scheme
  */
+@JsonInclude(Include.NON_NULL)
 public class ServerVariable {
     /**
      * The default variable that swagger uses Required
