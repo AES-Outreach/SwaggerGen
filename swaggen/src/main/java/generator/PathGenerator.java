@@ -153,8 +153,10 @@ public class PathGenerator {
      * @return PathInfo object with necessary information
      */
     private static PathInfo addPathInfo(SwaggerGen annotation, SwaggerGenClass klassAnnotation) {
-        String basePath = (annotation.basePath().isBlank() && klassAnnotation != null) ? klassAnnotation.basePath()
-                : annotation.basePath();
+    	// OpenAPIv3 spec requires paths to start with a slash
+        String basePath = (annotation.basePath().isBlank() && klassAnnotation != null) 
+        		? "/"+klassAnnotation.basePath()
+                : "/"+annotation.basePath();
         String[] servers = (klassAnnotation != null) ? klassAnnotation.servers() : new String[0];
         ArrayList<ServerURL> serverURL = new ArrayList<ServerURL>();
 
