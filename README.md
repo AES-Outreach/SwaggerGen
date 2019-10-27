@@ -38,6 +38,10 @@ Currently, the process of setting up the project will require you to clone the r
 </plugin>
 ```
 
+ # Generating documentation pages #
+ Running a Maven build on a project importing a plugin will create a folder structure that matches your base paths. We provide a ruby script that uses the Redoc CLI NPM package to generate static HTML documentation out of your Swagger files. To run the ruby file it run
+ ```ruby generate_docs.ruby```
+
 # Example #
 Given a sample servlet method meant to capture a PUT request:
 ```
