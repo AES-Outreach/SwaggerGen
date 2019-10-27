@@ -3,7 +3,8 @@ package domain.input.jsonschema;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import enums.PropertyType;
 
@@ -17,56 +18,22 @@ import enums.PropertyType;
 public class JsonSchema {
 
     /**
-     * The Schema used
-     */
-    @JsonProperty("$schema")
-    private String schema;
-
-    /**
-     * The Schema ID
-     */
-    @JsonProperty("$id")
-    private String id;
-    
-    /**
      * The base type
      */
-    @JsonProperty("type")
+    @JsonInclude(Include.NON_NULL)
     private PropertyType type;
-    
-    /**
-     * The Schema title
-     */
-    @JsonProperty("title")
-    private String title;
 
     /**
      * The properties if type is OBJECT
      */
-    @JsonProperty("properties")
+    @JsonInclude(Include.NON_NULL)
     private Map<String, Property> properties;
 
     /**
      * The items if type is ARRAY
      */
-    @JsonProperty("items")
+    @JsonInclude(Include.NON_NULL)
     private Property items;
-    
-    public String getSchema() {
-        return schema;
-    }
-    
-    public void setSchema(String schema) {
-        this.schema = schema;
-    }
-    
-    public String getId() {
-        return id;
-    }
-    
-    public void setId(String id) {
-        this.id = id;
-    }
     
     public PropertyType getType() {
         return type;
@@ -74,14 +41,6 @@ public class JsonSchema {
     
     public void setType(PropertyType type) {
         this.type = type;
-    }
-    
-    public String getTitle() {
-        return title;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
     }
     
     public Map<String, Property> getProperties() {
@@ -102,7 +61,7 @@ public class JsonSchema {
 
     @Override
     public String toString() {
-        return "JsonSchema [schema=" + schema + ", id=" + id + ", type=" + type + ", title=" + title + ", properties="
+        return "JsonSchema [type=" + type + ", properties="
                 + properties + ", items=" + items + "]";
     }
 }

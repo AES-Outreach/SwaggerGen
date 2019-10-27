@@ -1,5 +1,7 @@
 package mock.endpoint;
 import annotation.SwaggerGen;
+import annotation.SwaggerResponse;
+import annotation.body.*;
 import mock.service.MockSlingServerletRequest;
 import mock.service.MockSlingServerletResponse;
 
@@ -24,7 +26,11 @@ public class MockPostEndpoint {
                 "param4 = Another String Param"
                 },
         body="body.scheme",
-        responses={"200=OK", "400=Bad Request", "404"},
+        responses={
+        		@SwaggerResponse(body=@SwaggerBody("/test/schema.json")), 
+        		@SwaggerResponse(code=400, body=@SwaggerBody("/test/schema.json")), 
+        		@SwaggerResponse(code=404, body=@SwaggerBody("/test/schema.json"))
+        },
         responseBody= "response.scheme"
     )
     protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {

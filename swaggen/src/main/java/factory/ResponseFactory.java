@@ -1,10 +1,18 @@
 package factory;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.httpclient.HttpStatus;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import annotation.SwaggerGen;
+import annotation.SwaggerResponse;
 import domain.output.path.Response;
+
 
 /**
  * Creates a response from the annotation
@@ -12,53 +20,43 @@ import domain.output.path.Response;
  * @author William Gardiner (7267012)
  */
 public class ResponseFactory {
-
-    /**
-     * The delimiter between response codes and their description
-     */
-    private static final String DELIMITER = "=";
-    
-    /**
-     * The index of the response code
-     */
-    private static final int CODE_INDEX = 0;
-    
-    /**
-     * The index of the description
-     */
-    private static final int DESCRIPTION_INDEX = 1;
     
     /**
      * The description when no description id provided
      */
-    private static final String DEFAULT_DESCRIPTION = "No description";
+    public static final String DEFAULT_DESCRIPTION = "No description";
     
     /**
      * Generates a Map of response codes to Responses from the annotation
      * 
      * @param annotation the annotation
      * @return the map
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
      */
-    public static Map<String, Response> createResponses(SwaggerGen annotation) {
+    public static Map<String, Response> createResponses(SwaggerGen annotation) throws JsonParseException, JsonMappingException, IOException {
         Map<String, Response> responses = new HashMap<>();
-        String expectedResponseCode = "";
-        for(String responseString : annotation.responses()) {			
-            String[] responseSplit = responseString.split(DELIMITER);
+        for(SwaggerResponse responseAnnotation : annotation.responses()) {
+        	
             Response response = new Response();
-            if(responseSplit.length == 2) {
-                response.setDescription(responseSplit[DESCRIPTION_INDEX]);
+            if(responseAnnotation.description() != null) {
+                response.setDescription(responseAnnotation.description());
             } else {
-                response.setDescription(DEFAULT_DESCRIPTION);
+            	String defaultStatusText = HttpStatus.getStatusText(responseAnnotation.code());
+                response.setDescription(defaultStatusText != null ? defaultStatusText : DEFAULT_DESCRIPTION);
             }
             
-            responses.put(responseSplit[CODE_INDEX], response);
-            if("".contentEquals(expectedResponseCode)) {
-                expectedResponseCode = responseSplit[CODE_INDEX];
+            String code = String.valueOf(responseAnnotation.code());
+            
+            if(!responseAnnotation.body().value().contentEquals("")) {
+            	response.setContent(ResponseBodyFactory.createRequestBody(responseAnnotation.body().value(), annotation.title(), annotation.method()));
             }
+            
+            responses.put(code, response);
+
         }
-        if(annotation.responses().length > 0) {
-            responses.get(expectedResponseCode).setBody(ResponseBodyFactory.createRequestBody(annotation));
-        }
+       
         return responses;
     }
 

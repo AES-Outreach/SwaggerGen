@@ -34,10 +34,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
         setFile("test/schema/simple_object_schema.json");
         
         // Top Level Schema
-        assertEquals(schema.getSchema(), SCHEMA);
-        assertEquals(schema.getId(), "http://example.com/root.json");
         assertEquals(schema.getType(), PropertyType.OBJECT);
-        assertEquals(schema.getTitle(), "The Root Schema");
         assertNotNull(schema.getProperties());
         
         //Properties
@@ -134,7 +131,6 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
     public void testManySchemas() throws JsonParseException, JsonMappingException, IOException {
         for(int i = 0; i < 100; i++) {
             setFile("test/schema/simple_object_schema.json");
-            assertNotNull(schema.getTitle());
             schema = null;
         }
     }
@@ -150,10 +146,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
     public void testLargeSchema() throws JsonParseException, JsonMappingException, IOException {
         setFile("test/schema/large_schema.json");
         
-        assertEquals(schema.getSchema(), SCHEMA);
-        assertEquals(schema.getId(), "http://example.com/root.json");
         assertEquals(schema.getType(), PropertyType.ARRAY);
-        assertEquals(schema.getTitle(), "The Root Schema");
         assertNotNull(schema.getItems());
         
     }
@@ -181,10 +174,7 @@ public class DeserializeSchemaTests extends BaseSchemaDeserializerTest {
     public void testEmptyBody() throws JsonParseException, JsonMappingException, IOException {
         setFile("test/schema/empty_body.json");
         
-        assertEquals(schema.getSchema(), SCHEMA);
-        assertEquals(schema.getId(), "http://example.com/root.json");
         assertEquals(schema.getType(), PropertyType.OBJECT);
-        assertEquals(schema.getTitle(), "The Root Schema");
         assertNull(schema.getProperties());
         
         

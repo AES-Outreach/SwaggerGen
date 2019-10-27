@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import domain.output.path.Endpoint;
+import domain.input.jsonschema.JsonSchema;
 import domain.output.PathInfo;
+import domain.output.content.Components;
 import enums.RequestMethod;
 
 /**
@@ -35,6 +37,7 @@ public class Swagger {
         this.info = swagger.getInfo();
         this.setVersion(swagger.getOpenapi());
         this.servers = swagger.getServers();
+        this.components = swagger.getComponents();
     }
 
     /**
@@ -61,6 +64,8 @@ public class Swagger {
      * Top level map, mapping all endpoints by their request method and URL
      */
     private Map<String, Map<RequestMethod, Endpoint>> paths;
+    
+    private Components components;
 
     @JsonIgnore
     private Map<PathInfo, Map<RequestMethod, Endpoint>> swaggerPaths;
@@ -121,4 +126,12 @@ public class Swagger {
     public void setServers(ArrayList<ServerURL> server) {
         this.servers = server;
     }
+
+	public Components getComponents() {
+		return components;
+	}
+
+	public void setComponents(Components components) {
+		this.components = components;
+	}
 }

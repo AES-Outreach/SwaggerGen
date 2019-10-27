@@ -54,8 +54,6 @@ public abstract class BaseSchemaDeserializerTest {
             return null;
         }
         Property property = properties.get(key);
-        assertEquals(property.getId(), id);
-        assertEquals(property.getTitle(), title);
         assertEquals(property.getType(), type);
         switch (type) {
         case OBJECT:
@@ -88,8 +86,6 @@ public abstract class BaseSchemaDeserializerTest {
             return null;
         }
         Property item = property.getItems();
-        assertEquals(item.getId(), id);
-        assertEquals(item.getTitle(), title);
         assertEquals(item.getType(), type);
         switch (type) {
         case OBJECT:

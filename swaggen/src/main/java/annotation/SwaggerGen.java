@@ -68,7 +68,7 @@ public @interface SwaggerGen {
      * 
      * @return list of response codes
      */
-    String[] responses() default {"200=OK"};
+    SwaggerResponse[] responses() default {};
     
     /**
      * The name of the JSON schema file that describes the body of the response

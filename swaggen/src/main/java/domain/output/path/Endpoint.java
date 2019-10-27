@@ -3,8 +3,12 @@ package domain.output.path;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import domain.input.jsonschema.JsonSchema;
 
 /**
  * Represents a REST Endpoint. It is referenced from the Path by its method.
@@ -12,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author William Gardiner (7267012)
  */
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties({ "definitions" })
 public class Endpoint {
     
     /**
@@ -39,7 +44,17 @@ public class Endpoint {
      */
     private Map<String, Response> responses;
     
-    public String getSummary() {
+    private Map<String, JsonSchema> definitions;
+    
+	public Map<String, JsonSchema> getDefinitions() {
+		return definitions;
+	}
+
+	public void setDefinitions(Map<String, JsonSchema> definitions) {
+		this.definitions = definitions;
+	}
+
+	public String getSummary() {
         return summary;
     }
     
@@ -77,7 +92,8 @@ public class Endpoint {
     
     public void setResponses(Map<String, Response> responses) {
         this.responses = responses;
-    }
+    }    
+
 
     @Override
     public String toString() {
