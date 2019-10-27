@@ -26,13 +26,12 @@ hs_err_pid*
 /target/
 /apidocs/
 
-# Eclipse Core      
+# Eclipse Core
 .project
 
-# JDT-specific (Eclipse Java Development Tools)     
+# JDT-specific (Eclipse Java Development Tools)
 .classpath
 swaggen/generated/
-*.html
 sample-project/.factorypath
 .vscode/settings.json
 .vscode/launch.json

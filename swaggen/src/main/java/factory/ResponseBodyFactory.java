@@ -41,7 +41,7 @@ public class ResponseBodyFactory {
 
 	private static ApplicationJson buildApplicationPOJO(String definitionName) {
 		Schema schema = new Schema();
-		schema.set$ref(definitionName);
+		schema.setRef(definitionName);
 
 		ApplicationJson appjson = new ApplicationJson();
 		appjson.setSchema(schema);
