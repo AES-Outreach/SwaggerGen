@@ -17,7 +17,7 @@
   <proxies/>
   <profiles>
     <profile>
-      <id>outreach_nexus</id>
+      <id>swaggergen_nexus</id>
       <!--Override the repository (and pluginRepository) "central" from the Maven Super POM -->
       <repositories>
         <repository>
@@ -28,9 +28,9 @@
           </releases>
         </repository>
         <repository>
-          <id>repo.outreach.uottawa.io-release</id>
+          <id>repo.outreach.swaggergen.io-release</id>
           <name>Outreach Nexus Repo</name>
-          <url>https://repo.outstem.io/repository/maven-releases/</url>
+          <url>https://repo.outstem.io/repository/swaggergen/</url>
         </repository>
       </repositories>
       <pluginRepositories>
@@ -41,10 +41,15 @@
             <enabled>true</enabled>
           </releases>
         </pluginRepository>
+        <pluginRepository>
+          <id>repo.outreach.swaggergen.io-release</id>
+          <name>Outreach Nexus Repo</name>
+          <url>https://repo.outstem.io/repository/swaggergen/</url>
+        </pluginRepository>
       </pluginRepositories>
     </profile>
   </profiles>
   <activeProfiles>
-    <activeProfile>outreach_nexus</activeProfile>
+    <activeProfile>swaggergen_nexus</activeProfile>
   </activeProfiles>
 </settings>

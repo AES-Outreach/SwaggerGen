@@ -22,7 +22,7 @@
 	<distributionManagement>
 		<repository>
 			<id>repo.outreach.uottawa.io-release</id>
-			<url>https://repo.outstem.io/repository/maven-releases/</url>
+			<url>https://repo.outstem.io/repository/swaggergen/</url>
 		</repository>
 	</distributionManagement>
 
