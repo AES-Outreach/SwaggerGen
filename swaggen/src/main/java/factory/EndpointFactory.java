@@ -1,6 +1,7 @@
 package factory;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -25,7 +26,7 @@ public class EndpointFactory {
      * @throws JsonMappingException 
      * @throws JsonParseException 
      */
-    public static Endpoint createEndpoint(SwaggerGen annotation, SwaggerGenClass klassAnnotation) throws JsonParseException, JsonMappingException, IOException {
+    public static Endpoint createEndpoint(SwaggerGen annotation, SwaggerGenClass klassAnnotation, Properties config) throws JsonParseException, JsonMappingException, IOException {
         Endpoint endpoint = new Endpoint();
         
         if (klassAnnotation != null) {
@@ -38,7 +39,7 @@ public class EndpointFactory {
         
         endpoint.setParameters(ParameterFactory.createParameters(annotation, klassAnnotation));
         endpoint.setRequestBody(RequestBodyFactory.createRequestBody(annotation));
-        endpoint.setResponses(ResponseFactory.createResponses(annotation));
+        endpoint.setResponses(ResponseFactory.createResponses(annotation, config));
         endpoint.setDefinitions(DefinitionsFactory.createDefinitions(annotation));
         
         return endpoint;

@@ -31,6 +31,10 @@ public class ResponseBodyFactory {
 	 * @throws JsonParseException
 	 */
 	public static Content createRequestBody(String schemaLocation, String servletName, String requestMethod) {
+		if(schemaLocation == null) {
+			return null;
+		}
+		
 		Content responseSchema = new Content();
 
 		String definitionName = DefinitionsFactory.nameGenerator(servletName, requestMethod);
