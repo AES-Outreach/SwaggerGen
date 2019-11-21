@@ -19,7 +19,7 @@ public class MockBlankClassAnnotationEndpoint {
     @SwaggerGen(
         uri="/class/empty",
         method="PUT",
-        body="schemas/all/orderPut.json",
+        requestBody="schemas/all/orderPut.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 
@@ -45,7 +45,7 @@ public class MockBlankClassAnnotationEndpoint {
         title="Overwriting class title",
         description="Overwriting class description",
         headers={"langHeader=en"},
-        body="schemas/all/orderPut.json",
+        requestBody="schemas/all/orderPut.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 

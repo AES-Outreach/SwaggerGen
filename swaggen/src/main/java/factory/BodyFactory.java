@@ -19,7 +19,7 @@ import domain.output.path.Schema;
  * 
  * @author William Gardiner (7267012)
  */
-public class ResponseBodyFactory {
+public class BodyFactory {
 
 	/**
 	 * Generates a response body from the annotation.
@@ -30,7 +30,7 @@ public class ResponseBodyFactory {
 	 * @throws JsonMappingException
 	 * @throws JsonParseException
 	 */
-	public static Content createRequestBody(String schemaLocation, String servletName, String requestMethod) {
+	public static Content createContent(String schemaLocation, String servletName, String requestMethod) {
 		Content responseSchema = new Content();
 
 		String definitionName = DefinitionsFactory.nameGenerator(servletName, requestMethod);

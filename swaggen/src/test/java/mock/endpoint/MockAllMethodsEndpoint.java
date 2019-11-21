@@ -19,7 +19,7 @@ public class MockAllMethodsEndpoint {
         method="PUT",
         description="Put Servlet Description",
         headers={"Content-Type=application/json", "langHeader=en"},
-        body="schemas/all/orderPut.json",
+        requestBody="schemas/all/orderPut.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 
@@ -43,7 +43,7 @@ public class MockAllMethodsEndpoint {
         method="POST",
         description="Post Servlet Description",
         headers={"Content-Type=application/json", "langHeader=en"},
-        body="schemas/all/orderPost.json",
+        requestBody="schemas/all/orderPost.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 

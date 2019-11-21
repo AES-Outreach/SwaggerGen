@@ -22,7 +22,7 @@ public class MockPostEndpoint {
             "s64 param3 = A String Param",
             "param4 = Another String Param"
             },
-        body="body.scheme",
+        requestBody="body.scheme",
         responses={
             	@SwaggerResponse(),
             	@SwaggerResponse(code=400),

@@ -25,7 +25,6 @@ public class MockPostEndpoint {
                 "s64 param3 = A String Param",
                 "param4 = Another String Param"
                 },
-        body="body.scheme",
         responses={
         		@SwaggerResponse(body=@SwaggerBody("/test/schema.json")), 
         		@SwaggerResponse(code=400, body=@SwaggerBody("/test/schema.json")), 

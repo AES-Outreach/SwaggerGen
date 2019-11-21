@@ -63,6 +63,9 @@ public class DefinitionsFactory {
 	}
 	
 	public static String nameGenerator(String title, String method) {
-		return title.replaceAll("\\s","") + "-" + method;
+		return ((title != null && title.length() > 0)
+				? title.replaceAll("\\s","") 
+				: "Untitled")
+				+ "-" + method;
 	}
 }

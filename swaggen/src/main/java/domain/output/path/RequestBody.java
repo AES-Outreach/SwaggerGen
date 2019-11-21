@@ -8,40 +8,42 @@ import enums.ContentType;
 /**
  * Contains the Body of the request with its type
  * 
- * @author William Gardiner (7267012)
+ * @author Alexandre Seguin (7663995)
  */
 @JsonInclude(Include.NON_NULL)
 public class RequestBody {
 
     /**
-     * The type
+     * The content (schema)
      */
-    private ContentType type;
+    private Content content;
     
     /**
-     * The body
+     * The description for the request body
      */
-    private String filename;
+    private String description;
 
-    public ContentType getType() {
-        return type;
-    }
+	public Content getContent() {
+		return content;
+	}
 
-    public void setType(ContentType type) {
-        this.type = type;
-    }
+	public void setContent(Content content) {
+		this.content = content;
+	}
 
-    public String getFilename() {
-        return filename;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    @Override
-    public String toString() {
-        return "RequestBody [type=" + type + ", filename=" + filename + "]";
-    }
+	@Override
+	public String toString() {
+		return "RequestBody [content=" + content + ", description=" + description + "]";
+	}
+
+    
     
 }

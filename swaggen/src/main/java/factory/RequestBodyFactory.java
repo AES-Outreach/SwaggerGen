@@ -6,7 +6,7 @@ import domain.output.path.RequestBody;
 /**
  * Generates a RequestBody from the requestBody in the annotation.
  * 
- * @author William Gardiner (7267012)
+ * @author Alexandre Seguin (7663995)
  *
  */
 public class RequestBodyFactory {
@@ -18,7 +18,12 @@ public class RequestBodyFactory {
      * @return the request body
      */
     public static RequestBody createRequestBody(SwaggerGen annotation) {
-        // TODO: Implement
+        if (annotation.requestBody() != null) {
+        	RequestBody requestBody = new RequestBody();
+        	requestBody.setContent(BodyFactory.createContent(annotation.requestBody(), 
+        			annotation.title(), annotation.method()));
+        	return requestBody;
+        }
         return null;
     }
 

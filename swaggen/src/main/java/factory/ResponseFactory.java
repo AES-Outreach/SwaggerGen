@@ -50,7 +50,7 @@ public class ResponseFactory {
             String code = String.valueOf(responseAnnotation.code());
             
             if(!responseAnnotation.body().value().contentEquals("")) {
-            	response.setContent(ResponseBodyFactory.createRequestBody(responseAnnotation.body().value(), annotation.title(), annotation.method()));
+            	response.setContent(BodyFactory.createContent(responseAnnotation.body().value(), annotation.title(), annotation.method()));
             }
             
             responses.put(code, response);

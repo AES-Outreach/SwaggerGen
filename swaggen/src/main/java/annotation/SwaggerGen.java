@@ -61,7 +61,7 @@ public @interface SwaggerGen {
      * 
      * @return name of JSON schema file
      */
-    String body() default "";
+    String requestBody() default "";
     
     /**
      * A list of response codes of the form "{type} {name}={description}"
