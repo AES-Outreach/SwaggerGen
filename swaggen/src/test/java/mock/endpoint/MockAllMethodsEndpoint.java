@@ -1,6 +1,7 @@
 package mock.endpoint;
 import annotation.SwaggerGen;
 import annotation.SwaggerResponse;
+import annotation.body.SwaggerBody;
 /**
  * A Fake endpoint for testing.
  * 
@@ -19,9 +20,9 @@ public class MockAllMethodsEndpoint {
         method="PUT",
         description="Put Servlet Description",
         headers={"Content-Type=application/json", "langHeader=en"},
-        requestBody="schemas/all/orderPut.json",
+        requestBody="/schemas/fakePutSchema.json",
         responses={
-        		@SwaggerResponse(), 
+        		@SwaggerResponse(body = @SwaggerBody("/schemas/fakePutSchema.json")), 
         		@SwaggerResponse(code=400), 
         		@SwaggerResponse(code=401), 
         		@SwaggerResponse(code=403),
@@ -43,7 +44,7 @@ public class MockAllMethodsEndpoint {
         method="POST",
         description="Post Servlet Description",
         headers={"Content-Type=application/json", "langHeader=en"},
-        requestBody="schemas/all/orderPost.json",
+        requestBody="/test/schema.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 

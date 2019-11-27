@@ -29,8 +29,7 @@ public class MockPostEndpoint {
         		@SwaggerResponse(body=@SwaggerBody("/test/schema.json")), 
         		@SwaggerResponse(code=400, body=@SwaggerBody("/test/schema.json")), 
         		@SwaggerResponse(code=404, body=@SwaggerBody("/test/schema.json"))
-        },
-        responseBody= "response.scheme"
+        }
     )
     protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
         // Implementation not important.

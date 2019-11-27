@@ -21,7 +21,7 @@ public class RequestBodyFactory {
         if (annotation.requestBody() != null) {
         	RequestBody requestBody = new RequestBody();
         	requestBody.setContent(BodyFactory.createContent(annotation.requestBody(), 
-        			annotation.title(), annotation.method()));
+        			annotation.title(), annotation.method()+"-RequestBody"));
         	return requestBody;
         }
         return null;

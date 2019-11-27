@@ -19,7 +19,7 @@ public class MockPutEndpointWithSchema {
         title="Put",
         description="Put Servlet Description",
         headers={"Content-Type=application/json", "langHeader=en"},
-        requestBody="schemas/fakePutSchema.json",
+        requestBody="/schemas/fakePutSchema.json",
         responses={
             	@SwaggerResponse(),
             	@SwaggerResponse(code=400),

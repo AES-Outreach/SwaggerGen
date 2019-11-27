@@ -32,7 +32,6 @@ public class MockClassAnnotationEndpoint {
     @SwaggerGen(
         uri="/class",
         method="PUT",
-        requestBody="schemas/all/orderPut.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 
@@ -58,7 +57,6 @@ public class MockClassAnnotationEndpoint {
         title="Overwriting class title",
         description="Overwriting class description",
         headers={"langHeader=en"},
-        requestBody="schemas/all/orderPut.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 
@@ -83,7 +81,6 @@ public class MockClassAnnotationEndpoint {
         basePath="/base/endpoint",
         method="POST",
         headers={"langHeader=en"},
-        requestBody="schemas/all/orderPost.json",
         responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400), 

@@ -1,7 +1,9 @@
 package tests.swagger;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import factory.DefinitionsFactory;
 import mock.endpoint.MockMinimalGetEndpoint;
 import mock.endpoint.MockAllMethodsEndpoint;
 import mock.endpoint.MockClassAnnotationEndpoint;
@@ -19,7 +21,6 @@ import mock.endpoint.MockNonSwaggerMethods;
 
 
 public class EndToEndTests {
-
 
     /**
      * Test to generate a Swagger file using the MockAllMethodsEndpoint mock endpoint.

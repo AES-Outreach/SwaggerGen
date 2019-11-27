@@ -22,15 +22,14 @@ public class MockPostEndpoint {
             "s64 param3 = A String Param",
             "param4 = Another String Param"
             },
-        requestBody="body.scheme",
+        requestBody="/schemas/all/orderPut.json",
         responses={
             	@SwaggerResponse(),
             	@SwaggerResponse(code=400),
             	@SwaggerResponse(code=401),
             	@SwaggerResponse(code=403),
             	@SwaggerResponse(code=500)        		
-           },
-        responseBody= "response.scheme"
+           }
     )
     protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
         // Implementation not important.

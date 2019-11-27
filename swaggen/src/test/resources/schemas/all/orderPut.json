@@ -6,26 +6,19 @@
 	"type": "object",
 	"additionalProperties": false,
 	"required": [
-		"boolean",
-		"number",
-		"string",
-		"array"
+		"items"
 	],
 	"properties": {
-		"boolean": {
+		"valid": {
 			"$id": "#/properties/boolean",
 			"type": "boolean"
 		},
-		"number": {
-			"$id": "#/properties/number",
-			"type": "integer"
-		},
-		"string": {
+		"comments": {
 			"$id": "#/properties/string",
 			"type": "string",
 			"pattern": "^(.*)$"
 		},
-		"array": {
+		"items": {
 			"$id": "#/properties/array",
 			"type": "array",
 			"items": {
@@ -33,26 +26,19 @@
 				"type": "object",
 				"additionalProperties": false,
 				"required": [
-					"json",
-					"number"
+					"item_name",
+					"item_id"
 				],
 				"properties": {
-					"json": {
-						"$id": "#/properties/array/items/properties/json",
-						"type": "object",
-						"additionalProperties": false,
-						"required": [
-							"nestedString"
-						],
-						"properties": {
-							"nestedString": {
-								"$id": "#/properties/array/items/properties/json/properties/nestedString",
-								"type": "string",
-								"pattern": "^(.*)$"
-							}
-						}
+					"item_name": {
+						"$id": "#/properties/array/items/properties/number",
+						"type": "integer"
 					},
-					"number": {
+					"item_description": {
+						"$id": "#/properties/array/items/properties/number",
+						"type": "integer"
+					},
+					"item_id": {
 						"$id": "#/properties/array/items/properties/number",
 						"type": "integer"
 					}

@@ -33,6 +33,7 @@ public class DemoEndpoint {
         method="POST",
         description="Post Servlet Description",
         headers={"langHeader=en"},
+        requestBody="/schemas/all/orderPost.json",
         responses={
         		@SwaggerResponse(body=@SwaggerBody("/schemas/all/orderPost.json")),
         		@SwaggerResponse(code=400),

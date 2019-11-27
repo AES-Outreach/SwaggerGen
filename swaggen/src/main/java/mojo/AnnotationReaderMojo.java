@@ -57,6 +57,7 @@ public class AnnotationReaderMojo extends AbstractMojo {
      */
     public void execute() throws MojoExecutionException {
         try {
+        	infoLog("Fetch properties: " + propertiesPath);
             try (InputStream input = new FileInputStream(propertiesPath)) {
                 Properties config = new Properties();
                 config.load(input);

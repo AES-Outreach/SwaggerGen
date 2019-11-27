@@ -22,15 +22,13 @@ public class MockGetPostEndpoint {
 			"s64 param3 = A String Param",
 			"param4 = Another String Param"
 		},
-		requestBody="requestBody.scheme",
 		responses={
         		@SwaggerResponse(), 
         		@SwaggerResponse(code=400, description="Bad Request"), 
         		@SwaggerResponse(code=401), 
         		@SwaggerResponse(code=403),
         		@SwaggerResponse(code=404)
-        },
-		responseBody= "response.scheme"
+        }
 	)
 	protected static final void doPost(MockSlingServerletRequest request, MockSlingServerletResponse resp) {
 		// Implementation not important.

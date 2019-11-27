@@ -13,9 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import annotation.SwaggerGen;
 import annotation.SwaggerResponse;
 import domain.input.jsonschema.JsonSchema;
-import domain.output.path.ApplicationJson;
-import domain.output.path.Content;
-import domain.output.path.Schema;
 
 /**
  * Generates a RequestBody from the responseBody in the annotation.
@@ -24,6 +21,7 @@ import domain.output.path.Schema;
  */
 public class DefinitionsFactory {
 
+	
 	/**
 	 * Generates a response body from the annotation.
 	 * 
@@ -37,29 +35,41 @@ public class DefinitionsFactory {
 			throws JsonParseException, JsonMappingException, IOException {
 		String title = annotation.title();
     	String method = annotation.method();
-    	
-    	Map<String, JsonSchema> definitions = new HashMap<String, JsonSchema>();
 
+    	Map<String, String> readSchemas = new HashMap<String, String>();
+    	Map<String, JsonSchema> definitions = new HashMap<String, JsonSchema>();
+    	
+    	
         for(SwaggerResponse responseAnnotation : annotation.responses()) {
         	String schemaLocation = responseAnnotation.body().value(); 
         	if(!schemaLocation.contentEquals("")) {
-
-        		ObjectMapper mapper = new ObjectMapper();
-        		try {
-        			String schema = IOUtils.toString(
-        					DefinitionsFactory.class.getResourceAsStream(schemaLocation), "UTF-8");
-        			
-        			JsonSchema schemaPOJO = mapper.readValue(schema, JsonSchema.class);
-        			String definitionName = nameGenerator(title, method);
-        			
-        			definitions.put(definitionName, schemaPOJO);
-        		} catch (IOException e) {
-        			throw new IOException("Invalid schema resource path added to annotation for response body: "
-        					+ schemaLocation, e);
-        		}
+        		createDefinition(title, method, definitions, schemaLocation, readSchemas);
         	}
         }
+    	if(annotation.requestBody() != null 
+    			&& !annotation.requestBody().contentEquals("")) {
+    		createDefinition(title, method+"-RequestBody", definitions, annotation.requestBody(), readSchemas);
+    	}
 		return definitions;
+	}
+
+	private static void createDefinition(String title, String method, Map<String, JsonSchema> definitions,
+			String schemaLocation, Map<String, String> readSchemas) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			if(readSchemas.get(schemaLocation) == null) {
+				readSchemas.put(schemaLocation, IOUtils.toString(
+						DefinitionsFactory.class.getResourceAsStream(schemaLocation), "UTF-8"));
+			}
+			
+			JsonSchema schemaPOJO = mapper.readValue(readSchemas.get(schemaLocation), JsonSchema.class);
+			String definitionName = nameGenerator(title, method);
+			
+			definitions.put(definitionName, schemaPOJO);
+		} catch (IOException e) {
+			throw new IOException("Invalid schema resource path added to annotation for response body: "
+					+ schemaLocation, e);
+		}
 	}
 	
 	public static String nameGenerator(String title, String method) {
