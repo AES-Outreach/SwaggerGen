@@ -62,6 +62,47 @@ We currently host the repository our our organization's Nexus repository. To add
 </build>
 ```
 
+# Overview of annotations #
+### @SwaggerGenClass ###
+
+![class annotation](https://i.imgur.com/xQDMofu.png)
+Defines the class level annotations that can be shared within an endpoints different request methods (POST, PUT, GET, DELETE). Although we're looking into improving our OpenAPI specification support, here is the list of supported properties:
+
+`basePath` 
+Defines the base path for the current servlet. In OpenAPI specficiations, the path represents the URL under which a service can be organized. This can be more specifically specified at the method level, but will default to the class value if not.
+`title`
+The title of the servlet which will be used to define the OpenAPI specification. If a title isn't provided for a method, it will default to using this one.
+`description`
+The description of the servlet which will be used to describe the servlet. If a description isn't provided for a method, it will default to using this one.
+
+example:
+
+### @SwaggerGen ###
+
+![method annotation](https://i.imgur.com/65FwWXK.png)
+Defines the method level annotations of a servlet. Here's a list of supported properties:
+
+`uri`
+Subpath under which an endpoint can exist. Allows for multiple URIs to be grouped under the same path & file.
+`method`
+Request method of the specific servlet method.
+`title`
+The title of the servlet method. If a title isn't provided for a method, it will default to using the class annotation.
+`description`
+The description of the servlet which will be used to describe the servlet. If a description isn't provided for a method, it will default to using this one.
+`headers`
+Headers supported or required the make a request to this servlet method.
+`queryParams`
+Query string parameters that are supported by this request. Unless the initial type string is defined (i = integer, b = boolean, d = double) the value is assumed to be a string.
+`@SwaggerResponse`
+One of the only planned nested annotations supported by our Maven plugin. It supports 3 subproperties :
+- `code`: Defines the response code
+- `description`: Defines the response description
+- `@SwaggerBody`: Another nested annotation in which the path to a json schema resource can be passed which defines the structure of the response body.
+
+`basePath`
+Defines the base path for the current servlet method. In OpenAPI specficiations, the path represents the URL under which a service can be organized. If not specified, will default to the class level annotation.
+
  # Generating documentation pages #
  Running a Maven build on a project importing a plugin will create a folder structure that matches your base paths. We provide a ruby script that uses the Redoc CLI NPM package to generate static HTML documentation out of your Swagger files. To run the ruby file it run  ```ruby generate_docs.ruby```. Alternatively, since we generate valid OpenAPI *.yml* files, you can use any of the SmartBear OpenAPI tools. 
 
