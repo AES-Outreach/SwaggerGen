@@ -4,15 +4,16 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Properties;
 
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import domain.output.path.Endpoint;
 import domain.output.PathInfo;
 import domain.output.SwaggerEndpoint;
+import domain.output.path.Endpoint;
 import enums.ParamType;
 import enums.RequestMethod;
 import mock.endpoint.MockPostEndpoint;
@@ -35,7 +36,8 @@ public class annotationTests {
     public void testAnnotation() throws JsonParseException, JsonMappingException, IOException {
         
         Class<?>[] klasses = {MockPostEndpoint.class};
-        Map<PathInfo, SwaggerEndpoint> path = generator.PathGenerator.generatePathsFromClassList(klasses);
+        Properties config = new Properties();
+        Map<PathInfo, SwaggerEndpoint> path = generator.PathGenerator.generatePathsFromClassList(klasses, config);
         Endpoint endpoint = path.get(path.keySet().toArray()[0]).getEndpoint(RequestMethod.POST);
         
         assertEquals(endpoint.getDescription(), "Serverlet Description");

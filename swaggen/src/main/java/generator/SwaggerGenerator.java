@@ -43,7 +43,7 @@ public class SwaggerGenerator {
             throws JsonParseException, JsonMappingException, IOException {
 
         // Create Paths
-        Map<PathInfo, SwaggerEndpoint> paths = generator.PathGenerator.generatePathsFromClassList(klasses);
+        Map<PathInfo, SwaggerEndpoint> paths = generator.PathGenerator.generatePathsFromClassList(klasses, config);
 
         Swagger swagger = new Swagger();
         swagger.setVersion(config.getProperty("version"));
