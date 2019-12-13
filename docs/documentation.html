@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>SwaggerGen - Home</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/documentation.css" />
+	</head>
+
+	<body>
+
+		<!-- Header -->
+		<header id="header">
+			<a href="index.html" class="logo"><strong>SwaggerGen</strong> Document Anything</a>
+			<nav>
+				<a href="#menu">Menu</a>
+			</nav>
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="team.html">Team</a></li>
+				<li><a href="contact.html">Contact Us</a></li>
+				<li><a href="documentation.html">Documentation</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<section id="main">
+			<div class="inner">
+				<header>
+					<h1>Installation</h1>
+				</header>
+				<p>This solution requires a <strong>Maven Java project</strong> to work. It is currently tightly bound
+					to those tools in its current iteration.
+					Assuming that your Maven project is created and good to go, all you need to do is add the dependency
+					and build option below to your <em>POM</em> file, if that isn't the case, you should learn about <a
+						href="https://maven.apache.org/guides/getting-started/">maven</a> before continuing.</p>
+
+				<p>We currently host the repository our our organization's Nexus repository. To add our plugin as
+					dependency, you must first add the repo to your <em>pom.xml</em> file, then you also need to
+					configurate the plugin execution's.</p>
+
+				<p><strong>Adding the our Nexus repository</strong></p>
+
+				<pre><code>&lt;pluginRepositories&gt;
+	&lt;pluginRepository&gt;
+		&lt;id&gt;repo.outreach.swaggergen.io-release&lt;/id&gt;
+		&lt;name&gt;Outreach Nexus Repo&lt;/name&gt;
+		&lt;url&gt;https://repo.outstem.io/repository/swaggergen/&lt;/url&gt;
+	&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;</code></pre>
+
+				<p><strong>Adding the dependency</strong></p>
+
+				<pre><code>&lt;dependency&gt;
+	&lt;groupId&gt;com.github.aes-outreach&lt;/groupId&gt;
+	&lt;artifactId&gt;swaggen-annotations&lt;/artifactId&gt;
+	&lt;version&gt;0.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+				<p><strong>Configuring the plugin's execution</strong></p>
+
+				<pre><code>&lt;build&gt;
+	...
+	&lt;plugins&gt;
+		...
+		&lt;plugin&gt;
+			&lt;groupId&gt;com.github.aes-outreach&lt;/groupId&gt;
+			&lt;artifactId&gt;swaggen-annotations&lt;/artifactId&gt;
+			&lt;version&gt;0.0.1&lt;/version&gt;
+			&lt;configuration&gt;
+				&lt;propertiesPath&gt;config.properties&lt;/propertiesPath&gt;
+				&lt;showLogs&gt;true&lt;/showLogs&gt;
+			&lt;/configuration&gt;
+			&lt;executions&gt;
+				&lt;execution&gt;
+					&lt;phase&gt;install&lt;/phase&gt;
+					&lt;goals&gt;
+						&lt;goal&gt;process-annotations&lt;/goal&gt;
+					&lt;/goals&gt;
+				&lt;/execution&gt;
+			&lt;/executions&gt;
+		&lt;/plugin&gt;
+		...
+	&lt;/plugins&gt;
+	...
+&lt;/build&gt;</code></pre>
+
+				<h1 id="overviewofannotations">Overview of annotations</h1>
+
+				<h3 id="swaggergenclass">@SwaggerGenClass</h3>
+
+				<p><img src="https://i.imgur.com/xQDMofu.png" alt="class annotation" />
+					<br>
+					Defines the class level annotations that can be shared within an endpoints different request methods
+					(POST, PUT, GET, DELETE). Although we're looking into improving our OpenAPI specification support,
+					here
+					is the list of supported properties:</p>
+
+				<p><code>basePath</code>
+					Defines the base path for the current servlet. In OpenAPI specficiations, the path represents the
+					URL
+					under which a service can be organized. This can be more specifically specified at the method level,
+					but
+					will default to the class value if not.
+					<br>
+					<br>
+					<code>title</code>
+					The title of the servlet which will be used to define the OpenAPI specification. If a title isn't
+					provided for a method, it will default to using this one.
+					<br>
+					<br>
+					<code>description</code>
+					The description of the servlet which will be used to describe the servlet. If a description isn't
+					provided for a method, it will default to using this one.</p>
+					<br>
+					<br>
+				<h3 id="swaggergen">@SwaggerGen</h3>
+
+				<p><img src="https://i.imgur.com/65FwWXK.png" alt="method annotation" />
+					<br>
+					Defines the method level annotations of a servlet. Here's a list of supported properties:</p>
+
+				<p><code>uri</code>
+					Subpath under which an endpoint can exist. Allows for multiple URIs to be grouped under the same
+					path
+					&amp; file.
+					<br>
+					<br>
+					<code>method</code>
+					Request method of the specific servlet method.
+					<br>
+					<br>
+					<code>title</code>
+					The title of the servlet method. If a title isn't provided for a method, it will default to using
+					the
+					class annotation.
+					<br>
+					<br>
+					<code>description</code>
+					The description of the servlet which will be used to describe the servlet. If a description isn't
+					provided for a method, it will default to using this one.
+					<br>
+					<br>
+					<code>headers</code>
+					Headers supported or required the make a request to this servlet method.
+					<br>
+					<br>
+					<code>queryParams</code>
+					Query string parameters that are supported by this request. Unless the initial type string is
+					defined (i
+					= integer, b = boolean, d = double) the value is assumed to be a string.
+					<br>
+					<br>
+					<code>@SwaggerResponse</code>
+					One of the only planned nested annotations supported by our Maven plugin. It supports 3
+					subproperties :
+				</p>
+
+				<ul>
+					<li><code>code</code>: Defines the response code</li>
+
+					<li><code>description</code>: Defines the response description</li>
+
+					<li><code>@SwaggerBody</code>: Another nested annotation in which the path to a json schema resource
+						can
+						be passed which defines the structure of the response body.</li>
+				</ul>
+
+				<p><code>basePath</code>
+					Defines the base path for the current servlet method. In OpenAPI specficiations, the path represents
+					the
+					URL under which a service can be organized. If not specified, will default to the class level
+					annotation.</p>
+
+				<h1> Generating documentation pages </h1>
+				<p>
+					Running a Maven build on a project importing a plugin will create a folder structure that matches
+					your
+					base paths. We provide a ruby script that uses the Redoc CLI NPM package to generate static HTML
+					documentation out of your Swagger files. To run the ruby file it run
+					<code>ruby generate_docs.ruby</code>. Alternatively, since we generate valid OpenAPI <em>.yml</em>
+					files, you can use any of the SmartBear OpenAPI tools. </p>
+
+				<h1 id="example">Example</h1>
+
+				<p>Given a sample servlet method meant to capture a PUT request:</p>
+
+				<pre><code>@SwaggerGenClass(
+	basePath="/localhost/test",
+	title="Meeting",
+	servers={
+		"{scheme}://{environment}.localhost:{port} = This uses scheme, environment and port variables"
+	},
+	scheme="https",
+	environment="api",
+	port="8080",
+	headers={"Content-Type=application/json"}
+)
+public class DemoEndpoint {
+
+
+	/**
+	 * Fake endpoint for testing purposes
+	 * @param request fake request object
+	 * @param resp fake response object
+	 */
+	@SwaggerGen(
+		uri="/demo",
+		title="DemoExample",
+		method="POST",
+		description="Post Servlet Description",
+		headers={"language=en"},
+		responses={
+				@SwaggerResponse(body=@SwaggerBody("/schemas/someJsonSchema.json")),
+				@SwaggerResponse(code=400),
+				@SwaggerResponse(code=401),
+				@SwaggerResponse(code=403),
+				@SwaggerResponse(code=500)              
+		}
+	)
+	public void doPost(Object request, Object resp) {
+		RequestHandler.handle(request);
+		ResponseHandler.handle(resp);
+	}
+ }</code></pre>
+
+				<p>When the project containing the servlet is built, the following swagger file is generated:</p>
+
+				<pre><code>---
+openapi: "3.0.0"
+info:
+  title: "Title"
+  description: "Description"
+  version: "0.0"
+paths:
+  /localhost/test/put:
+	put:
+	  summary: "Meeting"
+	  description: "This is a sample PUT endpoint description to be printed in a Swagger\
+		\ format HTML documentation file."
+	  parameters:
+	  - name: "authorization"
+		description: "token used for authorization"
+		schema:
+		  type: "string"
+		required: false
+		in: "header"
+	  - name: "langHeader"
+		description: "expected language of the request"
+		schema:
+		  type: "string"
+		required: false
+		in: "header"
+	  - name: "Content-Type"
+		description: "application/json"
+		schema:
+		  type: "string"
+		required: false
+		in: "header"
+	  responses:
+		200:
+		  description: "OK"
+		400:
+		  description: "No description"
+		401:
+		  description: "No description"
+		403:
+		  description: "No description"
+		404:
+		  description: "No description"
+</code></pre>
+
+				<p>Which can be used to generate single page HTML files that look as such (we currently use redoc-cli
+					for
+					this):
+					<img src="https://i.imgur.com/eBNjfRx.png" alt="image" /></p </section> <!-- Footer -->
+
+
+			</div>
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="https://github.com/AES-Outreach/SwaggerGen" class="icon fa-github"><span
+								class="label">Github</span></a></li>
+					<li><a href="engineering.outreach@uOttawa.ca" class="icon fa-envelope"><span
+								class="label">Email</span></a>
+					</li>
+				</ul>
+				<div class="copyright">
+					&copy; 2019 SwaggerGen
+				</div>
+			</footer>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+
+</html>
