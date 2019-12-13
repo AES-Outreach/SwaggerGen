@@ -70,8 +70,10 @@ Defines the class level annotations that can be shared within an endpoints diffe
 
 `basePath` 
 Defines the base path for the current servlet. In OpenAPI specficiations, the path represents the URL under which a service can be organized. This can be more specifically specified at the method level, but will default to the class value if not.
+
 `title`
 The title of the servlet which will be used to define the OpenAPI specification. If a title isn't provided for a method, it will default to using this one.
+
 `description`
 The description of the servlet which will be used to describe the servlet. If a description isn't provided for a method, it will default to using this one.
 
@@ -84,16 +86,22 @@ Defines the method level annotations of a servlet. Here's a list of supported pr
 
 `uri`
 Subpath under which an endpoint can exist. Allows for multiple URIs to be grouped under the same path & file.
+
 `method`
 Request method of the specific servlet method.
+
 `title`
 The title of the servlet method. If a title isn't provided for a method, it will default to using the class annotation.
+
 `description`
 The description of the servlet which will be used to describe the servlet. If a description isn't provided for a method, it will default to using this one.
+
 `headers`
 Headers supported or required the make a request to this servlet method.
+
 `queryParams`
 Query string parameters that are supported by this request. Unless the initial type string is defined (i = integer, b = boolean, d = double) the value is assumed to be a string.
+
 `@SwaggerResponse`
 One of the only planned nested annotations supported by our Maven plugin. It supports 3 subproperties :
 - `code`: Defines the response code
